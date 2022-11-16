@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-y#g--tbru9r@2k554i@^-4*aq#w_g01cu3^x3)k12@is1ir+yx
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['https://colorez.es','colorez.es']
 
 
 # Application definition
@@ -78,14 +78,16 @@ WSGI_APPLICATION = 'ColorEz.wsgi.application'
 LOGIN_URL = 'Login'
 LOGIN_REDIRECT_URL = '/Home/'
 LOGOUT_REDIRECT_URL = 'Login'
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.mysql',
-#         'NAME': 'bd_Colorez',
-#         'user': 'coloreze_brucelas',
-#         'PASSWORD': 'Kkdvk123**'
-#     }
-# }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql', 
+        'NAME': 'coloreze_ColorEz', # database name
+        'USER': 'coloreze_coloreze', # user with access to that database
+        'PASSWORD': 'Kkdvk122*', # password for the user
+        'HOST': 'localhost',   # if your database is hosted in another server then you should specify the host's IP
+        'PORT': '3306', # default MySQL port
+    }
+}
 
 
 # Password validation
