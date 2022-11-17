@@ -29,8 +29,6 @@ class LoginView(FormView):
             if not remember_me:
                             request.session.set_expiry(0)
             return redirect('/Home/')
-        else:
-            messages.error(request, 'El usuario ingresado no es correcto!')
         return super(LoginView, self).form_invalid(form)
 
 @login_required()
