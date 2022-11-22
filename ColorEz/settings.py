@@ -95,7 +95,7 @@ DATABASES = {
         'NAME': 'coloreze_ColorEz', # database name
         'USER': 'coloreze_coloreze', # user with access to that database
         'PASSWORD': 'Kkdvk122*', # password for the user
-        'HOST': 'localhost',   # if your database is hosted in another server then you should specify the host's IP
+        'HOST': 'colorez.es',   # if your database is hosted in another server then you should specify the host's IP
         'PORT': '3306', # default MySQL port
     }
 }

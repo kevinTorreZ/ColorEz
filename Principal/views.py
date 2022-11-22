@@ -30,7 +30,6 @@ class LoginView(FormView):
                             request.session.set_expiry(0)
             return redirect('/Home/')
         return super(LoginView, self).form_invalid(form)
-
 @login_required()
 def Inicio(request):
     return render(request, 'Inicio.html')

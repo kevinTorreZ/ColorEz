@@ -8,7 +8,7 @@
 </head>
 <body>
     {% if user.is_authenticated %}
-        <script>window.location.href = '/Home/';</script>
+        <script>window.location.href = '/Inicio/';</script>
     {% else %}
         <form method="post">
             {% csrf_token %}
