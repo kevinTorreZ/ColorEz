@@ -6,16 +6,16 @@ from django.contrib.auth.decorators import login_required
 class RegisterView(CreateView):
     form_class = RegisterForm
     template_name = 'Register.html'
-    success_url = '/Home/'
+    success_url = '/Inicio/'
     succes_message = "%(name)s Se ha creado exitosamente!"
     def form_valid(self, form):
         request = self.request
         login(request, form.save())
-        return redirect('/Home/')
+        return redirect('/Inicio/')
 class LoginView(FormView):
     form_class = LoginForm
     template_name = 'login.html'
-    success_url = '/Home/'
+    success_url = '/Inicio/'
     succes_message = "%(name)s Se ha creado exitosamente!"
 
     def form_valid(self, form):
@@ -28,7 +28,7 @@ class LoginView(FormView):
             login(request, user)
             if not remember_me:
                             request.session.set_expiry(0)
-            return redirect('/Home/')
+            return redirect('/Inicio/')
         return super(LoginView, self).form_invalid(form)
 @login_required()
 def Inicio(request):

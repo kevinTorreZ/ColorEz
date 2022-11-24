@@ -22,7 +22,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.Index),
     path('Register/', views.RegisterView.as_view(), name='Register'),
-    path('Home/', views.Inicio),
+    path('Inicio/', views.Inicio),
     path('Login/', views.LoginView.as_view(), name='Login'),
     path('logout/', LogoutView.as_view(template_name='logout.html'), name='Logout'),
 
