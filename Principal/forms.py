@@ -5,18 +5,16 @@ class RegisterForm(forms.ModelForm):
     password_2 = forms.CharField(label='', widget=forms.PasswordInput(attrs={'placeholder': 'Confirmar contraseña'}))
     class Meta:
         model = Usuario
-        fields = ['usuario','correo','rut']
+        fields = ['username','email']
         widgets = {
-            'correo': forms.TextInput(attrs={'placeholder': 'Ingrese su correo'}),
-            'usuario': forms.TextInput(
+            'email': forms.TextInput(attrs={'placeholder': 'Ingrese su correo'}),
+            'username': forms.TextInput(
                 attrs={'placeholder': 'Ingrese su usuario'}),
             'contraseña': forms.PasswordInput(
                 attrs={'placeholder': 'Ingrese su contraseña'}),
-            'rut': forms.TextInput(
-                attrs={'placeholder': 'Ingrese su rut'})
         }
     def clean_email(self):
-        email = self.cleaned_data.get('correo')
+        email = self.cleaned_data.get('email')
         qs = Usuario.objects.filter(email=email)
         if qs.exists():
             raise forms.ValidationError("El correo ya esta en uso")
@@ -26,7 +24,7 @@ class RegisterForm(forms.ModelForm):
         cleaned_data = super().clean()
         password = cleaned_data.get("password")
         password_2 = cleaned_data.get("password_2")
-        Usuario = cleaned_data.get("usuario")
+        Usuario = cleaned_data.get("username")
         if len(Usuario) > 20:
             self.add_error("Usuario", "El nombre de usuario es demasiado largo!")            
         if len(password) == 0:
