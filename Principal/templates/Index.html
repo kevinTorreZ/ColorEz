@@ -1,22 +1,18 @@
 {% extends "Componentes/header.html" %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}ASDAS{% endblock %}</title>
-</head>
-<body>
-    {% block content %}
+
+{% block css %} {% endblock %}
+
+{% block title %} Quienes somos {% endblock %}
+
+{% block content %}
     {% if user.is_authenticated %}
     <script>window.location.href = '/Inicio/';</script>
-{% else %}
+    {% else %}
     <h1>PORTADA</h1>
 
     <a href="/Login/">Iniciar sesion</a>
     <a href="/Register/">Registrate</a>
-{% endif %}
-    {% endblock %}
-</body>
-</html>
+    {% endif %}
+{% endblock %}
+
+{% block js%}{% endblock %}
