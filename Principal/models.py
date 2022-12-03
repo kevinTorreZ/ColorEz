@@ -4,7 +4,7 @@ from django.contrib.auth.models import (
     BaseUserManager, AbstractBaseUser
 )
 class UserManager(BaseUserManager):
-    def create_user(self, email,username=None, password=None,photo=None,is_admin=False, activo=True,):
+    def create_user(self, email,username=None, password=None,photo=None,admin=False, activo=True,):
         if not correo:
             raise ValueError('deben tener correos')
         if not username:
@@ -17,7 +17,7 @@ class UserManager(BaseUserManager):
             
         )
         user.set_password(password)
-        user.is_admin = is_admin
+        user.admin = admin
         user.activo = activo
         user.save()
         return user
@@ -27,7 +27,7 @@ class UserManager(BaseUserManager):
             correo,username,
             password=password,
         )
-        user.is_admin = True
+        user.admin = True
         user.save()
         return user
 class Usuario(AbstractBaseUser):
@@ -48,7 +48,7 @@ class Usuario(AbstractBaseUser):
         default=None,
     )
     activo = models.BooleanField(default=True)
-    is_admin = models.BooleanField(default=False) 
+    admin = models.BooleanField(default=False) 
 
 
     USERNAME_FIELD = 'username'
@@ -73,7 +73,7 @@ class Usuario(AbstractBaseUser):
     @property
     def is_admin(self):
         "El usuario es un administrador?"
-        return self.is_admin
+        return self.admin
     objects = UserManager()
 
 class Metodo_pago(models.Model):
