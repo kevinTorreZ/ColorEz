@@ -5,6 +5,11 @@
 {% block title %} Quienes somos {% endblock %}
 
 {% block content %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
     {% if user.is_authenticated %}
     <script>window.location.href = '/Inicio/';</script>
     {% else %}

@@ -1,5 +1,7 @@
 from django import forms
 from Principal.models import Usuario
+from django.shortcuts import render,redirect
+import string
 class RegisterForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': 'Ingrese su Contraseña'}), label='')
     password_2 = forms.CharField(label='', widget=forms.PasswordInput(attrs={'placeholder': 'Confirmar contraseña'}))
@@ -31,6 +33,8 @@ class RegisterForm(forms.ModelForm):
             self.add_error("Usuario", "Debe ingresar un nombre de usuario!")
         if len(password) < 8:
             self.add_error("password", "La contraseña debe ser mayor a 8 digitos")
+        if not any(c in string.ascii_uppercase for c in str(password)):
+            self.add_error("password", "La contraseña debe contener mayusculas!")
         if password is not None and password != password_2:
             self.add_error("password_2", "Las contraseñas no coinciden")
         return cleaned_data
@@ -41,6 +45,24 @@ class RegisterForm(forms.ModelForm):
             Usuario.save()
         return Usuario   
 class LoginForm(forms.Form):
-    Usuario = forms.CharField(label='',max_length=63, widget=forms.TextInput(attrs={'placeholder': 'Ingrese su usuario'}))
+    username = forms.CharField(label='',max_length=63, widget=forms.TextInput(attrs={'placeholder': 'Ingrese su usuario'}))
     password = forms.CharField(label='',max_length=63, widget=forms.PasswordInput(attrs={'placeholder': 'Ingrese su contraseña'}))
     remember_me = forms.BooleanField(label='Recordar contraseña', required=None)
+
+    def clean(self):
+        cleaned_data = super(LoginForm, self).clean()
+        username = cleaned_data.get('username')
+        password = cleaned_data.get('password')
+
+        if Usuario.objects.filter(username=username).exists():
+            username = Usuario.objects.get(username=username)
+            if not username.check_password(password):
+                self.add_error('password', 'La contraseña es incorrecta')
+        else:
+            self.add_error('username', 'El usuario no existe')
+
+    def get_user(self):
+        cleaned_data = super(AuthenticationForm, self).clean()
+        username = cleaned_data.get('username')
+        password = cleaned_data.get('password')
+        return authenticate(username=username, password=password)

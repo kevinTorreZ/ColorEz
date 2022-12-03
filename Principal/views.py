@@ -2,7 +2,10 @@ from django.shortcuts import render,redirect
 from Principal.forms import RegisterForm,LoginForm
 from django.views.generic import CreateView, FormView
 from django.contrib.auth import authenticate, login
+from django.contrib import messages
+from django.urls import reverse_lazy
 from django.contrib.auth.decorators import login_required
+
 class RegisterView(CreateView):
     form_class = RegisterForm
     template_name = 'Register.html'
@@ -18,11 +21,16 @@ class LoginView(FormView):
     success_url = '/Inicio/'
     succes_message = "%(name)s Se ha creado exitosamente!"
 
+    def get(self, request, *args, **kwargs):
+        login_different = reverse_lazy('login_different')
+        if request.user.is_authenticated and login_different != request.path:
+            return redirect('/Inicio/')
+        return super().get(request, *args, **kwargs)
     def form_valid(self, form):
         request = self.request
-        Usuario = form.cleaned_data.get("Usuario")
+        Usuario = form.cleaned_data.get("username")
         password = form.cleaned_data.get("password")
-        remember_me = form.cleaned_data['remember_me']
+        remember_me = form.cleaned_data.get('remember_me')
         user = authenticate(request, username=Usuario, password=password)
         if user is not None:
             login(request, user)
