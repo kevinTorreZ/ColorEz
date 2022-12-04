@@ -17,7 +17,21 @@
     {% if user.is_authenticated %}
     <script>window.location.href = '/Inicio/';</script>
     {% else %}
-    <h1>ColorEz</h1>
+    <div class="divMain">
+        <div class="LogoIzq">
+            <div id="imgLogo"></div>
+            <h1>Color<a>Ez</a></h1>
+        </div>
+        <div class="TitleDer">
+            <h1>Bienvenido a Color<a>Ez</a></h1>
+            <a>comienza a diseñar</a>
+            <div id="btnIngresar">
+                <button>Comenzar</button>
+            </div>
+           
+        </div>
+        
+    </div>
     {% endif %}
     {% endblock %}
     {% block js%}{% endblock %}
