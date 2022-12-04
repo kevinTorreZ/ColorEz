@@ -1,10 +1,19 @@
 {% extends "Componentes/header.html" %}
-
-{% block css %} {% endblock %}
-
-{% block title %} Quienes somos {% endblock %}
-
-{% block content %}
+{% load static %}
+{% block links%}
+<link rel="stylesheet" href="{% static 'login.css' %}">
+{% endblock %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block title %} Iniciar sesión {% endblock %}
+</head>
+<body>
+    {% block css %} {% endblock %}
+    {% block content %}
     <ul class="messages">
         {% for message in messages %}
         <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
@@ -13,14 +22,22 @@
     {% if user.is_authenticated %}
     <script>window.location.href = '/Inicio/';</script>
     {% else %}
-    <form method="post">
-        {% csrf_token %}
-        {{form}}
-
-        <input type="submit" value="Enviar">
-    </form>
-    <a href="/">Atrás</a>
+    <div class="divForm">
+        <h1>Iniciar sesión</h1>
+        <form method="post">
+            {% csrf_token %}
+            {{form}}
+            <input type="submit" value="Iniciar sesión">
+        </form>
+    </div>
     {% endif %}
 {% endblock %}
+</body>
+</html>
+
+
+
+
+
 
 {% block js%}{% endblock %}
