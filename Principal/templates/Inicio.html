@@ -19,7 +19,20 @@
     {% if user.is_authenticated %}
     {{user.rut}}
     <a href="/logout/">Desconectarse</a>
-    {% endif %}s
+    {% endif %}
+    {% for id,color in colores.items %}
+        <div id="{{id}}">
+            
+        </div>
+        <script>
+            document.getElementById('{{id}}').style.backgroundColor = "{{color}}";
+            document.getElementById('{{id}}').style.width = "300px";
+            document.getElementById('{{id}}').style.height = "300px";
+            document.getElementById('{{id}}').style.margin = "20px";
+        
+    
+        </script>
+    {% endfor %}
     {% endblock %}
 
     {% block js%}{% endblock %}

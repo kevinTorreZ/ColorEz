@@ -1,4 +1,5 @@
 from django.shortcuts import render,redirect
+import requests
 from Principal.forms import RegisterForm,LoginForm
 from django.views.generic import CreateView, FormView
 from django.contrib.auth import authenticate, login
@@ -40,6 +41,13 @@ class LoginView(FormView):
         return super(LoginView, self).form_invalid(form)
 @login_required()
 def Inicio(request):
-    return render(request, 'Inicio.html')
+    url = 'http://palett.es/API/v1/palette'
+    data = requests.get(url)
+    lista = {}
+    if data.status_code == 200:
+        data = data.json()
+        for e in range(len(data)):
+            lista[e] = data[e]
+    return render(request, 'Inicio.html',{"colores":lista})
 def Index(request):
     return render(request, 'Index.html')
