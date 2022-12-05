@@ -21,6 +21,19 @@
         <h1>Bienvenido! {{ user.username }}</h1>
         <a href="/logout/">Desconectarse</a>
     </div>
+    {% for id,color in colores.items %}
+    <div id="{{id}}">
+        
+    </div>
+    <script>
+        document.getElementById('{{id}}').style.backgroundColor = "{{color}}";
+        document.getElementById('{{id}}').style.width = "300px";
+        document.getElementById('{{id}}').style.height = "300px";
+        document.getElementById('{{id}}').style.margin = "20px";
+    
+
+    </script>
+{% endfor %}
     {% endif %}
     {% endblock %}
 
@@ -28,3 +41,4 @@
 </body>
 
 </html>
+
