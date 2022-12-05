@@ -41,13 +41,18 @@ class LoginView(FormView):
         return super(LoginView, self).form_invalid(form)
 @login_required()
 def Inicio(request):
-    url = 'http://palett.es/API/v1/palette/monochrome/0.1'
-    data = requests.get(url)
+    ########  FUNCION PALETA DE COLORES ########
     lista = {}
-    if data.status_code == 200:
-        data = data.json()
-        for e in range(len(data)):
-            lista[e] = data[e]
+    if request.method == "POST":
+        color = request.POST['color']
+        color = str(color).replace('#', '')
+        url = 'https://www.thecolorapi.com/scheme?hex='+color+'&mode=monochrome&count=10'
+        data = requests.get(url)
+        if data.status_code == 200:
+            data = data.json()
+            for i in range(len(data['colors'])):
+                lista[i] = str(data['colors'][i]['hex']['value'])
+    #############        ###################
     return render(request, 'Inicio.html',{"colores":lista})
 def Index(request):
     return render(request, 'Index.html')

@@ -22,7 +22,6 @@
         <h1>Bienvenido! {{ user.username }}</h1>
         <a href="/logout/">Desconectarse</a>
     </div>
-    <div class="color"></div>
     <div style="display: flex;" id="paleta_colores">
         <input type="hidden" id="btnhiden">
         <script>
@@ -64,6 +63,39 @@
             }
         </script>
     </div>
+    <div>
+        <h1>----------------------------------------------------------------------------------------------------------------------------------------------------</h1>
+    </div>
+    <div>
+
+        <form method="post">
+            {% csrf_token %}
+            <input type="color" name="color">
+            <input type="submit" value="Obtener paleta">
+        </form>
+        {% if colores.lenght != 0 %}
+            <div style="display: flex;">
+                {% for id,color in colores.items %}
+                <div id="{{id}}" style="display: flex;justify-content: center;text-align: center;">
+
+                    <h1 style="margin: auto; color:white">{{color}}</h1>
+                </div>
+
+                <script>
+                    document.getElementById('{{id}}').style.backgroundColor = '{{color}}'
+                    document.getElementById('{{id}}').style.width = '300px'
+                    document.getElementById('{{id}}').style.height = '300px'
+                </script>
+            {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+
+    <div>
+        <h1>----------------------------------------------------------------------------------------------------------------------------------------------------</h1>
+    </div>
+
+    
     {% endif %}
     {% endblock %}
 
