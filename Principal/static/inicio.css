@@ -1,0 +1,20 @@
+body{
+    background-color: #121212;
+}
+
+.mainInicio{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.mainInicio h1{
+text-align: center;
+color: white;
+font-family: 'Poppins', sans-serif;
+}
+
+.mainInicio a{
+    color: white;
+}

@@ -75,3 +75,8 @@ input[type=submit]{
     font-family: 'Poppins', sans-serif;
     margin-bottom: 15px;
 }
+
+.errorlist{
+    font-family: 'Poppins', sans-serif;
+    color: red;
+}
