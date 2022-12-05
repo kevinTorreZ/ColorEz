@@ -5,6 +5,7 @@
 {% endblock %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -21,33 +22,54 @@
         <h1>Bienvenido! {{ user.username }}</h1>
         <a href="/logout/">Desconectarse</a>
     </div>
-    <div style="display: flex;">
-        {% for id,color in colores.items %}
-        <div id="{{id}}">
-            <h1 style="color: white;">{{color}}</h1>
-        </div>
+    <div class="color"></div>
+    <div style="display: flex;" id="paleta_colores">
         <input type="hidden" id="btnhiden">
         <script>
-            document.getElementById('{{id}}').style.backgroundColor = "{{color}}";
-            document.getElementById('{{id}}').style.width = "300px";
-            document.getElementById('{{id}}').style.height = "300px";
-            document.getElementById('{{id}}').style.margin = "20px";
-            document.getElementById("html").addEventListener("keyup", function(e) {
-            if (e.keyCode === 32) {
-                document.getElementById("btnhiden").click();
+            document.getElementById("html").addEventListener("keydown", function (e) {
+
+                if (e.code === 'Space') {
+                    generatePalette()
+                }
+            });
+            function randomInteger(max) {
+                return Math.floor(Math.random() * (max + 1));
             }
-            document.getElementById("btnhiden").onclick = function(){
-                window.location.href = window.location.href;
+            function randomRgbColor() {
+                let r = randomInteger(255);
+                let g = randomInteger(255);
+                let b = randomInteger(255);
+                return [r, g, b];
             }
-        });
+            function randomHexColor() {
+                let [r, g, b] = randomRgbColor();
+
+                let hr = r.toString(16).padStart(2, '0');
+                let hg = g.toString(16).padStart(2, '0');
+                let hb = b.toString(16).padStart(2, '0');
+                return "#" + hr + hg + hb;
+            }
+            function generatePalette() {
+                var highlightedItems = document.querySelectorAll('.color');
+                
+                console.log(highlightedItems.length)
+                if(highlightedItems.length != 0){
+                    highlightedItems.forEach(function(element){
+                        element.remove();
+                    })
+                }
+                for (i = 0; i < 5; i++) {
+                    document.getElementById('paleta_colores').innerHTML += '<div class="color" style="background-color:' + randomHexColor() + ';width:300px;height:300px;margin:10px"></div>'
+                }
+            }
         </script>
-        {% endfor %}
     </div>
     {% endif %}
     {% endblock %}
 
-    {% block js%}{% endblock %}
+    {% block js%}
+    <script src="{ static 'js/inicio.js' %} "></script>
+    {% endblock %}
 </body>
 
 </html>
-
