@@ -41,7 +41,7 @@ class LoginView(FormView):
         return super(LoginView, self).form_invalid(form)
 @login_required()
 def Inicio(request):
-    url = 'http://palett.es/API/v1/palette'
+    url = 'http://palett.es/API/v1/palette/monochrome/0.1'
     data = requests.get(url)
     lista = {}
     if data.status_code == 200:

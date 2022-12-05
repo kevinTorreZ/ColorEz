@@ -21,19 +21,28 @@
         <h1>Bienvenido! {{ user.username }}</h1>
         <a href="/logout/">Desconectarse</a>
     </div>
-    {% for id,color in colores.items %}
-    <div id="{{id}}">
-        
+    <div style="display: flex;">
+        {% for id,color in colores.items %}
+        <div id="{{id}}">
+            <h1 style="color: white;">{{color}}</h1>
+        </div>
+        <input type="hidden" id="btnhiden">
+        <script>
+            document.getElementById('{{id}}').style.backgroundColor = "{{color}}";
+            document.getElementById('{{id}}').style.width = "300px";
+            document.getElementById('{{id}}').style.height = "300px";
+            document.getElementById('{{id}}').style.margin = "20px";
+            document.getElementById("html").addEventListener("keyup", function(e) {
+            if (e.keyCode === 32) {
+                document.getElementById("btnhiden").click();
+            }
+            document.getElementById("btnhiden").onclick = function(){
+                window.location.href = window.location.href;
+            }
+        });
+        </script>
+        {% endfor %}
     </div>
-    <script>
-        document.getElementById('{{id}}').style.backgroundColor = "{{color}}";
-        document.getElementById('{{id}}').style.width = "300px";
-        document.getElementById('{{id}}').style.height = "300px";
-        document.getElementById('{{id}}').style.margin = "20px";
-    
-
-    </script>
-{% endfor %}
     {% endif %}
     {% endblock %}
 
