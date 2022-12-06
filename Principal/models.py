@@ -5,14 +5,9 @@ from django.contrib.auth.models import (
 )
 class UserManager(BaseUserManager):
     def create_user(self, email,username=None, password=None,photo=None,admin=False, activo=True,):
-        if not correo:
-            raise ValueError('deben tener correos')
-        if not username:
-            raise ValueError('Deben tener nombres de usuario')
         user = self.model(
             email=self.normalize_email(email),  
             username=username,
-            nombre=nombre,
             photo=photo,
             
         )

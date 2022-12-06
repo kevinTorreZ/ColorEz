@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-y#g--tbru9r@2k554i@^-4*aq#w_g01cu3^x3)k12@is1ir+yx
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['https://colorez.es','colorez.es','127.0.0.1']
+ALLOWED_HOSTS = ['https://colorez.es','colorez.es','127.0.0.1','localhost']
 
 
 # Application definition
@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'Principal',
+    'social_django',
     ]
 
 
@@ -50,6 +51,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'social_django.middleware.SocialAuthExceptionMiddleware',
 ]
 
 ROOT_URLCONF = 'ColorEz.urls'
@@ -65,10 +67,20 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'social_django.context_processors.backends', 
+                'social_django.context_processors.login_redirect',
             ],
         },
     },
 ]
+
+AUTHENTICATION_BACKENDS = (
+    'social_core.backends.facebook.FacebookOAuth2',
+    'social_core.backends.twitter.TwitterOAuth',
+    'social_core.backends.github.GithubOAuth2',
+
+    'django.contrib.auth.backends.ModelBackend',
+)
 
 WSGI_APPLICATION = 'ColorEz.wsgi.application'
 
@@ -76,7 +88,8 @@ WSGI_APPLICATION = 'ColorEz.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 LOGIN_URL = 'Login'
-LOGIN_REDIRECT_URL = '/Home/'
+LOGOUT_URL = 'logout'
+LOGIN_REDIRECT_URL = '/Inicio/'
 LOGOUT_REDIRECT_URL = 'Login'
 # DATABASES = {
 #     'default': {
@@ -144,3 +157,6 @@ AUTH_USER_MODEL = 'Principal.Usuario'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+SOCIAL_AUTH_FACEBOOK_KEY = '881798419644985'  # App ID
+SOCIAL_AUTH_FACEBOOK_SECRET = '88009e155283115f5b09c42fd2c00cdd'  # App Secret
