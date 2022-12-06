@@ -24,6 +24,8 @@
             {{form}}
             <input type="submit" value="Registarse">
         </form>
+        <a href="{% url 'social:begin' 'facebook' %}">Register with Facebook</a>
+        <a href="{% url 'social:begin' 'google-oauth2' %}">Register With Google</a>
     </div>
     {% endif %}
 {% endblock %}
