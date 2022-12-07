@@ -42,21 +42,6 @@ class LoginView(FormView):
         return super(LoginView, self).form_invalid(form)
 @login_required()
 def Inicio(request):
-    
-    lista = {}
-    listMixColors = []
-    color1 = ""
-    MezclarColores = ""
-    if request.method == "POST":
-        ########  FUNCION PALETA DE COLORES ########
-        color = request.POST.get('color','#24B1E0')
-        color = str(color).replace('#', '')
-        url = 'https://www.thecolorapi.com/scheme?hex='+color+'&mode=monochrome&count=10'
-        data = requests.get(url)
-        if data.status_code == 200:
-            data = data.json()
-            for i in range(len(data['colors'])):
-                lista[i] = str(data['colors'][i]['hex']['value'])
-    return render(request, 'Inicio.html',{"colores":lista})
+    return render(request, 'Inicio.html')
 def Index(request):
     return render(request, 'Index.html')
