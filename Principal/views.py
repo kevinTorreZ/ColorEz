@@ -4,6 +4,7 @@ from Principal.forms import RegisterForm,LoginForm
 from django.views.generic import CreateView, FormView
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
+from Principal.models import Usuarios_proyecto
 from colorutils import Color,rgb_to_hex,hex_to_rgb, ArithmeticModel
 from django.urls import reverse_lazy
 from django.contrib.auth.decorators import login_required
@@ -47,4 +48,5 @@ def Index(request):
     return render(request, 'Index.html')
 @login_required()
 def Proyectos(request):
-    return render(request, 'Proyectos.html')
+    obj = Usuarios_proyecto.objects.filter(Usuario='7')
+    return render(request, 'Proyectos.html',{'Proyectos':obj})

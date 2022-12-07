@@ -101,10 +101,11 @@ class Proyecto(models.Model):
     def __str__(self):
        return self.idProyecto
 class Usuarios_proyecto(models.Model):
+    id = models.AutoField(primary_key=True)
     Usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)
     Proyecto = models.ForeignKey(Proyecto, on_delete=models.CASCADE)
     def __str__(self):
-       return self.Proyecto
+       return str(self.id)
 class File(models.Model):
     idFile = models.AutoField(primary_key=True)
     url = models.FileField()

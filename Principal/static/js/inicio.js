@@ -21,19 +21,19 @@ function randomHexColor() {
     let hr = r.toString(16).padStart(2, '0');
     let hg = g.toString(16).padStart(2, '0');
     let hb = b.toString(16).padStart(2, '0');
-    return "#" + hr + hg + hb;
+    dicc = ['('+r+','+g+','+b+')',"#" + hr + hg + hb]
+    return dicc;
 }
 function generatePalette() {
     var highlightedItems = document.querySelectorAll('.color');
-
-    console.log(highlightedItems.length)
     if (highlightedItems.length != 0) {
         highlightedItems.forEach(function (element) {
             element.remove();
         })
     }
     for (i = 0; i < 5; i++) {
-        document.getElementById('paleta_colores').innerHTML += '<div class="color" style="background-color:' + randomHexColor() + ';width:170px;height:300px;margin:10px">' + randomHexColor() + '</div>'
+        var obj = randomHexColor();
+        document.getElementById('paleta_colores').innerHTML += '<div class="color" style="background-color:' + obj[1].toString() + ';width:170px;height:300px;margin:10px">' + obj[1].toString() + obj[0].toString() +  '</div>'
     }
 }
 window.onload = function(){
