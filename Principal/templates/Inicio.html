@@ -80,7 +80,6 @@
 
                     <h1 style="margin: auto; color:white">{{color}}</h1>
                 </div>
-
                 <script>
                     document.getElementById('{{id}}').style.backgroundColor = '{{color}}'
                     document.getElementById('{{id}}').style.width = '300px'
@@ -94,8 +93,19 @@
     <div>
         <h1>----------------------------------------------------------------------------------------------------------------------------------------------------</h1>
     </div>
-
-    
+        <form method="post">
+            {% csrf_token %}
+            <input type="color" name="color1">
+            <input type="color" name="color2">
+            <input type="submit" value="Mezclar colores">
+        </form>
+        <div id="MixColors">
+        </div>
+        <script>
+            document.getElementById('MixColors').style.background= '{{Mixcolors}}'
+            document.getElementById('MixColors').style.width = '300px'
+            document.getElementById('MixColors').style.height = '300px'
+        </script>
     {% endif %}
     {% endblock %}
 
