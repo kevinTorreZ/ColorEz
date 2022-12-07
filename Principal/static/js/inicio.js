@@ -39,7 +39,7 @@ window.onload = function(){
 }
 
 function GetPaleta(){
-    var highlightedItems = document.querySelectorAll('.colorPalette');
+    var highlightedItems = document.querySelectorAll('.colorPalette')
     if (highlightedItems.length != 0) {
         highlightedItems.forEach(function (element) {
             element.remove();
