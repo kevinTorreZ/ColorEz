@@ -45,3 +45,6 @@ def Inicio(request):
     return render(request, 'Inicio.html')
 def Index(request):
     return render(request, 'Index.html')
+@login_required()
+def Proyectos(request):
+    return render(request, 'Proyectos.html')

@@ -20,11 +20,12 @@ from Principal import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.Index),
+    path('', views.Index, name='Index'),
     path('Register/', views.RegisterView.as_view(), name='Register'),
-    path('Inicio/', views.Inicio),
+    path('Inicio/', views.Inicio, name='Inicio'),
     path('Login/', views.LoginView.as_view(), name='Login'),
     path('logout/', LogoutView.as_view(template_name='logout.html'), name='Logout'),
     path('oauth/', include('social_django.urls', namespace='social')),
+    path('Proyectos/', views.Proyectos, name='Proyectos'),
 
 ]
