@@ -15,7 +15,7 @@ class RegisterView(CreateView):
     succes_message = "%(name)s Se ha creado exitosamente!"
     def form_valid(self, form):
         request = self.request
-        login(request, form.save())
+        login(request, form.save(), backend='django.contrib.auth.backends.ModelBackend')
         return redirect('/Inicio/')
 class LoginView(FormView):
     form_class = LoginForm
