@@ -58,6 +58,8 @@ class LoginForm(forms.Form):
             username = Usuario.objects.get(username=username)
             if not username.check_password(password):
                 self.add_error('password', 'La contraseña es incorrecta')
+            if username.activo == False:
+                self.add_error('username', 'El usuario esta deshabilitado')
         else:
             self.add_error('username', 'El usuario no existe')
 
