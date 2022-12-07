@@ -52,6 +52,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'social_django.middleware.SocialAuthExceptionMiddleware',
+    'admin_ip_restrictor.middleware.AdminIPRestrictorMiddleware',
 ]
 
 ROOT_URLCONF = 'ColorEz.urls'
@@ -92,6 +93,10 @@ LOGIN_URL = 'Login'
 LOGOUT_URL = 'logout'
 LOGIN_REDIRECT_URL = '/Inicio/'
 LOGOUT_REDIRECT_URL = 'Login'
+RESTRICT_ADMIN=True
+ALLOWED_ADMIN_IPS=['191.112.237.188','201.189.191.172']
+TRUST_PRIVATE_IP=True
+
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.mysql', 
