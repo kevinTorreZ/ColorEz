@@ -57,25 +57,6 @@ def Inicio(request):
             data = data.json()
             for i in range(len(data['colors'])):
                 lista[i] = str(data['colors'][i]['hex']['value'])
-        #############    FUNCION MEZCLADOR COLORES    ###################
-        color1 = request.POST["color1"]
-        color2 = request.POST["color2"]
-        listMixColors.append(str(color1))
-        listMixColors.append(str(color2))
-        for i in listMixColors:
-            formater = str(i).replace('#', '')
-            url = "https://www.thecolorapi.com/id?hex="+formater+""
-            data = requests.get(url)
-            if data.status_code == 200:
-                data = data.json()
-                if i == color1:
-                    rgb1Tuple = Color(hex_to_rgb(data["hex"]["value"]))
-
-                rgb2Tuple = Color(hex_to_rgb(data["hex"]["value"]))
-                print(rgb2Tuple)
-        MezclarColores = Color(Color(rgb1Tuple),  arithmetic=ArithmeticModel.BLEND) + Color(rgb2Tuple)
-        print(MezclarColores)
-        MezclarColores = str(MezclarColores).replace("(", "rgb(")
-    return render(request, 'Inicio.html',{"colores":lista,"Mixcolors":MezclarColores})
+    return render(request, 'Inicio.html',{"colores":lista})
 def Index(request):
     return render(request, 'Index.html')

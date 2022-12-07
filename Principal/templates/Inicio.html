@@ -2,6 +2,8 @@
 {% load static %}
 {% block links%}
 <link rel="stylesheet" href="{% static 'inicio.css' %}">
+<script src="{% static 'js/chroma.min.js' %}"></script>
+<script src="{% static 'js/inicio.js' %} "></script>
 {% endblock %}
 <!DOCTYPE html>
 <html lang="en">
@@ -24,47 +26,10 @@
     </div>
     <div style="display: flex;" id="paleta_colores">
         <input type="hidden" id="btnhiden">
-        <script>
-            document.getElementById("html").addEventListener("keydown", function (e) {
-
-                if (e.code === 'Space') {
-                    generatePalette()
-                }
-            });
-            function randomInteger(max) {
-                return Math.floor(Math.random() * (max + 1));
-            }
-            function randomRgbColor() {
-                let r = randomInteger(255);
-                let g = randomInteger(255);
-                let b = randomInteger(255);
-                return [r, g, b];
-            }
-            function randomHexColor() {
-                let [r, g, b] = randomRgbColor();
-
-                let hr = r.toString(16).padStart(2, '0');
-                let hg = g.toString(16).padStart(2, '0');
-                let hb = b.toString(16).padStart(2, '0');
-                return "#" + hr + hg + hb;
-            }
-            function generatePalette() {
-                var highlightedItems = document.querySelectorAll('.color');
-                
-                console.log(highlightedItems.length)
-                if(highlightedItems.length != 0){
-                    highlightedItems.forEach(function(element){
-                        element.remove();
-                    })
-                }
-                for (i = 0; i < 5; i++) {
-                    document.getElementById('paleta_colores').innerHTML += '<div class="color" style="background-color:' + randomHexColor() + ';width:300px;height:300px;margin:10px"></div>'
-                }
-            }
-        </script>
     </div>
     <div>
-        <h1>----------------------------------------------------------------------------------------------------------------------------------------------------</h1>
+        <h1>----------------------------------------------------------------------------------------------------------------------------------------------------
+        </h1>
     </div>
     <div>
 
@@ -74,43 +39,36 @@
             <input type="submit" value="Obtener paleta">
         </form>
         {% if colores.lenght != 0 %}
-            <div style="display: flex;">
-                {% for id,color in colores.items %}
-                <div id="{{id}}" style="display: flex;justify-content: center;text-align: center;">
+        <div style="display: flex;">
+            {% for id,color in colores.items %}
+            <div id="{{id}}" style="display: flex;justify-content: center;text-align: center;">
 
-                    <h1 style="margin: auto; color:white">{{color}}</h1>
-                </div>
-                <script>
-                    document.getElementById('{{id}}').style.backgroundColor = '{{color}}'
-                    document.getElementById('{{id}}').style.width = '300px'
-                    document.getElementById('{{id}}').style.height = '300px'
-                </script>
-            {% endfor %}
+                <h1 style="margin: auto; color:white">{{color}}</h1>
             </div>
+            <script>
+                document.getElementById('{{id}}').style.backgroundColor = '{{color}}'
+                document.getElementById('{{id}}').style.width = '300px'
+                document.getElementById('{{id}}').style.height = '300px'
+            </script>
+            {% endfor %}
+        </div>
         {% endif %}
     </div>
 
     <div>
-        <h1>----------------------------------------------------------------------------------------------------------------------------------------------------</h1>
+        <h1>----------------------------------------------------------------------------------------------------------------------------------------------------
+        </h1>
     </div>
-        <form method="post">
-            {% csrf_token %}
-            <input type="color" name="color1">
-            <input type="color" name="color2">
-            <input type="submit" value="Mezclar colores">
-        </form>
-        <div id="MixColors">
-        </div>
-        <script>
-            document.getElementById('MixColors').style.background= '{{Mixcolors}}'
-            document.getElementById('MixColors').style.width = '300px'
-            document.getElementById('MixColors').style.height = '300px'
-        </script>
+    <div id="MixColors" style="display: flex;">
+    </div>
+    <input type="color" name="color1" id="Mixcolor1">
+    <input type="color" name="color2" id="Mixcolor2">
+
+    <input type="submit" value="Mezclar colores" id="btnnashe" onclick="Mixcolor()">
     {% endif %}
     {% endblock %}
 
     {% block js%}
-    <script src="{ static 'js/inicio.js' %} "></script>
     {% endblock %}
 </body>
 
