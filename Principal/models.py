@@ -4,7 +4,7 @@ from django.contrib.auth.models import (
     BaseUserManager, AbstractBaseUser
 )
 class UserManager(BaseUserManager):
-    def create_user(self, email,username=None, password=None,photo=None,admin=False, activo=True,):
+    def create_user(self, email,username=None, password=None,photo=None,staff=False,admin=False, activo=True,):
         user = self.model(
             email=self.normalize_email(email),  
             username=username,
@@ -13,15 +13,17 @@ class UserManager(BaseUserManager):
         )
         user.set_password(password)
         user.admin = admin
+        user.staff = staff
         user.activo = activo
         user.save()
         return user
 
-    def create_superuser(self, correo,username, password):
+    def create_superuser(self, email,username, password):
         user = self.create_user(
-            correo,username,
+            email,username,
             password=password,
         )
+        user.staff = True
         user.admin = True
         user.save()
         return user
@@ -44,19 +46,19 @@ class Usuario(AbstractBaseUser):
     )
     activo = models.BooleanField(default=True)
     admin = models.BooleanField(default=False) 
-
+    staff = models.BooleanField(default=False) 
 
     USERNAME_FIELD = 'username'
     REQUIRED_FIELDS = ['email']
 
     def get_full_name(self):
-        return self.correo
+        return self.email
 
     def get_short_name(self):
-        return self.correo
+        return self.email
 
     def __str__(self):
-        return self.correo
+        return self.email
 
     def has_perm(self, perm, obj=None):
         "El usuario tiene un permiso especifico?"
@@ -69,6 +71,10 @@ class Usuario(AbstractBaseUser):
     def is_admin(self):
         "El usuario es un administrador?"
         return self.admin
+    @property
+    def is_staff(self):
+        "El usuario es un administrador?"
+        return self.staff
     objects = UserManager()
 
 class Metodo_pago(models.Model):
@@ -91,7 +97,6 @@ class Proyecto(models.Model):
     Descripcion = models.TextField()
     Fecha_creacion = models.DateField()
     photo = models.ImageField()
-    Metodo_pago = models.ForeignKey(Metodo_pago, on_delete=models.CASCADE)
     Usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)
     def __str__(self):
        return self.idProyecto
