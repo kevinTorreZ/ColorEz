@@ -1,3 +1,17 @@
+function GetPaleta(){
+    var highlightedItems = document.querySelectorAll('.colorPalette')
+    if (highlightedItems.length != 0) {
+        highlightedItems.forEach(function (element) {
+            element.remove();
+        })
+    }
+    color = document.getElementById('colorPalette').value
+    var arrayPaleta = chroma.scale([color,'white']).colors(10)
+    for (var color of arrayPaleta) {
+        document.getElementById('paletteColor').innerHTML += "<div class='colorPalette' style='background-color:"+color+";width:180px;height:300px;color:white;'>"+color+"</div>"
+    }
+}
+
 document.getElementById("html").addEventListener("keydown", function (e) {
 
     if (e.code === 'Space') {
@@ -37,21 +51,6 @@ function generatePalette() {
 window.onload = function(){
     generatePalette()
 }
-
-function GetPaleta(){
-    var highlightedItems = document.querySelectorAll('.colorPalette')
-    if (highlightedItems.length != 0) {
-        highlightedItems.forEach(function (element) {
-            element.remove();
-        })
-    }
-    color = document.getElementById('colorPalette').value
-    var arrayPaleta = chroma.scale([color,'white']).colors(10)
-    for (var color of arrayPaleta) {
-        document.getElementById('paletteColor').innerHTML += "<div class='colorPalette' style='background-color:"+color+";width:180px;height:300px;color:white;'>"+color+"</div>"
-    }
-}
-
 
 function Mixcolor() {
     var highlightedItems = document.querySelectorAll('.colorofMix');
