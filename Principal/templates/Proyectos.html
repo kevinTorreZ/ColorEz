@@ -1,6 +1,7 @@
 {% extends "Componentes/header.html" %}
 {% load static %}
 {% block links%}
+<link href="{% static 'Proyectos.css' %}" rel="stylesheet">
 {% endblock %}
 <!DOCTYPE html>
 <html lang="en">
@@ -12,12 +13,46 @@
 </head>
 
 <body>
-    {% block css %} {% endblock %}
     {% block content %}
-        
-    {% for proyecto in Proyectos%}
-        {{proyecto.Usuario}}
-    {% endfor %}
+    <div class="contenedor_proyectos">
+        {% for proyecto in Proyectos%}
+        <div id="{{proyecto.Proyecto.idProyecto}}" class="Proyectos">
+            {{proyecto.Proyecto.Titulo}}
+            {{proyecto.Proyecto.Descripcion}}
+            {{proyecto.Proyecto.photo}}
+            {% for File in AllFiles%}
+                {% if File.Proyecto.idProyecto == proyecto.Proyecto.idProyecto %}
+                    {{File.url}}
+                {% endif %}
+            {% endfor %}
+        </div>
+        {% endfor %}
+        <script>
+            function superponer(idProyecto) {
+                var highlightedItems = document.querySelectorAll('.Proyectos');
+
+                highlightedItems.forEach(function (userItem) {
+                    userItem.style.zIndex = '0';
+                });
+                document.getElementById(idProyecto).style.zIndex = '10';
+            }
+        </script>
+        <div class="btnProyectos">
+            {% for proyecto in Proyectos%}
+                    <button onclick="superponer('{{proyecto.Proyecto.idProyecto}}')">Ola</button>
+            {% endfor %}
+            <button style="width: 30px; height: 20px;" onclick="document.getElementById('form').style.visibility = 'visible'">+</button>
+            </div>
+    </div>
+    <form style="visibility: hidden" id="form">
+        {{form}}
+        {% csrf_token %}
+        <input type="submit">
+
+    </form>
+
+
+
     {% endblock %}
 </body>
 

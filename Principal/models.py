@@ -96,10 +96,10 @@ class Proyecto(models.Model):
     Titulo = models.CharField(max_length=25)
     Descripcion = models.TextField()
     Fecha_creacion = models.DateField()
-    photo = models.ImageField()
-    Usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)
+    photo = models.ImageField(upload_to = 'home/coloreze/ColorEz/Principal/static/img',verbose_name='',default='/home/coloreze/ColorEz/Principal/static/img/default_image_project.png')
+    Usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE,verbose_name='',)
     def __str__(self):
-       return self.idProyecto
+       return self.Titulo
 class Usuarios_proyecto(models.Model):
     id = models.AutoField(primary_key=True)
     Usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)
@@ -108,6 +108,7 @@ class Usuarios_proyecto(models.Model):
        return str(self.id)
 class File(models.Model):
     idFile = models.AutoField(primary_key=True)
+    Nombre = models.CharField(max_length=25)
     url = models.FileField()
     Proyecto = models.ForeignKey(Proyecto, on_delete=models.CASCADE)
     def __str__(self):

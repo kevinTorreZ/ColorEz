@@ -1,5 +1,5 @@
 from django import forms
-from Principal.models import Usuario
+from Principal.models import Usuario, Proyecto
 from django.shortcuts import render,redirect
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
 import string
@@ -101,3 +101,12 @@ class UserAdminChangeForm(forms.ModelForm):
 
     def clean_password(self):
         return self.initial["password"]
+
+
+class NewProyecto(forms.ModelForm):
+    class Meta:
+        model = Proyecto
+        fields = '__all__'
+        widgets = {
+            'Usuario': forms.HiddenInput(attrs={'type': 'Hidden'}),
+        }
