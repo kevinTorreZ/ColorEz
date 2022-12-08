@@ -4,7 +4,6 @@ from Principal.forms import RegisterForm,LoginForm,NewProyecto
 from django.views.generic import CreateView, FormView
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
-from Principal.models import Usuarios_proyecto, File
 from colorutils import Color,rgb_to_hex,hex_to_rgb, ArithmeticModel
 from django.urls import reverse_lazy
 from django.contrib.auth.decorators import login_required
@@ -52,3 +51,6 @@ def Proyectos(request):
     obj = Usuarios_proyecto.objects.filter(Usuario=request.user.id)
     Fileobj = File.objects.all();
     return render(request, 'Proyectos.html',{'Proyectos':obj,'form':form,'AllFiles':Fileobj})
+def Funciones(request):
+    return render(request, 'Funciones.html')
+ 
