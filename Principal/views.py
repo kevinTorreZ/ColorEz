@@ -1,6 +1,7 @@
 from django.shortcuts import render,redirect
 import requests
 from Principal.forms import RegisterForm,LoginForm,NewProyecto
+from Principal.models import Usuario,Usuarios_proyecto,File
 from django.views.generic import CreateView, FormView
 from django.contrib.auth import authenticate, login
 from django.contrib import messages

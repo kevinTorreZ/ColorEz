@@ -109,6 +109,7 @@ class Usuarios_proyecto(models.Model):
 class File(models.Model):
     idFile = models.AutoField(primary_key=True)
     Nombre = models.CharField(max_length=25)
+    Last_modified = models.DateField()
     url = models.FileField()
     Proyecto = models.ForeignKey(Proyecto, on_delete=models.CASCADE)
     def __str__(self):
