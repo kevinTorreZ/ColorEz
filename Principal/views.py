@@ -48,3 +48,6 @@ def Index(request):
 @login_required()
 def Proyectos(request):
     return render(request, 'Proyectos.html')
+
+def Funciones(request):
+    return render(request, 'Funciones.html')
