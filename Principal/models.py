@@ -96,7 +96,7 @@ class Proyecto(models.Model):
     Titulo = models.CharField(max_length=25)
     Descripcion = models.TextField()
     Fecha_creacion = models.DateField(verbose_name='',)
-    photo = models.ImageField(upload_to = 'home/coloreze/public_html/media/png',verbose_name='',default='/home/coloreze/public_html/media/default_image_project.png')
+    photo = models.ImageField(upload_to = 'home/coloreze/public_html/static/img/',verbose_name='',default='/home/coloreze/public_html/static/img/default_image_project.png')
     Usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE,verbose_name='',)
     def __str__(self):
        return self.Titulo
@@ -129,4 +129,5 @@ class Suscripcion(models.Model):
     Plan = models.ForeignKey(Proyecto, on_delete=models.CASCADE)
     def __str__(self):
        return self.idSuscripcion
+
 
