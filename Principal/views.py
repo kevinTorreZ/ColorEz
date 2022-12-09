@@ -49,7 +49,7 @@ def Index(request):
     return render(request, 'Index.html')
 @login_required()
 def Proyectos(request):
-    form = NewProyecto()
+    form = NewProyecto(initial={'photo':'/default_image_project.png'})
     UserInst = Usuario.objects.get(id=request.user.id)
     obj = Usuarios_proyecto.objects.filter(Usuario=request.user.id)
     Fileobj = File.objects.all();
@@ -65,7 +65,6 @@ def Proyectos(request):
         else:
             Descripcion = request.POST.get('Descripcion')
             photo = request.POST.get('photo')
-            photo = "/home/asdad/asd"+photo
             SaveProject = Proyecto(Titulo=Titulo,Descripcion=Descripcion,Fecha_creacion=now,Usuario=UserInst,photo=photo)
             SaveProject.save()
             AddUserPrjt = Usuarios_proyecto(Usuario=UserInst,Proyecto=SaveProject)

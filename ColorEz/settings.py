@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 
 from pathlib import Path
 import os
+import mimetypes
+mimetypes.add_type("text/css", ".css", True)
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -108,6 +110,7 @@ TRUST_PRIVATE_IP=True
 #     }
 # }
 
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql', 
@@ -153,11 +156,10 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
-
 STATIC_URL = 'static/'
-MEDIA_URL='/media/'
 STATIC_ROOT = '/home/coloreze/public_html/static'
-MEDIA_ROOT = '/home/coloreze/public_html/media'
+MEDIA_URL = ''
+MEDIA_ROOT = ''
 AUTH_USER_MODEL = 'Principal.Usuario'
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field

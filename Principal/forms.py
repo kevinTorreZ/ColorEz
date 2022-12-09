@@ -107,3 +107,4 @@ class NewProyecto(forms.ModelForm):
     class Meta:
         model = Proyecto
         fields = ['Titulo','Descripcion','photo']
+    
