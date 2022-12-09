@@ -65,6 +65,7 @@ def Proyectos(request):
         else:
             Descripcion = request.POST.get('Descripcion')
             photo = request.POST.get('photo')
+            photo = "/home/asdad/asd"+photo
             SaveProject = Proyecto(Titulo=Titulo,Descripcion=Descripcion,Fecha_creacion=now,Usuario=UserInst,photo=photo)
             SaveProject.save()
             AddUserPrjt = Usuarios_proyecto(Usuario=UserInst,Proyecto=SaveProject)
