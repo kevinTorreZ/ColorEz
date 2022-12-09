@@ -19,12 +19,17 @@
         <div id="{{proyecto.Proyecto.idProyecto}}" class="Proyectos">
             {{proyecto.Proyecto.Titulo}}
             {{proyecto.Proyecto.Descripcion}}
-            {{proyecto.Proyecto.photo}}
-            {% for File in AllFiles%}
+            {{proyecto.Proyecto.photo.url}}
+            {% for File in AllFiles %}
                 {% if File.Proyecto.idProyecto == proyecto.Proyecto.idProyecto %}
                     {{File.url}}
                 {% endif %}
             {% endfor %}
+            <form method="post">
+                {% csrf_token %}
+                <input type="hidden" value="{{proyecto.Proyecto.idProyecto}}" name="idProyecto">
+                <input type="submit" value="Borrar">
+            </form>
         </div>
         {% endfor %}
         <script>
@@ -39,12 +44,13 @@
         </script>
         <div class="btnProyectos">
             {% for proyecto in Proyectos%}
-                    <button onclick="superponer('{{proyecto.Proyecto.idProyecto}}')">Ola</button>
+                    <img src="{{proyecto.Proyecto.photo.url}}" width="20px" height="20px" onclick="document.getElementById('{{proyecto.Proyecto.idProyecto}}btnprj').click()">
+                    <button onclick="superponer('{{proyecto.Proyecto.idProyecto}}')" id="{{proyecto.Proyecto.idProyecto}}btnprj" style="visibility: hidden;"></button>
             {% endfor %}
             <button style="width: 30px; height: 20px;" onclick="document.getElementById('form').style.visibility = 'visible'">+</button>
             </div>
     </div>
-    <form style="visibility: hidden" id="form">
+    <form style="visibility: hidden" id="form" method="POST">
         {{form}}
         {% csrf_token %}
         <input type="submit">

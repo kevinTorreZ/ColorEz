@@ -6,7 +6,6 @@
     background-color: gray;
     color: white;
     padding: 20px;
-    overflow: hidden;
     overflow-wrap: break-word;
     position: absolute;
     margin: 20px 100px;
@@ -18,7 +17,6 @@
     position: relative;
     height: 400px;
     width: 90%;
-    overflow: hidden;
     margin: auto;
 }
 .btnProyectos{
@@ -26,7 +24,8 @@
     flex-direction: column;
     margin-top: 30px;
     margin-left: 20px;
-    width: 30px;
+    width: 100px;
+    height: 500px;
     justify-content: center;
     align-items: center;
 }

@@ -106,7 +106,4 @@ class UserAdminChangeForm(forms.ModelForm):
 class NewProyecto(forms.ModelForm):
     class Meta:
         model = Proyecto
-        fields = '__all__'
-        widgets = {
-            'Usuario': forms.HiddenInput(attrs={'type': 'Hidden'}),
-        }
+        fields = ['Titulo','Descripcion','photo']

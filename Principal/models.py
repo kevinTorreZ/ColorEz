@@ -95,7 +95,7 @@ class Proyecto(models.Model):
     idProyecto = models.AutoField(primary_key=True)
     Titulo = models.CharField(max_length=25)
     Descripcion = models.TextField()
-    Fecha_creacion = models.DateField()
+    Fecha_creacion = models.DateField(verbose_name='',)
     photo = models.ImageField(upload_to = 'home/coloreze/ColorEz/Principal/static/img',verbose_name='',default='/home/coloreze/ColorEz/Principal/static/img/default_image_project.png')
     Usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE,verbose_name='',)
     def __str__(self):

@@ -1,7 +1,8 @@
 from django.shortcuts import render,redirect
 import requests
+from datetime import date
 from Principal.forms import RegisterForm,LoginForm,NewProyecto
-from Principal.models import Usuario,Usuarios_proyecto,File
+from Principal.models import Usuario,Usuarios_proyecto,File,Proyecto
 from django.views.generic import CreateView, FormView
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
@@ -49,8 +50,26 @@ def Index(request):
 @login_required()
 def Proyectos(request):
     form = NewProyecto()
+    UserInst = Usuario.objects.get(id=request.user.id)
     obj = Usuarios_proyecto.objects.filter(Usuario=request.user.id)
     Fileobj = File.objects.all();
+    if request.method == "POST":
+        now = date.today()
+        Titulo = request.POST.get('Titulo')
+        if Titulo == None:
+            idprj = request.POST['idProyecto']
+            searchPrjct = Proyecto.objects.get(idProyecto=idprj)
+            clearListuser = Usuarios_proyecto.objects.get(Usuario=UserInst, Proyecto=searchPrjct)
+            clearListuser.delete()
+            searchPrjct.delete()
+        else:
+            Descripcion = request.POST.get('Descripcion')
+            photo = request.POST.get('photo')
+            SaveProject = Proyecto(Titulo=Titulo,Descripcion=Descripcion,Fecha_creacion=now,Usuario=UserInst,photo=photo)
+            SaveProject.save()
+            AddUserPrjt = Usuarios_proyecto(Usuario=UserInst,Proyecto=SaveProject)
+            AddUserPrjt.save()
+
     return render(request, 'Proyectos.html',{'Proyectos':obj,'form':form,'AllFiles':Fileobj})
 def Funciones(request):
     return render(request, 'Funciones.html')
