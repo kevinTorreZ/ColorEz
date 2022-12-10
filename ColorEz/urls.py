@@ -31,5 +31,7 @@ urlpatterns = [
     path('oauth/', include('social_django.urls', namespace='social')),
     path('Proyectos/', views.Proyectos, name='Proyectos'),
     path('Funciones/', views.Funciones),
+    path('send_email/', views.enviar_correo, name='send_email'),
+    path('ChangePassword/', views.validate_token, name='ChangePassword'),
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

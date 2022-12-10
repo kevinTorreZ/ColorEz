@@ -29,6 +29,7 @@
             {{form}}
             <input type="submit" value="Iniciar sesión">
         </form>
+        <a href="{% url 'send_email' %}">Send email</a>
         <a href="{% url 'social:begin' 'facebook' %}">Login with Facebook</a>
         <a href="{% url 'social:begin' 'google-oauth2' %}">Login With Google</a>
     </div>

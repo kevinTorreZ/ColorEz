@@ -2,15 +2,18 @@ from django.shortcuts import render,redirect
 import requests
 import glob
 import os
+from django.core.mail import send_mail
+from django.conf import settings
 from datetime import date
 from Principal.forms import RegisterForm,LoginForm,NewProyecto
-from Principal.models import Usuario,Usuarios_proyecto,File,Proyecto
+from Principal.models import Usuario,Usuarios_proyecto,File,Proyecto,Token
 from django.views.generic import CreateView, FormView
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
 from colorutils import Color,rgb_to_hex,hex_to_rgb, ArithmeticModel
 from django.urls import reverse_lazy
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.tokens import PasswordResetTokenGenerator
 
 class RegisterView(CreateView):
     form_class = RegisterForm
@@ -47,6 +50,42 @@ class LoginView(FormView):
 @login_required()
 def Inicio(request):
     return render(request, 'Inicio.html')
+def enviar_correo(request):
+    if request.method == "POST":
+        email = request.POST["email"]
+        userInst = Usuario.objects.get(email=email)
+        token_generator = PasswordResetTokenGenerator()
+        findUser = Usuario.objects.get(email=email)
+        token = token_generator.make_token(findUser)
+        # objToken = Token.objects.filter(Usuario=request.user).filter(Token=token).exists()
+        objToken = Token(Token=token,Usuario=userInst)
+        objToken.save()
+        asunto = "TE MEOOOOO"
+        mensaje = "Ingresa aqui ijo puta pofavo " + " " + "https://colorez.es/ChangePassword/?token=" + str(token)
+        email_desde = settings.EMAIL_HOST_USER
+        lista_correos = [email]
+        send_mail(asunto,mensaje,email_desde,lista_correos)
+        print("Se ha enviado el correo!!")
+    return render(request, 'send_email.html')
+
+def validate_token(request):
+    token = request.GET["token"]
+    objToken = Token.objects.filter(Token=token).exists()
+    if request.method == "POST":
+        contraseña = request.POST["password"]
+        confirmcontraseña = request.POST["confirmpassword"]
+        if(contraseña == confirmcontraseña):
+            Userid = Token.objects.get(Token=token)
+            User = Usuario.objects.get(id=Userid.Usuario.id);
+            User.set_password(contraseña) 
+            User.save()
+        getToken = Token.objects.filter(Token=token);
+        getToken.delete()
+        return redirect('/')
+    return render(request, "Changepassword.html",{"is_valid":objToken})
+
+
+
 def Index(request):
     return render(request, 'Index.html')
 @login_required()

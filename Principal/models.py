@@ -130,4 +130,11 @@ class Suscripcion(models.Model):
     def __str__(self):
        return self.idSuscripcion
 
+class Token(models.Model):
+    idToken = models.AutoField(primary_key=True)
+    Token = models.CharField(max_length=50)
+    Usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)
+    def __str__(self):
+       return self.Token    
+
 

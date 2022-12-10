@@ -1,0 +1,27 @@
+{% extends "Componentes/header.html" %}
+{% load static %}
+{% block links%}
+<link rel="stylesheet" href="{% static 'login.css' %}">
+{% endblock %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block title %} Iniciar sesión {% endblock %}
+</head>
+<body>
+    {% block css %} {% endblock %}
+    {% block content %}
+        <div class="DivForm">
+            <form method="post" class="form">
+                {% csrf_token %}
+                <input type="email" name="email">
+                <input type="submit" value="Enviar correo">
+            </form>
+        </div>
+    {% endblock %}
+</body>
+</html>
+{% block js%}{% endblock %}

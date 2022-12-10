@@ -171,3 +171,15 @@ SOCIAL_AUTH_FACEBOOK_SECRET = '88009e155283115f5b09c42fd2c00cdd'  # App Secret
 
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '374694074680-99e56u86dmqflrqub1cg8hcr2ufh1sgp.apps.googleusercontent.com' 
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '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'
+
+
+
+
+########## EMAIL CONFIG
+
+EMAIL_BACKEND= "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST = "s333.v2nets.com"
+EMAI_USE_TLS=True
+EMAIL_PORT=587
+EMAIL_HOST_USER="contact.colorez@colorez.es"
+EMAIL_HOST_PASSWORD="x8p5JHy9#SQZ"
