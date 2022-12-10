@@ -44,7 +44,7 @@
         </script>
         <div class="btnProyectos">
             {% for proyecto in Proyectos%}
-                    <img src="/media/{{proyecto.Proyecto.photo}}" width="20px" height="20px" onclick="document.getElementById('{{proyecto.Proyecto.idProyecto}}btnprj').click()">
+                    <img src="/{{proyecto.Proyecto.photo}}" width="20px" height="20px" onclick="document.getElementById('{{proyecto.Proyecto.idProyecto}}btnprj').click()">
                     <button onclick="superponer('{{proyecto.Proyecto.idProyecto}}')" id="{{proyecto.Proyecto.idProyecto}}btnprj" style="visibility: hidden;"></button>
             {% endfor %}
             <button style="width: 30px; height: 20px;" onclick="document.getElementById('form').style.visibility = 'visible'">+</button>
@@ -63,4 +63,7 @@
 </body>
 
 </html>
-{% block js%}{% endblock %}
+{% block js%}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="{% static 'js/Proyectos.js' %}"></script>
+{% endblock %}
