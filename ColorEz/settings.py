@@ -179,7 +179,7 @@ SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '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'
 
 EMAIL_BACKEND= "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_HOST = "s333.v2nets.com"
-EMAI_USE_TLS=True
+EMAIL_USE_TLS=True
 EMAIL_PORT=25
 EMAIL_HOST_USER="soporte.colorez@colorez.es"
 EMAIL_HOST_PASSWORD="+njtv^;B1,zj"
