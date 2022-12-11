@@ -32,7 +32,7 @@ function generatePalette() {
     }
     for (i = 0; i < 5; i++) {
         var obj = randomHexColor();
-        document.getElementById('paleta_colores').innerHTML += '<div class="color" style="background-color:' + obj[1].toString() + ';width:170px;height:300px;margin:10px">' + obj[1].toString() + obj[0].toString() +  '</div>'
+        document.getElementById('paleta_colores').innerHTML += '<div class="color" style="background-color:'  + obj[1].toString() + ';width:250px;height:500px;margin:10px">' + "<div class='textos'>" + "<div class='text1'>" + '<h1>HEX: ' + obj[1].toString() + '</h1>' + '</div>' + "<div class='text2'>" + '<h1>RGB: ' + obj[0].toString() + '</h1>' + "</div>" + "</div>" +  '</div>'
     }
 }
 window.onload = function(){

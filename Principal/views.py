@@ -88,6 +88,10 @@ def validate_token(request):
 
 def Index(request):
     return render(request, 'Index.html')
+
+def GenerarPaleta(request):
+    return render(request, './Funciones/Generarpaleta.html')
+
 @login_required()
 def Proyectos(request):
     form = NewProyecto()

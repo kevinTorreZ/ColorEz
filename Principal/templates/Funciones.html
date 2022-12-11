@@ -13,13 +13,37 @@
     {% block title %} Funciones {% endblock %}
 </head>
 
-<body style="background-color: red;">
+<body>
     {% block css %} {% endblock %}
     {% block content %}
     {% if user.is_authenticated %}
+    <h1 id="fTitle">Selecciona la función que desees utilizar</h1>
     <div class="mainFuncion">
-        <div class="Funcion">
-
+        <div class="Funciones">
+            <div class="Funcion">
+                <img src="../static/img/GenerarPaleta.png">
+                <h3>Generar paleta de colores</h3>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit consequuntur eligendi tempore maiores. Perspiciatis ducimus laboriosam in veritatis nobis ab molestias, excepturi odio porro sed possimus incidunt labore debitis distinctio?</p>
+                <button onclick='location.href="/Generar-paleta/"'>Utilizar función</button>
+            </div>
+            <div class="Funcion">
+                <img src="../static/img/GenerarPaleta.png">
+                <h3>Mezclar colores</h3>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit consequuntur eligendi tempore maiores. Perspiciatis ducimus laboriosam in veritatis nobis ab molestias, excepturi odio porro sed possimus incidunt labore debitis distinctio?</p>
+                <button >Utilizar función</button>
+            </div>
+            <div class="Funcion">
+                <img src="../static/img/GenerarPaleta.png">
+                <h3>Obtener paleta de un color</h3>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit consequuntur eligendi tempore maiores. Perspiciatis ducimus laboriosam in veritatis nobis ab molestias, excepturi odio porro sed possimus incidunt labore debitis distinctio?</p>
+                <button>Utilizar función</button>
+            </div>
+            <div class="Funcion">
+                <img src="../static/img/GenerarPaleta.png">
+                <h3>Generar paleta de colores</h3>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit consequuntur eligendi tempore maiores. Perspiciatis ducimus laboriosam in veritatis nobis ab molestias, excepturi odio porro sed possimus incidunt labore debitis distinctio?</p>
+                <button>Utilizar función</button>
+            </div>
         </div>
     </div>
     {% endif %}

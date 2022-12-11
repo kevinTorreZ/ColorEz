@@ -1,0 +1,36 @@
+{% extends "Componentes/header.html" %}
+{% load static %}
+{% block links%}
+<link rel="stylesheet" href="{% static 'GenerarPaleta.css' %}">
+<script src="{% static 'js/chroma.min.js' %}"></script>
+<script src="{% static 'js/inicio.js' %} "></script>
+{% endblock %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block title %} Funciones {% endblock %}
+</head>
+
+<body>
+    {% block css %} {% endblock %}
+    {% block content %}
+    {% if user.is_authenticated %}
+    <h1 id="titleG">¡Empieza a generar paletas de colores!</h1>
+    <div class="mainGenerar">
+        <h1 id="titleSpace">¡Presionar la tecla "espacio" para generar otra paleta!</h1>
+        <div id="paleta_colores">
+            <input type="hidden" id="btnhiden">
+        </div>
+    </div>
+    {% endif %}
+    {% endblock %}
+
+    {% block js%}
+    {% endblock %}
+</body>
+
+</html>
