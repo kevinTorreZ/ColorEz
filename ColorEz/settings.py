@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'Principal',
     'social_django',
+    'qr_code',
     ]
 
 

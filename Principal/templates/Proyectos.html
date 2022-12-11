@@ -57,7 +57,16 @@
 
     </form>
 
-
+    <form method="post">
+        {% csrf_token %}
+        <select name="ProjectSelected">
+            <option value="0">Selecciona tu proyecto</option>
+            {% for proyecto in ProyectosOwner %}
+                <option value="{{proyecto.idProyecto}}">{{proyecto.Titulo}}</option>
+            {% endfor %}
+        </select>
+        <input type="submit">
+    </form>
 
     {% endblock %}
 </body>

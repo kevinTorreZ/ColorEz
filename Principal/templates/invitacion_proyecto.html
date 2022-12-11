@@ -1,0 +1,34 @@
+{% extends "Componentes/header.html" %}
+{% load static %}
+{% block links%}
+<link rel="stylesheet" href="{% static 'login.css' %}">
+{% endblock %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block title %} Iniciar sesión {% endblock %}
+</head>
+<body>
+    {% block css %} {% endblock %}
+    {% block content %}
+    {% if is_valid == True %}
+        <form method="post" id="formChangePassword">
+            {% csrf_token %}
+            <h1>Restablecer contraseña</h1>
+            <input type="hidden" id="inputhidden">
+            <input type="submit" onsubmit="document.getElementById('inputhidden').value = 'ok'">
+        </form>
+        {% if send == True %}
+            <script>document.getElementById("formChangePassword").remove()</script>
+            <h1>Se ha restablecido su contraseña correctamente!</h1>
+        {% endif %}
+    {% else %}
+        <h1>El token no existe o ya ha expirado!</h1>
+    {% endif %}
+    {% endblock %}
+</body>
+</html>
+{% block js%}{% endblock %}

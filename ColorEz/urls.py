@@ -34,5 +34,6 @@ urlpatterns = [
     path('send_email/', views.enviar_correo, name='send_email'),
     path('ChangePassword/', views.validate_token, name='ChangePassword'),
     path('Generar-paleta/', views.GenerarPaleta),
+    path('invitacion_proyecto/', views.Invitacion_proyecto, name='invitacion_proyecto'),
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

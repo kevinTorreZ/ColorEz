@@ -5,6 +5,7 @@ import os
 from django.core.mail import send_mail
 from django.conf import settings
 from datetime import date
+from qrcode import *
 from Principal.forms import RegisterForm,LoginForm,NewProyecto
 from Principal.models import Usuario,Usuarios_proyecto,File,Proyecto,Token
 from django.views.generic import CreateView, FormView
@@ -45,7 +46,7 @@ class LoginView(FormView):
             login(request, user)
             if not remember_me:
                             request.session.set_expiry(0)
-            return redirect('/Inicio/')
+            return redirect(request.GET.get("next"))
         return super(LoginView, self).form_invalid(form)
 @login_required()
 def Inicio(request):
@@ -102,16 +103,32 @@ def Proyectos(request):
     form = NewProyecto()
     UserInst = Usuario.objects.get(id=request.user.id)
     obj = Usuarios_proyecto.objects.filter(Usuario=request.user.id)
+    objOwner = Proyecto.objects.filter(Usuario=request.user.id)
+
     Fileobj = File.objects.all();
     if request.method == "POST":
+        ProjectSelected = request.POST.get('ProjectSelected')
         now = date.today()
         Titulo = request.POST.get('Titulo')
         if Titulo == None:
-            idprj = request.POST['idProyecto']
-            searchPrjct = Proyecto.objects.get(idProyecto=idprj)
-            clearListuser = Usuarios_proyecto.objects.get(Usuario=UserInst, Proyecto=searchPrjct)
-            clearListuser.delete()
-            searchPrjct.delete()
+            if ProjectSelected == 0:
+                idprj = request.POST['idProyecto']
+                searchPrjct = Proyecto.objects.get(idProyecto=idprj)
+                clearListuser = Usuarios_proyecto.objects.get(Usuario=UserInst, Proyecto=searchPrjct)
+                clearListuser.delete()
+                searchPrjct.delete()
+            else:
+                userInst = Usuario.objects.get(request.user.id)
+                token_generator = PasswordResetTokenGenerator()
+                findUser = Usuario.objects.get(request.user.id)
+                token = token_generator.make_token(findUser)
+                # objToken = Token.objects.filter(Usuario=request.user).filter(Token=token).exists()
+                objToken = Token(Token=token,Usuario=userInst)
+                objToken.save()
+                asunto = "Restablecer contraseña"
+                imgtest = make("Ingrese en el link para restablecer su contraseña." + " " + "https://colorez.es/ChangePassword/?token=" + str(token))
+                imgtest.save("media/test.png")
+                print(ProjectSelected)
         else:
             Descripcion = request.POST.get('Descripcion')
             photo = request.FILES.get('photo')
@@ -122,8 +139,22 @@ def Proyectos(request):
             SaveProject.save()
             AddUserPrjt = Usuarios_proyecto(Usuario=UserInst,Proyecto=SaveProject)
             AddUserPrjt.save()
-
-    return render(request, 'Proyectos.html',{'Proyectos':obj,'form':form,'AllFiles':Fileobj})
+    return render(request, 'Proyectos.html',{'Proyectos':obj,'form':form,'AllFiles':Fileobj,'ProyectosOwner':objOwner})
+@login_required()
+def Invitacion_proyecto(request):
+    token = request.GET["token"]
+    idProject = request.GET["id"]
+    Enviado = False
+    objToken = Token.objects.filter(Token=token).exists()
+    if request.method == "POST":
+        acept = request.POST["inputhidden"]
+        if(acept == "ok"):
+            User = Usuario.objects.get(id=request.user.id);
+            projecto = Proyecto.objects.get(idProyecto=idProject)
+            vincular = Usuarios_proyecto(Usuario=User,Proyecto=projecto)
+            vincular.save()
+            Enviado = True
+    return render(request, "invitacion_proyecto.html",{"is_valid":objToken,"send":Enviado})
 def Funciones(request):
     return render(request, 'Funciones.html')
  
