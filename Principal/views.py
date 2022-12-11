@@ -126,7 +126,7 @@ def Proyectos(request):
                 # objToken = Token.objects.filter(Usuario=request.user).filter(Token=token).exists()
                 objToken = Token(Token=token,Usuario=userInst)
                 objToken.save()
-                imgtest = make("https://colorez.es/ChangePassword/?token=" + str(token) + "&id=" + str(ProjectSelected))
+                imgtest = make("https://colorez.es/invitacion_proyecto/?token=" + str(token) + "&id=" + str(ProjectSelected))
                 imgtest.save("media/test2.png")
                 Mostrarqr = True
         else:
