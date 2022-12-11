@@ -53,19 +53,23 @@ def Inicio(request):
 def enviar_correo(request):
     if request.method == "POST":
         email = request.POST["email"]
-        userInst = Usuario.objects.get(email=email)
-        token_generator = PasswordResetTokenGenerator()
-        findUser = Usuario.objects.get(email=email)
-        token = token_generator.make_token(findUser)
-        # objToken = Token.objects.filter(Usuario=request.user).filter(Token=token).exists()
-        objToken = Token(Token=token,Usuario=userInst)
-        objToken.save()
-        asunto = "TE MEOOOOO"
-        mensaje = "Ingresa aqui ijo puta pofavo " + " " + "https://colorez.es/ChangePassword/?token=" + str(token)
-        email_desde = settings.EMAIL_HOST_USER
-        lista_correos = [email]
-        send_mail(asunto,mensaje,email_desde,lista_correos)
-        print("Se ha enviado el correo!!")
+        userInst = Usuario.objects.filter(email=email).exists()
+        if userInst:
+            userInst = Usuario.objects.get(email=email)
+            token_generator = PasswordResetTokenGenerator()
+            findUser = Usuario.objects.get(email=email)
+            token = token_generator.make_token(findUser)
+            # objToken = Token.objects.filter(Usuario=request.user).filter(Token=token).exists()
+            objToken = Token(Token=token,Usuario=userInst)
+            objToken.save()
+            asunto = "Restablecer contraseña"
+            mensaje = "Ingrese en el link para restablecer su contraseña." + " " + "https://colorez.es/ChangePassword/?token=" + str(token)
+            email_desde = settings.EMAIL_HOST_USER
+            lista_correos = [email]
+            send_mail(asunto,mensaje,email_desde,lista_correos)
+            print("Se ha enviado el correo!!")
+        else:
+            return render(request, 'send_email.html',{"error":'El correo ingresado no se encuentra asociado a una cuenta.'})
     return render(request, 'send_email.html')
 
 def validate_token(request):
@@ -79,10 +83,12 @@ def validate_token(request):
             User = Usuario.objects.get(id=Userid.Usuario.id);
             User.set_password(contraseña) 
             User.save()
-        getToken = Token.objects.filter(Token=token);
-        getToken.delete()
-        return redirect('/')
-    return render(request, "Changepassword.html",{"is_valid":objToken})
+            getToken = Token.objects.filter(Token=token);
+            getToken.delete()
+            Enviado = True
+        else:
+            Enviado = False
+    return render(request, "Changepassword.html",{"is_valid":objToken,"send":Enviado})
 
 
 
