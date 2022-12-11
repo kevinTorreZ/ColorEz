@@ -146,9 +146,9 @@ def Invitacion_proyecto(request):
     idProject = request.GET["id"]
     Enviado = False
     objToken = Token.objects.filter(Token=token).exists()
+    projecto = Proyecto.objects.get(idProyecto=idProject)
     if request.method == "POST":
         User = Usuario.objects.get(id=request.user.id);
-        projecto = Proyecto.objects.get(idProyecto=idProject)
         vincular = Usuarios_proyecto(Usuario=User,Proyecto=projecto)
         vincular.save()
         Enviado = True
