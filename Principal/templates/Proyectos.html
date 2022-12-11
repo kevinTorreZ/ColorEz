@@ -14,7 +14,7 @@
 
 <body>
     {% block content %}
-    <div class="contenedor_proyectos">
+    <div class="contenedor_proyectos" id="content">
         {% for proyecto in Proyectos%}
         <div id="{{proyecto.Proyecto.idProyecto}}" class="Proyectos">
             {{proyecto.Proyecto.Titulo}}
@@ -67,7 +67,9 @@
         </select>
         <input type="submit">
     </form>
-
+    {% if MostrarQR %}
+        <img src="/media/test2.png">
+    {% endif %}
     {% endblock %}
 </body>
 

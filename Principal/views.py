@@ -101,6 +101,7 @@ def GenerarPaleta(request):
 @login_required()
 def Proyectos(request):
     form = NewProyecto()
+    Mostrarqr = False
     UserInst = Usuario.objects.get(id=request.user.id)
     obj = Usuarios_proyecto.objects.filter(Usuario=request.user.id)
     objOwner = Proyecto.objects.filter(Usuario=request.user.id)
@@ -118,17 +119,16 @@ def Proyectos(request):
                 clearListuser.delete()
                 searchPrjct.delete()
             else:
-                userInst = Usuario.objects.get(request.user.id)
+                userInst = Usuario.objects.get(id=request.user.id)
                 token_generator = PasswordResetTokenGenerator()
-                findUser = Usuario.objects.get(request.user.id)
+                findUser = Usuario.objects.get(id=request.user.id)
                 token = token_generator.make_token(findUser)
                 # objToken = Token.objects.filter(Usuario=request.user).filter(Token=token).exists()
                 objToken = Token(Token=token,Usuario=userInst)
                 objToken.save()
-                asunto = "Restablecer contraseña"
-                imgtest = make("Ingrese en el link para restablecer su contraseña." + " " + "https://colorez.es/ChangePassword/?token=" + str(token))
-                imgtest.save("media/test.png")
-                print(ProjectSelected)
+                imgtest = make("https://colorez.es/ChangePassword/?token=" + str(token) + "&id=" + str(ProjectSelected))
+                imgtest.save("media/test2.png")
+                Mostrarqr = True
         else:
             Descripcion = request.POST.get('Descripcion')
             photo = request.FILES.get('photo')
@@ -139,7 +139,7 @@ def Proyectos(request):
             SaveProject.save()
             AddUserPrjt = Usuarios_proyecto(Usuario=UserInst,Proyecto=SaveProject)
             AddUserPrjt.save()
-    return render(request, 'Proyectos.html',{'Proyectos':obj,'form':form,'AllFiles':Fileobj,'ProyectosOwner':objOwner})
+    return render(request, 'Proyectos.html',{'Proyectos':obj,'form':form,'AllFiles':Fileobj,'ProyectosOwner':objOwner,"MostrarQR":Mostrarqr})
 @login_required()
 def Invitacion_proyecto(request):
     token = request.GET["token"]
