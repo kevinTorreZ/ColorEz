@@ -74,6 +74,7 @@ def enviar_correo(request):
 
 def validate_token(request):
     token = request.GET["token"]
+    Enviado = False
     objToken = Token.objects.filter(Token=token).exists()
     if request.method == "POST":
         contraseña = request.POST["password"]
@@ -87,7 +88,7 @@ def validate_token(request):
             getToken.delete()
             Enviado = True
         else:
-            Enviado = False
+            pass
     return render(request, "Changepassword.html",{"is_valid":objToken,"send":Enviado})
 
 
