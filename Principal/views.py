@@ -87,8 +87,6 @@ def validate_token(request):
             getToken = Token.objects.filter(Token=token);
             getToken.delete()
             Enviado = True
-        else:
-            pass
     return render(request, "Changepassword.html",{"is_valid":objToken,"send":Enviado})
 
 
