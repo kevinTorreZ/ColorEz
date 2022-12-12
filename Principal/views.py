@@ -172,15 +172,20 @@ def Perfil(request):
     formChange = ChangeDataPerfil(instance=instUser)
     
     if request.method == "POST":
-        formChange= ChangeDataPerfil(request.POST,instance= instUser)
+        formChange= ChangeDataPerfil(request.POST,request.FILES,instance= instUser)
         if formChange.is_valid(): 
-            filepath = glob.glob('media/ImagePerfil/'+str(request.FILES['photo'])) 
-            if filepath != []:
-                instUser.photo = 'media/ImagePerfil/'+str(request.FILES['photo'])
+            if request.FILES.get('photo',"") != "":
+                filepath = glob.glob('media/ImagePerfil/'+str(request.FILES['photo'])) 
+                if filepath != []:
+                    instUser.photo = 'media/ImagePerfil/'+str(request.FILES['photo'])
+                    instUser.username = str(request.POST['username'])
+                    instUser.email = str(request.POST['email'])
+                    instUser.save()
+                else:
+                    formChange.save(commit=True)
+            else:
                 instUser.username = str(request.POST['username'])
                 instUser.email = str(request.POST['email'])
                 instUser.save()
-            else:
-                formChange.save(commit=True)
     return render(request, "Perfil.html",{"form":formChange})
  

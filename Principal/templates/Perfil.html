@@ -19,7 +19,7 @@
     {% block css %} {% endblock %}
     {% block content %}
     {% if user.is_authenticated %}
-
+        <img src="/{{user.photo}}" width="400" height="300" style="border-radius: 50%; margin: auto;">
         <form method="post"  enctype="multipart/form-data">
             {% csrf_token %}
             {{form}}    
