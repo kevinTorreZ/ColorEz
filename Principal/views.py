@@ -172,7 +172,7 @@ def Perfil(request):
     formChange = ChangeDataPerfil(instance=instUser)
     
     if request.method == "POST":
-        formChange= ChangeDataPerfil(request.POST,request.FILES,instance= instUser)
+        formChange= ChangeDataPerfil(request.POST,instance= instUser)
         if formChange.is_valid(): 
             filepath = glob.glob('media/ImagePerfil/'+str(request.FILES['photo'])) 
             if filepath != []:
