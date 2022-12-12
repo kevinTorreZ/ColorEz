@@ -17,13 +17,14 @@
     {% if is_valid == True %}
         <form method="post" id="formChangePassword">
             {% csrf_token %}
-            <h1>Restablecer contraseña</h1>
-            <input type="hidden" id="inputhidden">
-            <input type="submit" onsubmit="document.getElementById('inputhidden').value = 'ok'">
+            <h1>Quieres unirte al proyecto? </h1>
+            {{projecto.Titulo}}
+            <input type="hidden" id="inputhidden" name="inputhidden">
+            <input type="submit" onsubmit="document.getElementById('inputhidden').value = 'ok'" value="Aceptar">
         </form>
         {% if send == True %}
             <script>document.getElementById("formChangePassword").remove()</script>
-            <h1>Se ha restablecido su contraseña correctamente!</h1>
+            <h1>Te has unido correctamente!</h1>
         {% endif %}
     {% else %}
         <h1>El token no existe o ya ha expirado!</h1>

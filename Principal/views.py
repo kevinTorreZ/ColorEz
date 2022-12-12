@@ -146,15 +146,15 @@ def Invitacion_proyecto(request):
     idProject = request.GET["id"]
     Enviado = False
     objToken = Token.objects.filter(Token=token).exists()
+    projecto = Proyecto.objects.get(idProyecto=idProject)
     if request.method == "POST":
-        acept = request.POST["inputhidden"]
-        if(acept == "ok"):
-            User = Usuario.objects.get(id=request.user.id);
-            projecto = Proyecto.objects.get(idProyecto=idProject)
-            vincular = Usuarios_proyecto(Usuario=User,Proyecto=projecto)
-            vincular.save()
-            Enviado = True
-    return render(request, "invitacion_proyecto.html",{"is_valid":objToken,"send":Enviado})
+        User = Usuario.objects.get(id=request.user.id);
+        vincular = Usuarios_proyecto(Usuario=User,Proyecto=projecto)
+        vincular.save()
+        Enviado = True
+        objToken = Token.objects.get(Token=token)
+        objToken.delete()
+    return render(request, "invitacion_proyecto.html",{"is_valid":objToken,"send":Enviado,"Proyecto":projecto})
 def Funciones(request):
     return render(request, 'Funciones.html')
  
