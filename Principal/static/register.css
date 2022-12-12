@@ -1,3 +1,12 @@
+body{
+    background-image: url('./img/bg.jpg');
+    background-size: auto;
+    background-repeat: no-repeat;
+    background-position: 50% 0;
+    background-attachment: scroll;
+    background-color: #f3f4fd;
+}
+
 .divForm {
     width: 100%;
     display: flex;

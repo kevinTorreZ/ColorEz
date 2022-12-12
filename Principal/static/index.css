@@ -1,101 +1,77 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
 
+.indexPage {
+    height: 550px;
+}
 
-.divMain {
+nav {
+    background-color: #2c124c !important;
+}
+
+.indexPage::before {
+    left: 0;
+    top: -24%;
+    content: "";
+    z-index: -1;
     width: 100%;
+    height: 750px;
+    position: absolute;
+    background-size: cover;
+    transform: skewY(-2.5deg);
+    background-position: 0 50%;
+    background-repeat: no-repeat;
+    background-image: linear-gradient(36deg, #2c124c 20%, #2c124c 92%);
+}
+
+.container {
+    width: 65em;
     height: 600px;
     margin: 0 auto;
+}
+
+.columnas {
     display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 630px;
     align-items: center;
-    background-color: #5A189A;
-    --mask:
-        radial-gradient(51.61px at 50% calc(100% - 72.00px), #000 99%, #0000 101%) calc(50% - 60px) 0/120px 100%,
-        radial-gradient(51.61px at 50% calc(100% + 42.00px), #0000 99%, #000 101%) 50% calc(100% - 30px)/120px 100% repeat-x;
-    -webkit-mask: var(--mask);
-    mask: var(--mask);
 }
 
-
-.LogoIzq {
-    float: left;
-    width: 600px;
-    height: 500px;
-    margin-left: 50px;
-    margin-bottom: 50px;
-}
-
-.LogoIzq h1 {
-    color: #FFFF;
-    font-family: 'Poppins', sans-serif;
-    font-weight: bold;
-    font-size: 65px;
-    text-align: center;
-}
-
-.LogoIzq a {
-    color: #E0AAFF;
-}
-
-.TitleDer {
-    float: right;
-    width: 700px;
-    height: 500px;
-    margin-left: 300px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 50px;
-}
-
-.TitleDer h1 {
-    margin-top: 150px;
-    font-size: 45px;
+.header-text {
+    font-family: 'Lato', sans-serif;
     color: white;
-    text-align: center;
-    font-family: 'DM Sans', sans-serif;
+    text-align: left;
+    line-height: 1.5;
+    width: 430px;
 }
 
-.TitleDer h1 a{
-    color: #E0AAFF;
-    font-size: 45px;
+.header-img {
+    width: 650px;
+    height: 530px;
+    background-image: url('./img/Shake-naslovne-slike-5-1.png');
+    background-size: cover;
 }
 
-.TitleDer a{
-    text-align: center;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 40px;
-    color: white;
-    font-weight: bold;
+.header-text p {
+    margin-top: 10px;
 }
 
-#imgLogo {
-    margin-top: 50px;
-    background-image: url('./img/Logito3.png');
-    height: 350px;
-    background-position: center;
-    background-size: contain;
-    background-repeat: no-repeat;
-}
-
-#btnIngresar button {
-    margin-top: 50px;
+#btnIngresar {
+    font-family: 'Lato', sans-serif;
     cursor: pointer;
-    background: #E0AAFF;
-    font-size: 20px;
-    font-weight: bold;
-    height: 50px;
-    width: 250px;
+    margin-top: 50px;
     border: none;
     border-radius: 10px;
-    box-shadow: 0px 0px 10px 1px #3C096C ;
-    font-family: 'DM Sans', sans-serif;
+    width: 200px;
+    height: 40px;
+    background-color: #ff5722;
+    color: white;
+    transition: 0.3s ease-in-out;
+    font-size: 15px;
 }
 
-#btnIngresar button a{
-    color: #3C096C;
-    text-decoration: none;
-    font-size: 20px;
-    font-family: 'DM Sans', sans-serif;
+#btnIngresar:hover {
+    background-color: #FF7247;
 }

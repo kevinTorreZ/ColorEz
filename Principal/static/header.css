@@ -5,58 +5,90 @@
 }
 
 nav{
-    height: 55px;
-    background-color: #5A189A;
+    display: block;
+    left: 0;
+    top: 0;
+    right: 0;
+    z-index: 500;
+    height: 64px;
+    perspective: 2000px;
     font-family: 'Poppins', sans-serif;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    
-}
-
-
-#Logo{
-    margin-right: 25px;
-    font-family: 'Poppins', sans-serif;
-    font-weight: bold;
-    font-size: 20px;
-    
-}
-
-#Logo a{
-    text-decoration: none;
+    background-color: #2C124C;
 }
 
 .navBar{
-    float: left;
-}
-
-.navBarDer{
-    float: right;
-    margin-right: 50px;
-}
-
-.navBar ul li{
-    list-style: none;
-    display: inline-block;
-}
-
-.navBar ul li a{
+    width: 1040px;
+    margin: 0 auto;
+    height: 64px!important;
     color: white;
-    margin-left: 15px;
-    cursor: pointer;
-    text-decoration: none;
     
 }
 
-.navBarDer ul li a{
-    color: white;
-    margin-left: 15px;
-    cursor: pointer;
-    text-decoration: none;
+.rootnav{
+    line-height: 64px;
+    padding: 0 10px;
 }
 
-.navBarDer ul li{
+.logo-section{
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.logo-section a{
+    cursor: pointer;
+    text-decoration: none;
+    color: white;
+}
+
+
+.rootnav{
+    position: relative;
     list-style: none;
-    display: inline-block;
+    
+}
+
+.navBar ul{
+    padding: 0;
+    margin: 0;
+    
+}
+
+
+.main-section a{
+    padding: 0 10px;
+    cursor: pointer;
+    text-decoration: none;
+    color: white;
+}
+
+.main-section{
+    display: flex;
+    justify-content: center;
+}
+
+.nav-login{
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: flex;
+
+}
+
+
+.nav-login a{
+    cursor: pointer;
+    padding: 0 10px;
+    text-decoration: none;
+    color: white;
+    
+}
+
+
+.fa-user{
+    margin-right: 10px;
+}
+
+.fa-right-to-bracket{
+    margin-right: 10px;
 }

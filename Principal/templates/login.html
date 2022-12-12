@@ -28,6 +28,7 @@
         <form method="post">
             {% csrf_token %}
             {{form}}
+            <a id="createAccount" href="/Register/">Crear cuenta</a>
             <input type="submit" value="Iniciar sesión">
         </form>
         <a id="forgotPsw" href="{% url 'send_email' %}">¿Olvidaste tu contraseña?</a>

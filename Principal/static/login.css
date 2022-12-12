@@ -7,6 +7,14 @@
     justify-content: center;
     align-items: center;
     height: 85vh;
+    
+}
+
+#createAccount{
+    font-family: 'Poppins', sans-serif;
+    color: rgb(123, 44, 191);
+    text-decoration: none;
+    margin-left: 65px;
 }
 
 .divForm input[type="text"] {
