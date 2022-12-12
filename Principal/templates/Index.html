@@ -17,17 +17,16 @@
     {% if user.is_authenticated %}
     <script>window.location.href = '/Inicio/';</script>
     {% else %}
-    <div class="divMain">
-        <div class="LogoIzq">
-            <div id="imgLogo"></div>
-            <h1>Color<a>Ez</a></h1>
-        </div>
-        <div class="TitleDer">
-            <h1>Bienvenido a Color<a>Ez</a></h1>
-            <a>comienza a diseñar</a>
-            <div id="btnIngresar">
-                <button onclick='location.href="/Register/"'><a >Comenzar</a></button>
-            </div> 
+    <div class="indexPage">
+        <div class="container">
+            <div class="columnas">
+                <div class="header-text">
+                    <h1>¡Empieza a diseñar!</h1>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia exercitationem illo magni at et, placeat perferendis maiores, cupiditate optio fugiat illum velit ut quas accusantium! Non fuga aut animi architecto?</p>
+                    <button id="btnIngresar" onclick="window.location.href ='/Register/'">Ingresar</button>
+                </div>
+                <div class="header-img"></div>
+            </div>
         </div>
     </div>
     {% endif %}

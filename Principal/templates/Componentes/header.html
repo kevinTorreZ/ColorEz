@@ -10,6 +10,7 @@
     {% load static %}
     <link rel="stylesheet" href="https://static.imgix.net/treefrog.jpg?w=640&h=320&fit=crop&palette=css&class=frog">
     <link rel="stylesheet" href="{% static 'header.css' %}">
+    <script src="https://kit.fontawesome.com/c1366bcc7f.js" crossorigin="anonymous"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %} {% endblock %}</title>
 </head>
@@ -18,19 +19,22 @@
     <header>
         <nav>
             <div class="navBar">
-                <ul>
-                    <li id="Logo"><a href="/">ColorEz</a></li>
-                    <li><a href="/">Inicio</a></li>
-                    <li><a href="/Funciones/">Funciones</a></li>
-                </ul>
-            </div>
-            <div class="navBarDer">
-                <ul>{% if user.is_authenticated %}
-                    <li><a href="/Perfil/">Perfil</a></li>
-                    <li><a href="/Proyectos/">Proyectos</a></li>
+                <ul class="rootnav">
+                    
+                    <li class="logo-section"><a href="/">LOGO</a></li>
+                    {% if user.is_authenticated %}
+                    <li class="main-section">
+                        <a href="/">Inicio</a>
+                        <a href="/Funciones/">Funciones</a>
+                    </li>
+                    <li class="nav-login">
+                        <a><i class="fa-solid fa-user"></i>Perfil</a>
+                        <a href="/logout/">Cerrar sesión</a>
+                    </li>
                     {% else %}
-                    <li><a href="/Login/">Iniciar sesión</a></li>
-                    <li><a href="/Register/">Registrarse</a></li>
+                    <li class="nav-login">
+                        <a href="/Login/"><i class="fa-solid fa-right-to-bracket"></i>Iniciar sesión</a>
+                    </li>
                     {% endif %}
                 </ul>
             </div>
