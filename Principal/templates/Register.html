@@ -2,6 +2,7 @@
 {% load static %}
 {% block links%}
 <link rel="stylesheet" href="{% static 'register.css' %}">
+<script src="https://kit.fontawesome.com/c1366bcc7f.js" crossorigin="anonymous"></script>
 {% endblock %}
 <!DOCTYPE html>
 <html lang="en">
@@ -24,8 +25,10 @@
             {{form}}
             <input type="submit" value="Registarse">
         </form>
-        <a href="{% url 'social:begin' 'facebook' %}">Register with Facebook</a>
-        <a href="{% url 'social:begin' 'google-oauth2' %}">Register With Google</a>
+        <div class="redesSociales">
+            <a href="{% url 'social:begin' 'facebook' %}"><i class="fa-brands fa-2xl fa-facebook" id="fb"></i></a>
+            <a href="{% url 'social:begin' 'google-oauth2' %}"><i class="fa-brands fa-2x fa-google" id="google"></i></a>
+        </div>
     </div>
     {% endif %}
 {% endblock %}
