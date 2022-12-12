@@ -89,3 +89,11 @@ input[type=password]:focus {
     color: transparent;
     -webkit-text-fill-color: transparent;
 }
+
+#lgnIcons{
+    margin-top: 15px;
+    text-decoration: none;
+    color: rgb(123, 44, 191);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+}
