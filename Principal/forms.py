@@ -107,4 +107,9 @@ class NewProyecto(forms.ModelForm):
     class Meta:
         model = Proyecto
         fields = ['Titulo','Descripcion','photo']
+
+class ChangeDataPerfil(forms.ModelForm):
+    class Meta:
+        model = Usuario
+        fields = ['username','email']
     

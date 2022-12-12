@@ -19,10 +19,12 @@
     {% block css %} {% endblock %}
     {% block content %}
     {% if user.is_authenticated %}
-    {{user.rut}}
     <div class="mainInicio">
         <h1>Bienvenido! {{ user.username }}</h1>
         <a href="/logout/">Desconectarse</a>
+        <div style="width: 100px; height: 70px; border-radius: 50%;">
+            <img src="/media/ImagePerfil/{{user.photo}}"  style="width: 100%; height: 100%; border-radius: 50%;">
+        </div>
     </div>
     <div style="display: flex;" id="paleta_colores">
         <input type="hidden" id="btnhiden">

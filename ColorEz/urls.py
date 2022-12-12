@@ -27,13 +27,14 @@ urlpatterns = [
     path('Register/', views.RegisterView.as_view(), name='Register'),
     path('Inicio/', views.Inicio, name='Inicio'),
     path('Login/', views.LoginView.as_view(), name='Login'),
-    path('logout/', LogoutView.as_view(template_name='logout.html'), name='Logout'),
+    path('logout/', views.LogoutView,name='Logout'),
     path('oauth/', include('social_django.urls', namespace='social')),
     path('Proyectos/', views.Proyectos, name='Proyectos'),
     path('Funciones/', views.Funciones),
     path('send_email/', views.enviar_correo, name='send_email'),
     path('ChangePassword/', views.validate_token, name='ChangePassword'),
     path('Generar-paleta/', views.GenerarPaleta),
+    path('Perfil/', views.Perfil),
     path('invitacion_proyecto/', views.Invitacion_proyecto, name='invitacion_proyecto'),
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
