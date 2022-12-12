@@ -56,7 +56,6 @@ def Inicio(request):
 @login_required()
 def LogoutView(request):
     if request.user.photo != "userImageDefault.png":
-        print(request.user.photo)
         logout(request)
     else:
         print(request.user.photo)
@@ -143,7 +142,6 @@ def Proyectos(request):
         else:
             Descripcion = request.POST.get('Descripcion')
             photo = request.FILES.get('photo')
-            print(photo)
             if photo == None:
                 photo = 'media/default_image_project.png'
             SaveProject = Proyecto(Titulo=Titulo,Descripcion=Descripcion,Fecha_creacion=now,Usuario=UserInst,photo=photo)
@@ -172,9 +170,17 @@ def Funciones(request):
 def Perfil(request):
     instUser = Usuario.objects.get(id=request.user.id)
     formChange = ChangeDataPerfil(instance=instUser)
+    
     if request.method == "POST":
-        formChange= ChangeDataPerfil(request.POST, instance= instUser)
-        if formChange.is_valid():
-            formChange.save()
+        formChange= ChangeDataPerfil(request.POST,request.FILES,instance= instUser)
+        if formChange.is_valid(): 
+            filepath = glob.glob('media/ImagePerfil/'+str(request.FILES['photo'])) 
+            if filepath != []:
+                instUser.photo = 'media/ImagePerfil/'+str(request.FILES['photo'])
+                instUser.username = str(request.POST['username'])
+                instUser.email = str(request.POST['email'])
+                instUser.save()
+            else:
+                formChange.save(commit=True)
     return render(request, "Perfil.html",{"form":formChange})
  
