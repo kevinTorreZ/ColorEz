@@ -39,10 +39,11 @@ class Usuario(AbstractBaseUser):
         unique=True,
     )
     photo = models.ImageField(
+        upload_to = 'media',
+        default='userImageDefault.png',
         verbose_name='',
         max_length=24,
         unique=False,
-        default=None,
     )
     activo = models.BooleanField(default=True)
     admin = models.BooleanField(default=False) 
@@ -134,6 +135,7 @@ class Token(models.Model):
     idToken = models.AutoField(primary_key=True)
     Token = models.CharField(max_length=50)
     Usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)
+    
     def __str__(self):
        return self.Token    
 

@@ -6,10 +6,10 @@ from django.core.mail import send_mail
 from django.conf import settings
 from datetime import date
 from qrcode import *
-from Principal.forms import RegisterForm,LoginForm,NewProyecto
+from Principal.forms import RegisterForm,LoginForm,NewProyecto,ChangeDataPerfil
 from Principal.models import Usuario,Usuarios_proyecto,File,Proyecto,Token
 from django.views.generic import CreateView, FormView
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login,logout
 from django.contrib import messages
 from colorutils import Color,rgb_to_hex,hex_to_rgb, ArithmeticModel
 from django.urls import reverse_lazy
@@ -23,6 +23,7 @@ class RegisterView(CreateView):
     succes_message = "%(name)s Se ha creado exitosamente!"
     def form_valid(self, form):
         request = self.request
+        form.photo = 'media/ImagePerfil/userImageDefault.png'
         login(request, form.save(), backend='django.contrib.auth.backends.ModelBackend')
         return redirect('/Inicio/')
 class LoginView(FormView):
@@ -32,8 +33,7 @@ class LoginView(FormView):
     succes_message = "%(name)s Se ha creado exitosamente!"
 
     def get(self, request, *args, **kwargs):
-        login_different = reverse_lazy('login_different')
-        if request.user.is_authenticated and login_different != request.path:
+        if request.user.is_authenticated:
             return redirect('/Inicio/')
         return super().get(request, *args, **kwargs)
     def form_valid(self, form):
@@ -46,13 +46,24 @@ class LoginView(FormView):
             login(request, user)
             if not remember_me:
                             request.session.set_expiry(0)
+            if request.GET.get("next") == None or request.GET.get("next") == "":
+                return redirect('/Inicio/')
             return redirect(request.GET.get("next"))
         return super(LoginView, self).form_invalid(form)
 @login_required()
 def Inicio(request):
     return render(request, 'Inicio.html')
+@login_required()
+def LogoutView(request):
+    if request.user.photo != "userImageDefault.png":
+        print(request.user.photo)
+        logout(request)
+    else:
+        print(request.user.photo)
+        logout(request)
+    return render(request, "logout.html")
 def enviar_correo(request):
-    if request.method == "POST":
+    if request.method == "POST":    
         email = request.POST["email"]
         userInst = Usuario.objects.filter(email=email).exists()
         if userInst:
@@ -157,4 +168,13 @@ def Invitacion_proyecto(request):
     return render(request, "invitacion_proyecto.html",{"is_valid":objToken,"send":Enviado,"Proyecto":projecto})
 def Funciones(request):
     return render(request, 'Funciones.html')
+
+def Perfil(request):
+    instUser = Usuario.objects.get(id=request.user.id)
+    formChange = ChangeDataPerfil(instance=instUser)
+    if request.method == "POST":
+        formChange= ChangeDataPerfil(request.POST, instance= instUser)
+        if formChange.is_valid():
+            formChange.save()
+    return render(request, "Perfil.html",{"form":formChange})
  

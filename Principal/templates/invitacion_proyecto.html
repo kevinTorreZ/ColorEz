@@ -18,7 +18,7 @@
         <form method="post" id="formChangePassword">
             {% csrf_token %}
             <h1>Quieres unirte al proyecto? </h1>
-            {{projecto.Titulo}}
+
             <input type="hidden" id="inputhidden" name="inputhidden">
             <input type="submit" onsubmit="document.getElementById('inputhidden').value = 'ok'" value="Aceptar">
         </form>
