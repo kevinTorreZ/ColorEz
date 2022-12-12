@@ -19,11 +19,11 @@
     {% block css %} {% endblock %}
     {% block content %}
     {% if user.is_authenticated %}
-
-        <form method="post">
+        <img src="/{{user.photo}}" width="400" height="300" style="border-radius: 50%; margin: auto;">
+        <form method="post"  enctype="multipart/form-data">
             {% csrf_token %}
             {{form}}    
-            <input type="submit" value="Editar">        
+            <input type="submit" value="Editar">       
         </form>
     {% endif %}
     {% endblock %}

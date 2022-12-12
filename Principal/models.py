@@ -39,10 +39,10 @@ class Usuario(AbstractBaseUser):
         unique=True,
     )
     photo = models.ImageField(
-        upload_to = 'media',
+        upload_to = 'media/ImagePerfil/',
         default='userImageDefault.png',
         verbose_name='',
-        max_length=24,
+        max_length=40,
         unique=False,
     )
     activo = models.BooleanField(default=True)

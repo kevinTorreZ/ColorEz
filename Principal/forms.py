@@ -111,5 +111,5 @@ class NewProyecto(forms.ModelForm):
 class ChangeDataPerfil(forms.ModelForm):
     class Meta:
         model = Usuario
-        fields = ['username','email']
+        fields = ['username','email','photo']
     
