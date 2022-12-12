@@ -17,11 +17,11 @@ nav{
 }
 
 .navBar{
-    width: 1040px;
+    max-width: 1040px;
     margin: 0 auto;
     height: 64px!important;
     color: white;
-    
+    width: 100%;
 }
 
 .rootnav{
@@ -91,4 +91,10 @@ nav{
 
 .fa-right-to-bracket{
     margin-right: 10px;
+}
+
+@media (min-width: 1040px){
+    .nav-login a{
+        padding: 0 15px;
+    }
 }
