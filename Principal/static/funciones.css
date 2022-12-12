@@ -4,9 +4,9 @@ body{
 
 .mainFuncion{
     background-color: #1B1B1B;
-    width: 1280px;
+    width: 65%;
     height: 600px;
-    margin: 0px auto;
+    margin: 0 auto;
     margin-top: 15px;
     border-radius: 15px;
 }
@@ -22,14 +22,15 @@ body{
     display: flex;
     flex-direction: row;
     justify-content: center;
-    width: 1280px;
+    width: 100%;
     height: 600px;
-    gap: 15px;
+    gap: 0.5%;
 }
 
 .Funcion{
-    margin-top: 20px;
-    width: 300px;
+    max-width: 55%;
+    width: 24%;
+    margin-top: 1.5%;
     height: 550px;
     border-radius: 10px;
     background-color: #121212;
@@ -37,9 +38,8 @@ body{
 }
 
 .Funcion img{
-    margin-top: 15px;
-    outline: red;
-    width: 280px;
+    margin-top: 3%;
+    width: 90%;
     height: 200px;
 }
 
@@ -56,8 +56,8 @@ body{
 }
 
 .Funcion button{
-    margin-top: 50px;
-    width: 280px;
+    margin-top: 20%;
+    width: 85%;
     height: 40px;
     background-color: #26C469;
     color: #f3f2f2;
@@ -74,4 +74,90 @@ body{
 .Funcion button:hover{
     background-color: #2B8C4F;
     
+}
+
+@media only screen and (max-width:1637px){
+
+    .mainFuncion{
+        width: 75%;
+    }
+
+}
+
+@media only screen and (max-width:1421px){
+
+    .mainFuncion{
+        width: 95%;
+    }
+
+
+}
+
+@media only screen and (max-width:1192px){
+
+    .mainFuncion{
+        height: auto;
+        margin: 0 auto;
+    }
+
+    .Funciones{
+        height: 100%;
+        display: inline-grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-auto-rows: minmax(52%, auto);
+        margin-bottom: 3%;
+        gap: 0px;
+        margin-top: 1%;
+    }
+
+    .Funcion{
+        max-width: 85%;
+        width: 85%;
+        margin: 0 auto;
+    }
+
+}
+
+@media only screen and (max-width:1005px){
+
+    .mainFuncion{
+        height: auto;
+        margin: 0 auto;
+    }
+
+    .Funciones{
+        height: 100%;
+        display: inline-grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-auto-rows: minmax(52%, auto);
+        margin-bottom: 5%;
+        gap: 0px;
+        margin-top: 3%;
+    }
+
+    .Funcion{
+        max-width: 85%;
+        width: 85%;
+        margin: 0 auto;
+    }
+
+}
+
+
+@media only screen and (max-width: 768px) {
+
+    .mainFuncion{
+        height: 100%;
+    }
+
+    .Funciones{
+        flex-direction: column;
+        height: auto;
+        align-items: center;
+    }  
+
+    .Funcion{
+        width: 80%;
+        max-width: 80%;
+    }
 }
