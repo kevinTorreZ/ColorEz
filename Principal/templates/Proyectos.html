@@ -17,14 +17,30 @@
     <div class="contenedor_proyectos" id="content">
         {% for proyecto in Proyectos%}
         <div id="{{proyecto.Proyecto.idProyecto}}" class="Proyectos">
-            {{proyecto.Proyecto.Titulo}}
-            {{proyecto.Proyecto.Descripcion}}
-            {{proyecto.Proyecto.photo}}
-            {% for File in AllFiles %}
-                {% if File.Proyecto.idProyecto == proyecto.Proyecto.idProyecto %}
-                    {{File.url}}
-                {% endif %}
-            {% endfor %}
+            <form>
+                <img src="/{{proyecto.Proyecto.photo}}" width="100" height="50">
+                {{proyecto.Proyecto.Titulo}}
+                {{proyecto.Proyecto.Descripcion}}
+                {% for Font in Fonts %}
+                    {% if Font.Proyecto.idProyecto == proyecto.Proyecto.idProyecto %}
+                        '{{Font.Fonts}}'
+                    {% endif %}
+                {% endfor %}
+                <input name="Fontadd" type="text" placeholder="Ingrese nuevo Font....">
+                {% for logo in Logos %}
+                    {% if logo.Proyecto.idProyecto == proyecto.Proyecto.idProyecto %}
+                        {{logo.Logo}}
+                    {% endif %}
+                {% endfor %}
+                <input name="Logoadd" type="file" placeholder="Ingrese logo " accept="image/*">
+                {% for Tarea in Tareas %}
+                    {% if Tarea.Proyecto.idProyecto == proyecto.Proyecto.idProyecto %}
+                        {{Tarea.Tarea}}
+                    {% endif %}
+                {% endfor %}
+                <input name="Tareadd" type="text" placeholder="Agregar tarea....">
+                <input value="Guardar cambios" type="submit">
+            </form>
             <form method="post">
                 {% csrf_token %}
                 <input type="hidden" value="{{proyecto.Proyecto.idProyecto}}" name="idProyecto">
@@ -44,8 +60,9 @@
         </script>
         <div class="btnProyectos">
             {% for proyecto in Proyectos%}
-                    <img src="/{{proyecto.Proyecto.photo}}" width="20px" height="20px" onclick="document.getElementById('{{proyecto.Proyecto.idProyecto}}btnprj').click()">
-                    <button onclick="superponer('{{proyecto.Proyecto.idProyecto}}')" id="{{proyecto.Proyecto.idProyecto}}btnprj" style="visibility: hidden;"></button>
+                <img src="/{{proyecto.Proyecto.photo}}" width="20px" height="20px" onclick="document.getElementById('{{proyecto.Proyecto.idProyecto}}btnprj').click()">
+                <button onclick="superponer('{{proyecto.Proyecto.idProyecto}}')" id="{{proyecto.Proyecto.idProyecto}}btnprj" style="visibility: hidden;"></button>
+
             {% endfor %}
             <button style="width: 30px; height: 20px;" onclick="document.getElementById('form').style.visibility = 'visible'">+</button>
             </div>
@@ -63,7 +80,7 @@
             <option value="0">Selecciona tu proyecto</option>
             {% for proyecto in ProyectosOwner %}
                 <option value="{{proyecto.idProyecto}}">{{proyecto.Titulo}}</option>
-            {% endfor %}
+            {% endfor %} 
         </select>
         <input type="submit">
     </form>

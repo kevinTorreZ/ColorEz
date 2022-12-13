@@ -7,7 +7,7 @@ from django.conf import settings
 from datetime import date
 from qrcode import *
 from Principal.forms import RegisterForm,LoginForm,NewProyecto,ChangeDataPerfil
-from Principal.models import Usuario,Usuarios_proyecto,Proyecto,Token
+from Principal.models import Usuario,Usuarios_proyecto,Proyecto,Token,LogoTipos,Fonts,PaletaColores,Tareas
 from django.views.generic import CreateView, FormView
 from django.contrib.auth import authenticate, login,logout
 from django.contrib import messages
@@ -124,6 +124,9 @@ def Proyectos(request):
     UserInst = Usuario.objects.get(id=request.user.id)
     obj = Usuarios_proyecto.objects.filter(Usuario=request.user.id)
     objOwner = Proyecto.objects.filter(Usuario=request.user.id)
+    LogotiposProyecto = LogoTipos.objects.all()
+    AllFonts = Fonts.objects.all()
+    AllTareas = Tareas.objects.all()
     if request.method == "POST":
         ProjectSelected = request.POST.get('ProjectSelected')
         now = date.today()
@@ -131,6 +134,7 @@ def Proyectos(request):
         if Titulo == None:
             if ProjectSelected == 0:
                 idprj = request.POST['idProyecto']
+
                 searchPrjct = Proyecto.objects.get(idProyecto=idprj)
                 clearListuser = Usuarios_proyecto.objects.get(Usuario=UserInst, Proyecto=searchPrjct)
                 clearListuser.delete()
@@ -150,12 +154,12 @@ def Proyectos(request):
             Descripcion = request.POST.get('Descripcion')
             photo = request.FILES.get('photo')
             if photo == None:
-                photo = 'media/default_image_project.png'
+                photo = 'media/ImageProyectos/default_image_project.png'
             SaveProject = Proyecto(Titulo=Titulo,Descripcion=Descripcion,Fecha_creacion=now,Usuario=UserInst,photo=photo)
             SaveProject.save()
             AddUserPrjt = Usuarios_proyecto(Usuario=UserInst,Proyecto=SaveProject)
             AddUserPrjt.save()
-    return render(request, 'Proyectos.html',{'Proyectos':obj,'form':form,'ProyectosOwner':objOwner,"MostrarQR":Mostrarqr})
+    return render(request, 'Proyectos.html',{'Proyectos':obj,'form':form,'ProyectosOwner':objOwner,"MostrarQR":Mostrarqr,'Tareas':AllTareas,'Logos':LogotiposProyecto,'Fonts':AllFonts})
 @login_required()
 def Invitacion_proyecto(request):
     token = request.GET["token"]
@@ -177,7 +181,8 @@ def Funciones(request):
 def Perfil(request):
     instUser = Usuario.objects.get(id=request.user.id)
     formChange = ChangeDataPerfil(instance=instUser)
-    
+    ProyectosIn = Usuarios_proyecto.objects.filter(Usuario=instUser)
+    ProyectosOwner = Proyecto.objects.filter(Usuario=instUser)
     if request.method == "POST":
         formChange= ChangeDataPerfil(request.POST,request.FILES,instance= instUser)
         if formChange.is_valid(): 
@@ -194,5 +199,5 @@ def Perfil(request):
                 instUser.username = str(request.POST['username'])
                 instUser.email = str(request.POST['email'])
                 instUser.save()
-    return render(request, "Perfil.html",{"form":formChange})
+    return render(request, "Perfil.html",{"form":formChange,"ProyectosOwner":ProyectosOwner,"ProyectosIn":ProyectosIn})
  
