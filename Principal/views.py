@@ -114,8 +114,16 @@ def validate_token(request):
 def Index(request):
     return render(request, 'Index.html')
 
+@login_required()
 def GenerarPaleta(request):
-    return render(request, './Funciones/Generarpaleta.html')
+    instUser = Usuario.objects.get(id=request.user.id)
+    PlanUser = Suscripcion.objects.get(Usuario=instUser)
+    PlanUser = PlanUser.Plan.idPlan
+    if PlanUser == 2:
+        PlanUser = True
+    else:
+        PlanUser = False
+    return render(request, './Funciones/Generarpaleta.html',{"plan":PlanUser})
 
 def MezclarColores(request):
     return render(request, './Funciones/Mezclarcolores.html')
@@ -186,7 +194,7 @@ def Invitacion_proyecto(request):
         objToken.delete()
     return render(request, "invitacion_proyecto.html",{"is_valid":objToken,"send":Enviado,"Proyecto":projecto})
 def Funciones(request):
-    return render(request, 'Funciones.html')
+    return render(request, "Funciones.html")
 
 def Perfil(request):
     instUser = Usuario.objects.get(id=request.user.id)

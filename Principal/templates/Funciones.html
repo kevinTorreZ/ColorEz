@@ -16,7 +16,6 @@
 <body>
     {% block css %} {% endblock %}
     {% block content %}
-    {% if user.is_authenticated %}
     <div class="mainFuncion">
         <div class="container-funciones">
             <div class="columnas">
@@ -55,7 +54,6 @@
             </div>
         </div>
     </div>
-    {% endif %}
     {% endblock %}
 
     {% block js%}
