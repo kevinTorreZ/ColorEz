@@ -55,7 +55,6 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-
     font-family: 'Lato', sans-serif;
 }
 
@@ -64,7 +63,7 @@
 }
 
 .email h3{
-    margin-left: 37px;
+    margin-left: 20px;
 }
 
 .info-sacada h3{
@@ -85,4 +84,53 @@
 hr{
     width: 95%;
     margin: 0 auto;
+}
+
+#title-proyectos{
+    font-family: 'Lato', sans-serif;
+    color: black;
+    margin-top: 15px;
+    margin-left: 15px;
+}
+
+.productos{
+    height: 250px!important;
+    width: 670px!important;
+    color: black;
+    display: flex;
+    justify-content: left;
+    margin-left: 15px;
+    margin-top: 15px;
+}
+
+.productos-info h3{
+    font-family: 'Lato', sans-serif;
+    font-weight: normal;
+    margin-top: 5px;
+}
+
+
+.productos-info{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    margin-right: 10px;
+    
+}
+
+.productos-info img{
+    border-radius: 5px;
+}
+
+#Btnperfil{
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    background-color: #672BB1;
+    height: 30px;
+    width: 120px;
+    color: white;
+    font-family: 'Poppins', sans-serif;
+    margin-left: 15px;
+    margin-top: 10px;
 }

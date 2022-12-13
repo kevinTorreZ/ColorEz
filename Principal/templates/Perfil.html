@@ -26,7 +26,7 @@
         </div>
         <div class="user-data">
             <div class="column-settings user-name">
-                <h3><strong>Full name:</strong></h3>
+                <h3><strong>Usuario:</strong></h3>
                 <div class="info-sacada">
                     <h3>{{user.username}}</h3>
                 </div>
@@ -39,13 +39,16 @@
                 </div>
             </div>
             <hr>
-            {% for proyecto in ProyectosOwner %}
-                {{proyecto.Titulo}}
-            {% endfor %}
-            -------------------------------
-            {% for proyecto in ProyectosIn %}
-            {{proyecto.Proyecto.Titulo}}
-        {% endfor %}
+            <h3 id="title-proyectos">Proyectos del usuario:</h3>
+            <div class="productos">
+                {% for proyecto in ProyectosOwner %}
+                    <div class="productos-info">
+                        <img width="140px" height="110px" src="/{{proyecto.photo}}">
+                        <h3>{{proyecto.Titulo}}</h3>
+                    </div>
+                {% endfor %}
+            </div>
+            <button id="Btnperfil" onclick="window.location.href ='/Editar-perfil'">Editar perfil</button>
         </div>
     </div>
     

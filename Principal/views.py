@@ -117,6 +117,9 @@ def MezclarColores(request):
 def Obtenerpaleta(request):
     return render(request, './Funciones/Obtenerpaleta.html')
 
+def Editarperfil(request):
+    return render(request, 'Editar-perfil.html')
+
 @login_required()
 def Proyectos(request):
     form = NewProyecto()
