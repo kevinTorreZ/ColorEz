@@ -111,6 +111,9 @@ def GenerarPaleta(request):
 def MezclarColores(request):
     return render(request, './Funciones/Mezclarcolores.html')
 
+def Obtenerpaleta(request):
+    return render(request, './Funciones/Obtenerpaleta.html')
+
 @login_required()
 def Proyectos(request):
     form = NewProyecto()
