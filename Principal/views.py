@@ -5,6 +5,7 @@ import os
 from django.core.mail import send_mail
 from django.conf import settings
 from datetime import datetime
+from datetime import date
 from qrcode import *
 from Principal.forms import RegisterForm,LoginForm,NewProyecto,ChangeDataPerfil
 from Principal.models import Usuario,Usuarios_proyecto,Proyecto,Token,LogoTipos,Fonts,PaletaColores,Tareas,Suscripcion,Plan
@@ -167,6 +168,7 @@ def Proyectos(request):
             SaveProject.save()
             AddUserPrjt = Usuarios_proyecto(Usuario=UserInst,Proyecto=SaveProject)
             AddUserPrjt.save()
+            return redirect('/Proyectos/')
     return render(request, 'Proyectos.html',{'Proyectos':obj,'form':form,'ProyectosOwner':objOwner,"MostrarQR":Mostrarqr,'Tareas':AllTareas,'Logos':LogotiposProyecto,'Fonts':AllFonts})
 @login_required()
 def Invitacion_proyecto(request):
@@ -203,8 +205,10 @@ def Perfil(request):
                     instUser.username = str(request.POST['username'])
                     instUser.email = str(request.POST['email'])
                     instUser.save()
+                    return redirect('/Perfil/')
                 else:
                     formChange.save(commit=True)
+                    return redirect('/Perfil/')
             else:
                 instUser.username = str(request.POST['username'])
                 instUser.email = str(request.POST['email'])

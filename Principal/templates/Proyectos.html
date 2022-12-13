@@ -26,7 +26,7 @@
                         '{{Font.Fonts}}'
                     {% endif %}
                 {% endfor %}
-                <input name="Fontadd" type="text" placeholder="Ingrese nuevo Font....">
+                <input name="Fontadd" type="text" placeholder="Agregar Font....">
                 {% for logo in Logos %}
                     {% if logo.Proyecto.idProyecto == proyecto.Proyecto.idProyecto %}
                         {{logo.Logo}}
