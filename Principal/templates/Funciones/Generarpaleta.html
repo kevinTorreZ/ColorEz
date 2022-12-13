@@ -19,6 +19,9 @@
     {% block css %} {% endblock %}
     {% block content %}
     {% if user.is_authenticated %}
+        <script>window.onload = function(){
+            generatePalette()
+        }</script>
     <div class="topFuncion">
         <h1 id="titleG">¡Presiona la tecla "espacio" para generar otra paleta!</h1>
     </div>
