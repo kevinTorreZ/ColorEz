@@ -1,0 +1,88 @@
+.main-profile{
+    width: 1040px;
+    height: 500px;
+    margin: 0 auto;
+    display: flex;
+    align-content: center;
+}
+
+.user-profile{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    width: 300px;
+    height: 490px;
+    text-align: center;
+    background-color: #F4F8FA;
+    margin-left: 5px;
+    margin-top: 5px;
+    border-radius: 5px;
+    border: 2px solid #DCDDE3;
+    box-shadow: 0px 0px 10px 1px #DCDDE3;
+}
+
+.user-profile img{
+    height: 150px;
+    width: 130px;
+    clip-path: circle();
+}
+
+.user-profile h3{
+    font-family: 'Poppins', sans-serif;
+}
+
+.user-data{
+    background-color: #F4F8FA;
+    width: 700px;
+    height: 490px;
+    border-radius: 5px;
+    border: 2px solid #DCDDE3;
+    box-shadow: 0px 0px 10px 1px #DCDDE3;
+    display: flex;
+    flex-direction: column;
+    margin-left: 15px;
+    margin-top: 5px;
+}
+
+.column-settings{
+    width: 300px;
+    height: 40px;
+    margin: 0 auto;
+    margin-left: 15px;
+    margin-bottom: 10px;
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    font-family: 'Lato', sans-serif;
+}
+
+.info-sacada{
+    margin-left: 25px;
+}
+
+.email h3{
+    margin-left: 37px;
+}
+
+.info-sacada h3{
+    font-family: 'Lato', sans-serif;
+    color: #696969;
+    text-align: left;
+}
+
+.user-name{
+    margin-top: 15px;
+}
+
+.user-name h3{
+    text-align: left;  
+    font-weight: normal;
+}
+
+hr{
+    width: 95%;
+    margin: 0 auto;
+}
