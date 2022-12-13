@@ -34,6 +34,7 @@ urlpatterns = [
     path('send_email/', views.enviar_correo, name='send_email'),
     path('ChangePassword/', views.validate_token, name='ChangePassword'),
     path('Generar-paleta/', views.GenerarPaleta),
+    path('Mezclar-colores', views.MezclarColores),
     path('Perfil/', views.Perfil),
     path('invitacion_proyecto/', views.Invitacion_proyecto, name='invitacion_proyecto'),
 ]

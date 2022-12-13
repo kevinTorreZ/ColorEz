@@ -64,27 +64,29 @@
 .card-funciones {
     width: 370px;
     height: 400px;
-    background-color: #8035dc;
+    background-color: #F4F8FA;
+    box-shadow: 0px 0px 5px 0.5px rgb(50,50,50);
     border-radius: 15px;
     text-align: center;
+   
 }
 
 .card-funciones img {
-    margin-top: 10px;
+    margin-top: 20px;
     width: 320px;
     height: 150px;
 }
 
 .card-funciones h1{
     font-family: 'Lato', sans-serif;
-    color: white;
+    color: black;
     font-size: 24px;
 }
 
 .card-funciones p{
     width: 350px;
     font-family: 'Lato', sans-serif;
-    color: white;
+    color: black;
     margin: 0 auto;
     margin-top: 15px;
 }
