@@ -30,7 +30,7 @@ function generatePalette() {
             element.remove();
         })
     }
-    for (i = 0; i < 5; i++) {
+    for (i = 0; i < 6; i++) {
         var obj = randomHexColor();
         document.getElementById('paleta_colores').innerHTML += '<div class="color" style="background-color:'  + obj[1].toString() + ';width:250px;height:500px;margin:10px">' + "<div class='textos'>" + "<div class='text1'>" + '<h1>HEX: ' + obj[1].toString() + '</h1>' + '</div>' + "<div class='text2'>" + '<h1>RGB: ' + obj[0].toString() + '</h1>' + "</div>" + "</div>" +  '</div>'
     }
@@ -50,7 +50,7 @@ function Mixcolor() {
     color2 = document.getElementById('Mixcolor2').value
     var arrayColors = chroma.scale([color1, color2]).mode('lch').colors(10)
     for (var color of arrayColors) {
-        document.getElementById('MixColors').innerHTML += "<div class='colorofMix' style='background-color:"+color+";width:170px;height:300px;color:white;'>"+color+"</div>"
+        document.getElementById('MixColors').innerHTML += "<div class='colorofMix' style='background-color:"+color+";width:170px;height:300px;color:white;'>" +  "<div class='texto-color'>" + "<h1>" + color + "</h1>" + "</div>" + "</div>"
     }
 }
 

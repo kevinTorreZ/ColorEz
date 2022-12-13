@@ -26,7 +26,7 @@ nav {
 }
 
 .container {
-    width: 65em;
+    width: 1040px;
     height: 600px;
     margin: 0 auto;
 }
@@ -48,8 +48,8 @@ nav {
 }
 
 .header-img {
-    width: 650px;
-    height: 530px;
+    width: 60%;
+    height: 75%;
     background-image: url('./img/Shake-naslovne-slike-5-1.png');
     background-size: cover;
 }
@@ -74,4 +74,19 @@ nav {
 
 #btnIngresar:hover {
     background-color: #FF7247;
+}
+
+@media (max-width: 1040px){
+
+    .indexPage::before{
+        height: 950px;
+    }
+
+    .container{
+        width: 920px;
+    }
+
+    .columnas{
+        flex-direction: column;
+    }
 }

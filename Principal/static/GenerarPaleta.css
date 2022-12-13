@@ -1,28 +1,40 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Khula:wght@300;400;600;700;800&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
+
 body{
-    background-color: #121212;
+    background-color: #F4F8FA;
 }
 
 #titleG{
     text-align: center;
-    color: white;
-    font-family: 'DM Sans', sans-serif;
-    margin-top: 50px;
+    color: black;
+    font-family: 'Inter', sans-serif;
+    font-size: 35px;
+    font-weight: bold;
 }
 
+.topFuncion{
+    width: 100%;
+    height: 100px;
+    background-color: #F4F8FA;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+    box-shadow: 0 4px 2px -2px gray;
+}
 
 .mainGenerar{
     background-color: red;
-    width: 1350px;
+    width: 100%;
     height: auto;
-    margin: 0 auto;
-    margin-top: 50px;
-    border-radius: 15px;
-    background-color: #1B1B1B;
-    padding: 15px;
+    display: flex;
+    justify-content: center;
+    background-color: #F4F8FA;
     text-align: center;
 }
 
 #paleta_colores{
+    margin: 50px;
     display: flex;
     flex-direction: row;
     height: 520px;
@@ -56,7 +68,7 @@ body{
 }
 
 #titleSpace{
-    color: white;
+    color: black;
     font-size: 25px;
     font-family: 'Poppins', sans-serif;
     margin-top: 15px;

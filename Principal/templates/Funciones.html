@@ -18,7 +18,42 @@
     {% block content %}
     {% if user.is_authenticated %}
     <div class="mainFuncion">
-        
+        <div class="container-funciones">
+            <div class="columnas">
+                <div class="header-img"></div>
+                <div class="header-text">
+                    <h1>Descubre nuestras funciones</h1>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus, voluptates est id, quidem recusandae dignissimos tenetur rem fugiat quis, et architecto maxime! Iste adipisci magnam fugit enim, tempore deleniti aut!</p>
+                </div>
+            </div>
+        </div>
+        <h1 id="titleFunciones">Funciones disponibles</h1>
+        <div class="funciones">
+            <div class="card-funciones">
+                <img src="../static/img/GenerarPaleta.png">
+                <h1>Generar paleta de colores</h1>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Est in mollitia cumque, reiciendis magni molestias harum accusantium voluptatem minus eaque? Neque quam consequatur eius ad ratione nemo repudiandae doloribus voluptate.</p>
+                <button id="btnFuncion" onclick="window.location.href='/Generar-paleta/'">Usar función</button>
+            </div>
+            <div class="card-funciones">
+                <img src="../static/img/GenerarPaleta.png">
+                <h1>Mezclar colores</h1>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Est in mollitia cumque, reiciendis magni molestias harum accusantium voluptatem minus eaque? Neque quam consequatur eius ad ratione nemo repudiandae doloribus voluptate.</p>
+                <button id="btnFuncion" onclick="window.location.href='/Mezclar-colores'">Usar función</button>
+            </div>
+            <div class="card-funciones">
+                <img src="../static/img/GenerarPaleta.png">
+                <h1>Generar paleta de colores</h1>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Est in mollitia cumque, reiciendis magni molestias harum accusantium voluptatem minus eaque? Neque quam consequatur eius ad ratione nemo repudiandae doloribus voluptate.</p>
+                <button id="btnFuncion" onclick="window.location.href='/Obtener-paleta'">Usar función</button>
+            </div>
+            <div class="card-funciones">
+                <img src="../static/img/GenerarPaleta.png">
+                <h1>Generar paleta de colores</h1>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Est in mollitia cumque, reiciendis magni molestias harum accusantium voluptatem minus eaque? Neque quam consequatur eius ad ratione nemo repudiandae doloribus voluptate.</p>
+                <button id="btnFuncion">Usar función</button>
+            </div>
+        </div>
     </div>
     {% endif %}
     {% endblock %}

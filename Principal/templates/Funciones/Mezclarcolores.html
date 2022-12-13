@@ -1,0 +1,47 @@
+{% extends "Componentes/header.html" %}
+{% load static %}
+{% block links%}
+<link rel="stylesheet" href="{% static 'MezclarColores.css' %}">
+<script src="{% static 'js/chroma.min.js' %}"></script>
+<script src="{% static 'js/inicio.js' %} "></script>
+{% endblock %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block title %} Funciones {% endblock %}
+</head>
+
+<body>
+    {% block css %} {% endblock %}
+    {% block content %}
+    {% if user.is_authenticated %}
+    <div class="mainMix">
+        <div class="input-colores">
+            <h1>Escoge los colores a mezclar</h1>
+            <div class="texto-colores">
+                <a>Color 1:</a>
+                <input type="color" name="color1" id="Mixcolor1">
+                <a>Color 2:</a>
+                <input type="color" name="color2" id="Mixcolor2">
+                <input type="submit" value="Mezclar colores" id="btnnashe" onclick="Mixcolor()">
+            </div>
+            
+        </div>
+        <div id="MixColors"></div>
+    </div>
+    
+
+    
+
+    {% endif %}
+    {% endblock %}
+
+    {% block js%}
+    {% endblock %}
+</body>
+
+</html>
