@@ -188,6 +188,8 @@ def Perfil(request):
     formChange = ChangeDataPerfil(instance=instUser)
     ProyectosIn = Usuarios_proyecto.objects.filter(Usuario=instUser)
     ProyectosOwner = Proyecto.objects.filter(Usuario=instUser)
+    PlanUser = Suscripcion.objects.get(Usuario=instUser)
+    PlanUser = PlanUser.Plan.Nombre
     if request.method == "POST":
         formChange= ChangeDataPerfil(request.POST,request.FILES,instance= instUser)
         if formChange.is_valid(): 
@@ -204,5 +206,5 @@ def Perfil(request):
                 instUser.username = str(request.POST['username'])
                 instUser.email = str(request.POST['email'])
                 instUser.save()
-    return render(request, "Perfil.html",{"form":formChange,"ProyectosOwner":ProyectosOwner,"ProyectosIn":ProyectosIn})
+    return render(request, "Perfil.html",{"form":formChange,"ProyectosOwner":ProyectosOwner,"ProyectosIn":ProyectosIn,"Plan":str(PlanUser)})
  
