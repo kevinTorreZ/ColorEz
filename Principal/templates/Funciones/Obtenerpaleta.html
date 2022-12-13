@@ -15,7 +15,7 @@
     {% block title %} Funciones {% endblock %}
 </head>
 
-<body>
+<body onload="cargarRandom()">
     {% block css %} {% endblock %}
     {% block content %}
     {% if user.is_authenticated %}
@@ -30,30 +30,58 @@
         </div>
         <div id="MixColors">
             <div>
-                <script>
-                    function GetPaleta() {
-                        var highlightedItems = document.querySelectorAll('.colorPalette')
-                        if (highlightedItems.length != 0) {
-                            highlightedItems.forEach(function (element) {
-                                element.remove();
-                            })
-                        }
-                        color = document.getElementById('colorPalette').value
-                        var arrayPaleta = chroma.scale([color, 'white']).colors(10)
-                        for (var color of arrayPaleta) {
-                            document.getElementById('paletteColor').innerHTML += "<div class='colorPalette' style='background-color:" + color + ";width:180px;height:300px;color:white;'>" + "<div class='color-text'>" + "<h1>" + color + "</h1>"+ "</div>" + "</div>"
-                        }
-                    }
-                </script>
+
                 <div id="paletteColor">
                 </div>
             </div>
             <div>
-    </div>
-    {% endif %}
-    {% endblock %}
+            </div>
+            {% endif %}
+            {% endblock %}
 
-    {% block js%}
-    {% endblock %}
+            {% block js%}
+            <script>
+                function GetPaleta() {
+                    var highlightedItems = document.querySelectorAll('.colorPalette')
+                    if (highlightedItems.length != 0) {
+                        highlightedItems.forEach(function (element) {
+                            element.remove();
+                        })
+                    }
+                    color = document.getElementById('colorPalette').value
+                    var arrayPaleta = chroma.scale([color, 'white']).colors(10)
+                    for (var color of arrayPaleta) {
+                        document.getElementById('paletteColor').innerHTML += "<div class='colorPalette' style='background-color:" + color + ";width:180px;height:300px;color:white;'>" + "<div class='color-text'>" + "<h1>" + color + "</h1>" + "</div>" + "</div>"
+                    }
+                }
+            </script>
+            <script>
+                function randomHexColor() {
+                    let [r, g, b] = randomRgbColor();
+
+                    let hr = r.toString(16).padStart(2, '0');
+                    let hg = g.toString(16).padStart(2, '0');
+                    let hb = b.toString(16).padStart(2, '0');
+                    dicc = ['(' + r + ',' + g + ',' + b + ')', "#" + hr + hg + hb]
+                    return dicc;
+                }
+            </script>
+            <script>
+                function cargarRandom() {
+                    rnd3 = randomHexColor()
+                    document.getElementById('colorPalette').value = rnd3[1].toString()
+                    GetPaleta()
+
+                }   
+            </script>
+            <script>
+
+                window.onload = function(){
+                    cargarRandom()
+                }
+
+            </script>
+            {% endblock %}
 </body>
+
 </html>
