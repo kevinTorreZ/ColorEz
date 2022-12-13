@@ -1,4 +1,5 @@
 
+
 document.getElementById("html").addEventListener("keydown", function (e) {
 
     if (e.code === 'Space') {
@@ -54,3 +55,10 @@ function Mixcolor() {
     }
 }
 
+window.onload = function(){
+    var rnd1 = randomHexColor()
+    var rnd2 = randomHexColor()
+    document.getElementById('Mixcolor1').value = rnd1[1].toString()
+    document.getElementById('Mixcolor2').value = rnd2[1].toString()
+    Mixcolor()
+}
