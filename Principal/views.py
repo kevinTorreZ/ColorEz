@@ -7,7 +7,7 @@ from django.conf import settings
 from datetime import date
 from qrcode import *
 from Principal.forms import RegisterForm,LoginForm,NewProyecto,ChangeDataPerfil
-from Principal.models import Usuario,Usuarios_proyecto,File,Proyecto,Token
+from Principal.models import Usuario,Usuarios_proyecto,Proyecto,Token
 from django.views.generic import CreateView, FormView
 from django.contrib.auth import authenticate, login,logout
 from django.contrib import messages
@@ -124,8 +124,6 @@ def Proyectos(request):
     UserInst = Usuario.objects.get(id=request.user.id)
     obj = Usuarios_proyecto.objects.filter(Usuario=request.user.id)
     objOwner = Proyecto.objects.filter(Usuario=request.user.id)
-
-    Fileobj = File.objects.all();
     if request.method == "POST":
         ProjectSelected = request.POST.get('ProjectSelected')
         now = date.today()
@@ -157,7 +155,7 @@ def Proyectos(request):
             SaveProject.save()
             AddUserPrjt = Usuarios_proyecto(Usuario=UserInst,Proyecto=SaveProject)
             AddUserPrjt.save()
-    return render(request, 'Proyectos.html',{'Proyectos':obj,'form':form,'AllFiles':Fileobj,'ProyectosOwner':objOwner,"MostrarQR":Mostrarqr})
+    return render(request, 'Proyectos.html',{'Proyectos':obj,'form':form,'ProyectosOwner':objOwner,"MostrarQR":Mostrarqr})
 @login_required()
 def Invitacion_proyecto(request):
     token = request.GET["token"]

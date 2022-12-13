@@ -95,27 +95,48 @@ class Comprobante(models.Model):
 class Proyecto(models.Model):
     idProyecto = models.AutoField(primary_key=True)
     Titulo = models.CharField(max_length=25)
-    Descripcion = models.TextField()
+    Descripcion = models.TextField(max_length=75)
     Fecha_creacion = models.DateField(verbose_name='',)
     photo = models.ImageField(upload_to = 'media',unique=False, height_field = None, width_field = None, max_length = 100, default='/media/default_image_project.png', help_text = None)
     Usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE,verbose_name='',)
     def __str__(self):
        return self.Titulo
+class LogoTipos(models.Model):
+    idLogo = models.AutoField(primary_key=True)
+    Logo = models.ImageField(upload_to = 'media/Logotipos',unique=False, height_field = None, width_field = None, max_length = 100, help_text = None)
+    Proyecto = models.ForeignKey(Proyecto, on_delete=models.CASCADE)
+    def __str__(self):
+       return self.Logo
+class Tareas(models.Model):
+    idTarea = models.AutoField(primary_key=True)
+    Tarea = models.CharField(max_length=100)
+    Proyecto = models.ForeignKey(Proyecto, on_delete=models.CASCADE)
+    def __str__(self):
+       return self.Tarea
+class Fonts(models.Model):
+    idTarea = models.AutoField(primary_key=True)
+    Fonts = models.CharField(max_length=100)
+    Proyecto = models.ForeignKey(Proyecto, on_delete=models.CASCADE)
+    def __str__(self):
+       return self.Fonts
+class PaletaColores(models.Model):
+    idTarea = models.AutoField(primary_key=True)
+    Color = models.CharField(max_length=35)
+    Proyecto = models.ForeignKey(Proyecto, on_delete=models.CASCADE)
+    def __str__(self):
+       return self.Fonts
+class Tareas(models.Model):
+    idTarea = models.AutoField(primary_key=True)
+    Tarea = models.CharField(max_length=100)
+    Proyecto = models.ForeignKey(Proyecto, on_delete=models.CASCADE)
+    def __str__(self):
+       return self.Tarea
 class Usuarios_proyecto(models.Model):
     id = models.AutoField(primary_key=True)
     Usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)
     Proyecto = models.ForeignKey(Proyecto, on_delete=models.CASCADE)
     def __str__(self):
        return str(self.id)
-class File(models.Model):
-    idFile = models.AutoField(primary_key=True)
-    Nombre = models.CharField(max_length=25)
-    Last_modified = models.DateField()
-    url = models.FileField()
-    Proyecto = models.ForeignKey(Proyecto, on_delete=models.CASCADE)
-    def __str__(self):
-       return self.idFile
-
 class Plan(models.Model):
     idPlan = models.AutoField(primary_key=True)
     Nombre = models.CharField(max_length=45)
