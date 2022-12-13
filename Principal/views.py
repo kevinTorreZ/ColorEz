@@ -15,6 +15,7 @@ from colorutils import Color,rgb_to_hex,hex_to_rgb, ArithmeticModel
 from django.urls import reverse_lazy
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.tokens import PasswordResetTokenGenerator
+from django.template.loader import render_to_string
 
 class RegisterView(CreateView):
     form_class = RegisterForm
@@ -73,11 +74,13 @@ def enviar_correo(request):
             # objToken = Token.objects.filter(Usuario=request.user).filter(Token=token).exists()
             objToken = Token(Token=token,Usuario=userInst)
             objToken.save()
+            linkChangepassword = "https://colorez.es/ChangePassword/?token=" + str(token)
             asunto = "Restablecer contraseña"
-            mensaje = "Ingrese en el link para restablecer su contraseña." + " " + "https://colorez.es/ChangePassword/?token=" + str(token)
+            mensaje = "Ingrese en el link para restablecer su contraseña." + " " + linkChangepassword
             email_desde = settings.EMAIL_HOST_USER
             lista_correos = [email]
-            send_mail(asunto,mensaje,email_desde,lista_correos)
+            msg_html = render_to_string('email.html', {'Link': linkChangepassword,'user':findUser})
+            send_mail(asunto,mensaje,email_desde,lista_correos,html_message=msg_html)
             print("Se ha enviado el correo!!")
         else:
             return render(request, 'send_email.html',{"error":'El correo ingresado no se encuentra asociado a una cuenta.'})
