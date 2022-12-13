@@ -4,10 +4,10 @@ import glob
 import os
 from django.core.mail import send_mail
 from django.conf import settings
-from datetime import date
+from datetime import datetime
 from qrcode import *
 from Principal.forms import RegisterForm,LoginForm,NewProyecto,ChangeDataPerfil
-from Principal.models import Usuario,Usuarios_proyecto,Proyecto,Token,LogoTipos,Fonts,PaletaColores,Tareas
+from Principal.models import Usuario,Usuarios_proyecto,Proyecto,Token,LogoTipos,Fonts,PaletaColores,Tareas,Suscripcion,Plan
 from django.views.generic import CreateView, FormView
 from django.contrib.auth import authenticate, login,logout
 from django.contrib import messages
@@ -24,8 +24,13 @@ class RegisterView(CreateView):
     succes_message = "%(name)s Se ha creado exitosamente!"
     def form_valid(self, form):
         request = self.request
-        form.photo = 'media/ImagePerfil/userImageDefault.png'
+        now = datetime.today()
         login(request, form.save(), backend='django.contrib.auth.backends.ModelBackend')
+        instUser = Usuario.objects.get(id=request.user.id)
+        form.photo = 'media/ImagePerfil/userImageDefault.png'
+        plane = Plan.objects.get(Nombre='Basico')
+        Suscrp = Suscripcion(Plan=plane,Usuario=instUser,Fecha_inicio=now)
+        Suscrp.save()
         return redirect('/Inicio/')
 class LoginView(FormView):
     form_class = LoginForm

@@ -140,9 +140,9 @@ class Plan(models.Model):
 class Suscripcion(models.Model):
     idSuscripcion = models.AutoField(primary_key=True)
     Fecha_inicio = models.DateTimeField()
-    Fecha_termino = models.DateTimeField()
+    Fecha_termino = models.DateTimeField(null=True)
     Usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)
-    Plan = models.ForeignKey(Proyecto, on_delete=models.CASCADE)
+    Plan = models.ForeignKey(Plan, on_delete=models.CASCADE)
     def __str__(self):
        return self.idSuscripcion
 
