@@ -23,23 +23,22 @@
                     <h3>{{proyecto.Proyecto.Titulo}}</h3>
                     <h3>{{proyecto.Proyecto.Descripcion}}</h3>
                 </div>
-                
                 {% for Font in Fonts %}
-                    {% if Font.Proyecto.idProyecto == proyecto.Proyecto.idProyecto %}
-                        '{{Font.Fonts}}'
-                    {% endif %}
+                {% if Font.Proyecto.idProyecto == proyecto.Proyecto.idProyecto %}
+                '{{Font.Fonts}}'
+                {% endif %}
                 {% endfor %}
                 <input name="Fontadd" type="text" placeholder="Agregar Font....">
                 {% for logo in Logos %}
-                    {% if logo.Proyecto.idProyecto == proyecto.Proyecto.idProyecto %}
-                        {{logo.Logo}}
-                    {% endif %}
+                {% if logo.Proyecto.idProyecto == proyecto.Proyecto.idProyecto %}
+                {{logo.Logo}}
+                {% endif %}
                 {% endfor %}
                 <input name="Logoadd" type="file" placeholder="Ingrese logo " accept="image/*">
                 {% for Tarea in Tareas %}
-                    {% if Tarea.Proyecto.idProyecto == proyecto.Proyecto.idProyecto %}
-                        {{Tarea.Tarea}}
-                    {% endif %}
+                {% if Tarea.Proyecto.idProyecto == proyecto.Proyecto.idProyecto %}
+                {{Tarea.Tarea}}
+                {% endif %}
                 {% endfor %}
                 <input name="Tareadd" type="text" placeholder="Agregar tarea....">
                 <input value="Guardar cambios" type="submit">
@@ -63,12 +62,15 @@
         </script>
         <div class="btnProyectos">
             {% for proyecto in Proyectos%}
-                <img src="/{{proyecto.Proyecto.photo}}" width="20px" height="20px" onclick="document.getElementById('{{proyecto.Proyecto.idProyecto}}btnprj').click()">
-                <button onclick="superponer('{{proyecto.Proyecto.idProyecto}}')" id="{{proyecto.Proyecto.idProyecto}}btnprj" style="visibility: hidden;"></button>
+            <img src="/{{proyecto.Proyecto.photo}}" width="20px" height="20px"
+                onclick="document.getElementById('{{proyecto.Proyecto.idProyecto}}btnprj').click()">
+            <button onclick="superponer('{{proyecto.Proyecto.idProyecto}}')" id="{{proyecto.Proyecto.idProyecto}}btnprj"
+                style="visibility: hidden;"></button>
 
             {% endfor %}
-            <button style="width: 30px; height: 20px;" onclick="document.getElementById('form').style.visibility = 'visible'">+</button>
-            </div>
+            <button style="width: 30px; height: 20px;"
+                onclick="document.getElementById('form').style.visibility = 'visible'">+</button>
+        </div>
     </div>
     <form style="visibility: hidden" id="form" method="POST" enctype="multipart/form-data">
         {{form}}
@@ -82,19 +84,19 @@
         <select name="ProjectSelected">
             <option value="0">Selecciona tu proyecto</option>
             {% for proyecto in ProyectosOwner %}
-                <option value="{{proyecto.idProyecto}}">{{proyecto.Titulo}}</option>
-            {% endfor %} 
+            <option value="{{proyecto.idProyecto}}">{{proyecto.Titulo}}</option>
+            {% endfor %}
         </select>
         <input type="submit">
     </form>
     {% if MostrarQR %}
-        <img src="/media/test2.png">
+    <img src="/media/test2.png">
     {% endif %}
     {% endblock %}
 </body>
 
 </html>
 {% block js%}
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-    <script src="{% static 'js/Proyectos.js' %}"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="{% static 'js/Proyectos.js' %}"></script>
 {% endblock %}
