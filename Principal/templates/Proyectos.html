@@ -24,28 +24,59 @@
                     <h3>{{proyecto.Proyecto.Titulo}}</h3>
                     <h3>{{proyecto.Proyecto.Descripcion}}</h3>
                 </div>
-                {% for Font in Fonts %}
-                {% if Font.Proyecto.idProyecto == proyecto.Proyecto.idProyecto %}
-                '{{Font.Fonts}}'
-                {% endif %}
-                {% endfor %}
-                <input name="Fontadd" type="text" placeholder="Agregar Font....">
-                {% for logo in Logos %}
-                {% if logo.Proyecto.idProyecto == proyecto.Proyecto.idProyecto %}
-                    <img src="/{{logo.Logo}}" width="50" height="50">
-                {% endif %}
-                {% endfor %}
+                <input name="Coloradd" type="hidden" value="" placeholder="Agregar Color...." id="inputcolor">
+                <input type="button" value="Select color" onclick="document.getElementById('inputcolor').type = 'color' ">
                 <input name="Logoadd" type="file" placeholder="Ingrese logo " accept="image/*">
-                {% for Tarea in Tareas %}
-                {% if Tarea.Proyecto.idProyecto == proyecto.Proyecto.idProyecto %}
-                {{Tarea.Tarea}}
-                {% endif %}
-                {% endfor %}
+                <input name="Fontadd" type="text" placeholder="Agregar Font....">
                 <input name="Tareadd" type="text" placeholder="Agregar tarea....">
                 <input type="hidden" value="{{proyecto.Proyecto.idProyecto}}" name="idProyecto">
                 <input type="hidden" value="ok" name="Change">
                 <input value="Guardar cambios" type="submit">
             </form>
+                {% for color in Paleta %}
+                {% if color.Proyecto.idProyecto == proyecto.Proyecto.idProyecto %}
+                '{{color.Color}}'
+                <form method="post">
+                    {% csrf_token %}
+                    <input type="hidden" value="{{proyecto.Proyecto.idProyecto}}" name="idProyecto">
+                    <input type="hidden" value="{{color.idPaleta}}" name="colorEliminate" style="display: None;">
+                    <input type="submit" value="X">
+                </form>
+                {% endif %}
+                {% endfor %}
+                {% for Font in Fonts %}
+                {% if Font.Proyecto.idProyecto == proyecto.Proyecto.idProyecto %}
+                '{{Font.Fonts}}'
+                <form method="post">
+                    {% csrf_token %}
+                    <input type="hidden" value="{{proyecto.Proyecto.idProyecto}}" name="idProyecto">
+                    <input type="hidden" value="{{Font.idFont}}" name="FontEliminate" style="display: None;">
+                    <input type="submit" value="X">
+                </form>
+                {% endif %}
+                {% endfor %}
+                {% for Tarea in Tareas %}
+                {% if Tarea.Proyecto.idProyecto == proyecto.Proyecto.idProyecto %}
+                {{Tarea.Tarea}}
+                <form method="post">
+                    {% csrf_token %}
+                    <input type="hidden" value="{{proyecto.Proyecto.idProyecto}}" name="idProyecto">
+                    <input type="hidden" value="{{Tarea.idTarea}}" name="TareaEliminate" style="display: None;">
+                    <input type="submit" value="X">
+                </form>
+                {% endif %}
+                {% endfor %}
+                {% for logo in Logos %}
+                {% if logo.Proyecto.idProyecto == proyecto.Proyecto.idProyecto %}
+                    <img src="/{{logo.Logo}}" width="50" height="50">
+                    <form method="post">
+                        {% csrf_token %}
+                        <input type="hidden" value="{{proyecto.Proyecto.idProyecto}}" name="idProyecto">
+                        <input type="hidden" value="{{logo.idLogo}}" name="logoEliminate" style="display: None;">
+                        <input type="submit" value="X">
+                    </form>
+                {% endif %}
+                {% endfor %}
             <form method="post">
                 {% csrf_token %}
                 <input type="hidden" value="{{proyecto.Proyecto.idProyecto}}" name="idProyecto">
