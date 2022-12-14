@@ -221,5 +221,6 @@ def Perfil(request):
                 instUser.username = str(request.POST['username'])
                 instUser.email = str(request.POST['email'])
                 instUser.save()
+                return redirect('/Perfil/')
     return render(request, "Perfil.html",{"form":formChange,"ProyectosOwner":ProyectosOwner,"ProyectosIn":ProyectosIn,"Plan":str(PlanUser)})
  
