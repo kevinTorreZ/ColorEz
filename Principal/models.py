@@ -40,7 +40,7 @@ class Usuario(AbstractBaseUser):
     )
     photo = models.ImageField(
         upload_to = 'media/ImagePerfil/',
-        default='userImageDefault.png',
+        default='media/ImagePerfil/userImageDefault.png',
         verbose_name='',
         max_length=40,
         unique=False,
@@ -97,7 +97,7 @@ class Proyecto(models.Model):
     Titulo = models.CharField(max_length=25)
     Descripcion = models.TextField(max_length=75)
     Fecha_creacion = models.DateField(verbose_name='',)
-    photo = models.ImageField(upload_to = 'media/ImageProyectos',unique=False, height_field = None, width_field = None, max_length = 100, help_text = None)
+    photo = models.ImageField(upload_to = 'media/ImageProyectos',default='media/ImageProyectos/default_image_project.png',unique=False, height_field = None, width_field = None, max_length = 100, help_text = None)
     Usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE,verbose_name='',)
     def __str__(self):
        return self.Titulo
