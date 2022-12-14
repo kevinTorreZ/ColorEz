@@ -1,9 +1,7 @@
 {% extends "Componentes/header.html" %}
 {% load static %}
 {% block links%}
-<link rel="stylesheet" href="{% static 'inicio.css' %}">
-<script src="{% static 'js/chroma.min.js' %}"></script>
-<script src="{% static 'js/inicio.js' %} "></script>
+<link rel="stylesheet" href="{% static 'funciones.css' %}">
 {% endblock %}
 <!DOCTYPE html>
 <html lang="en">
@@ -12,59 +10,44 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    {% block title %} Inicio {% endblock %}
+    {% block title %} Funciones {% endblock %}
 </head>
 
 <body>
     {% block css %} {% endblock %}
     {% block content %}
-    {% if user.is_authenticated %}
-    <div class="mainInicio">
-        <h1>Bienvenido! {{ user.username }}</h1>
-        <a href="/logout/">Desconectarse</a>
-        <div style="width: 100px; height: 70px; border-radius: 50%;">
-            <img src="/{{user.photo}}"  style="width: 100%; height: 100%; border-radius: 50%;">
+    <div class="mainFuncion">
+        <div class="container-funciones">
+            <div class="columnas">
+                <div class="header-img"></div>
+                <div class="header-text">
+                    <h1>Descubre nuestras funciones</h1>
+                    <p>Aquí podrás encontrar diversas funciones para que puedas impulsar tus diseños</p>
+                </div>
+            </div>
+        </div>
+        <h1 id="titleFunciones">Funciones disponibles</h1>
+        <div class="funciones">
+            <div class="card-funciones">
+                <img src="../static/img/generarapaleta.png">
+                <h1>Generar paleta de colores</h1>
+                <p>Con esta función podrás generar 10 paletas de colores con colores aleatorios, genera las paletas que desees.</p>
+                <button id="btnFuncion" onclick="window.location.href='/Generar-paleta/'">Usar función</button>
+            </div>
+            <div class="card-funciones">
+                <img src="../static/img/mezclarcolores.png">
+                <h1>Mezclar colores</h1>
+                <p>Con esta función podrás mezclar dos colores para asi generar una paleta de colores de los colores que escojas.</p>
+                <button id="btnFuncion" onclick="window.location.href='/Mezclar-colores'">Usar función</button>
+            </div>
+            <div class="card-funciones">
+                <img src="../static/img/obtenerpaleta.png">
+                <h1>Obtener paleta</h1>
+                <p>Con esta función podrás obtener la paleta de color del color que quieras, así podrás ver la paleta hasta el color más claro.</p>
+                <button id="btnFuncion" onclick="window.location.href='/Obtener-paleta'">Usar función</button>
+            </div>
         </div>
     </div>
-    <div style="display: flex;" id="paleta_colores">
-        <input type="hidden" id="btnhiden">
-    </div>
-    <div>
-        <h1>----------------------------------------------------------------------------------------------------------------------------------------------------
-        </h1>
-    </div>
-    <div>
-        <input type="color" id="colorPalette">
-        <input type="submit" value="Obtener paleta" onclick="GetPaleta()">
-        <script>
-            function GetPaleta() {
-                var highlightedItems = document.querySelectorAll('.colorPalette')
-                if (highlightedItems.length != 0) {
-                    highlightedItems.forEach(function (element) {
-                        element.remove();
-                    })
-                }
-                color = document.getElementById('colorPalette').value
-                var arrayPaleta = chroma.scale([color, 'white']).colors(10)
-                for (var color of arrayPaleta) {
-                    document.getElementById('paletteColor').innerHTML += "<div class='colorPalette' style='background-color:" + color + ";width:180px;height:300px;color:white;'>" + color + "</div>"
-                }
-            }
-        </script>
-        <div style="display: flex;" id="paletteColor">
-        </div>
-    </div>
-    <div>
-        <h1>----------------------------------------------------------------------------------------------------------------------------------------------------
-        </h1>
-    </div>
-    <div id="MixColors" style="display: flex;">
-    </div>
-    <input type="color" name="color1" id="Mixcolor1">
-    <input type="color" name="color2" id="Mixcolor2">
-
-    <input type="submit" value="Mezclar colores" id="btnnashe" onclick="Mixcolor()">
-    {% endif %}
     {% endblock %}
 
     {% block js%}

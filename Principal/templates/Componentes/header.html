@@ -24,7 +24,6 @@
                     {% if user.is_authenticated %}
                     <li class="main-section">
                         <a href="/">Inicio</a>
-                        <a href="/Funciones/">Funciones</a>
                         <a href="/Proyectos/">Proyectos</a>
                     </li>
                     <li class="nav-login">
@@ -32,6 +31,11 @@
                         <a href="/logout/">Cerrar sesión</a>
                     </li>
                     {% else %}
+                    <li class="main-section">
+                        <a href="/">Inicio</a>
+                        <a href="/Funciones/">Funciones</a>
+                   
+                    </li>
                     <li class="nav-login">
                         <a href="/Login/"><i class="fa-solid fa-right-to-bracket"></i>Iniciar sesión</a>
                     </li>
