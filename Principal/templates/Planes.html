@@ -1,7 +1,7 @@
 {% extends "Componentes/header.html" %}
 {% load static %}
 {% block links%}
-<link rel="stylesheet" href="{% static 'login.css' %}">
+<link rel="stylesheet" href="{% static 'planes.css' %}">
 {% endblock %}
 <!DOCTYPE html>
 <html lang="en">
@@ -14,26 +14,33 @@
 <body>
     {% block css %} {% endblock %}
     {% block content %}
-        <form method="post">
-            {% csrf_token %}
-            <h1>Basico</h1>
-            {% if PlanUser == 1 %}
-                <input type="submit" value="Plan actual" disabled>
-            {% else %}
-                <input type="hidden" value="True" name="PlanBasico">
-                <input type="submit" value="Escoger plan">
-            {% endif %}
-        </form>
-        <form method="post">
-            {% csrf_token %}
-            <h1>Premium</h1>
-            {% if PlanUser == 2 %}
-                <input type="submit" value="Plan actual" disabled>
-            {% else %}
-                <input type="hidden" value="True" name="PlanPremium">
-                <input type="submit" value="Escoger plan">
-            {% endif %}
-        </form>
+    <div class="cont-planes">
+        <div class="plan1">
+            <form method="post">
+                {% csrf_token %}
+                <h1>Basico</h1>
+                {% if PlanUser == 1 %}
+                    <input type="submit" value="Plan actual" disabled>
+                {% else %}
+                    <input type="hidden" value="True" name="PlanBasico">
+                    <input type="submit" value="Escoger plan">
+                {% endif %}
+            </form>
+        </div>
+        <div class="plan2">
+            <form method="post">
+                {% csrf_token %}
+                <h1>Premium</h1>
+                {% if PlanUser == 2 %}
+                    <input type="submit" value="Plan actual" disabled>
+                {% else %}
+                    <input type="hidden" value="True" name="PlanPremium">
+                    <input type="submit" value="Escoger plan">
+                {% endif %}
+            </form>
+        </div> 
+    </div>
+    
         
     {% endblock %}
 </body>

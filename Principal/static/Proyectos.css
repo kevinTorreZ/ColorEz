@@ -344,6 +344,7 @@ input[type="file"] {
     border-radius: 10px;
     height: 600px;
     width: 55px;
+    text-align: center;
 }
 
 #AddBtn{
@@ -358,5 +359,65 @@ input[type="file"] {
 }
 
 .form-ingresar{
-    
+    background-color: #2C124C;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    width: 500px;
+    height: 300px;
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    border-radius: 10px;
+    color: white;
+    align-items: center;
+    text-align: center;
+}
+
+.form-ingresar label{
+    display: block;
+}
+
+.form-ingresar input[type="text"]{
+    display: block;
+    width: 350px;
+    border-radius: 5px;
+    border: 2px solid rgb(218, 220, 224);
+    height: 25px;
+    display: block;
+    font-family: "DM Sans", sans-serif;
+    padding-left: 10px;
+    outline: none;
+    margin-bottom: 15px;
+}
+
+.form-ingresar textarea{
+    resize: none;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: 350px;
+    border-radius: 10px;
+    padding-left: 15px;
+    height: 150px;
+    outline: none;
+    border: none;
+    background-color: rgb(255, 255, 255);
+    font-family: "DM Sans", sans-serif;
+    font-size: 15px;
+    padding-top: 15px;
+    max-height: 60px;
+}
+
+#btnClose{
+    border: none;
+    cursor: pointer;
+    width: 25px;
+    height: 25px;
+    font-family: "DM Sans", sans-serif;
+    border-radius: 5px;
+    background-color: #672BB1;
+    margin-left: 350px;
+    color: white;
 }

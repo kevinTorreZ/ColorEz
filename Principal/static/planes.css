@@ -1,0 +1,51 @@
+.cont-planes{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    background-color: #2C124C;
+    width: 600px;
+    height: 300px;
+    margin: 0 auto;
+    margin-top: 150px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+input[type="button"], input[type="submit"]{
+    margin-top: 100px;
+    cursor: pointer;
+    border: none;
+    border-radius: 15px;
+    background-color: #672BB1;
+    height: 30px;
+    width: 140px;
+    color: white;
+    font-family: 'Poppins', sans-serif;
+}
+
+
+.plan1{
+    background-color: #42295E;
+    width: 250px;
+    height: 250px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-family: 'Lato', sans-serif;
+}
+
+.plan2{
+    background-color: #42295E;
+    width: 250px;
+    height: 250px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-family: 'Lato', sans-serif;
+    margin-left: 5px;
+}

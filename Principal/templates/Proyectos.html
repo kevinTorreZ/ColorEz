@@ -36,7 +36,7 @@
                     <div class="logo-cont">
                         <h2>Sube tus logos/imagenes: </h2>
                         <label for="file-upload" class="custom-file-upload">
-                            <i class="fa fa-cloud-upload"></i> Custom Upload
+                            <i class="fa fa-cloud-upload"></i> Subir archivo
                         </label>
                         <input name="Logoadd" id="file-upload" type="file" placeholder="Ingrese logo " accept="image/*">
                     </div>
@@ -149,11 +149,12 @@
 
             {% endfor %}
             <button id="AddBtn" style="width: 30px; height: 20px;"
-                onclick="document.getElementById('form').style.visibility = 'visible'">+</button>
+                onclick="btnCloses()">+</button>
         </div>
     </div>
-    <div class="form-ingresar">
-        <form style="visibility: hidden" id="form" method="POST" enctype="multipart/form-data">
+    <div class="form-ingresar" id="formIngresar">
+        <form style="visibility: visible" id="form" method="POST" enctype="multipart/form-data">
+            <button id="btnClose" onclick="btnCloses()">X</button>
             {{form}}
             {% csrf_token %}
             <input type="submit">
@@ -173,7 +174,7 @@
                     {% endfor %}
                 </select>
             </div>
-            
+
             <input type="submit" value="Mostrar QR">
         </form>
         {% if MostrarQR %}
@@ -189,4 +190,19 @@
 {% block js%}
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script src="{% static 'js/Proyectos.js' %}"></script>
+<script>
+    function btnCloses(){
+        var btnClose = document.getElementById('formIngresar')
+        if (btnClose.style.display == "none") {
+            btnClose.style.display = "block"
+        } else {
+            btnClose.style.display = "none"
+        }
+    }
+</script>
+<script>
+    window.onload = function () {
+        document.getElementById('formIngresar').style.display = "none"
+    }
+</script>
 {% endblock %}
