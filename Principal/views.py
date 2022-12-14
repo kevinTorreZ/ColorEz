@@ -70,7 +70,17 @@ def Inicio(request):
             PlanUser = False
         return render(request, 'Inicio.html',{"plan":PlanUser})
     except ObjectDoesNotExist:
-        print("a")
+        now = date.today()
+        planbasic = Plan.objects.get(idPlan=1)
+        subscripcion = Suscripcion(Usuario=instUser,Plan=planbasic,Fecha_inicio=now)
+        subscripcion.save()
+        PlanUser = Suscripcion.objects.get(Usuario=instUser)
+        PlanUser = PlanUser.Plan.idPlan
+        if PlanUser == 2:
+            PlanUser = True
+        else:
+            PlanUser = False
+        return render(request, 'Inicio.html',{"plan":PlanUser})
 @login_required()
 def LogoutView(request):
     if request.user.photo != "userImageDefault.png":
