@@ -1,7 +1,6 @@
-{% extends "Componentes/header.html" %}
 {% load static %}
 {% block links%}
-<link rel="stylesheet" href="{% static 'editperfil.css' %}">
+<link rel="stylesheet" href="{% static 'footer.css' %}">
 <script src="{% static 'js/chroma.min.js' %}"></script>
 <script src="{% static 'js/inicio.js' %} "></script>
 {% endblock %}
@@ -12,17 +11,17 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    {% block title %} Editar perfil {% endblock %}
 </head>
 
 <body>
     {% block css %} {% endblock %}
     {% block content %}
-    {% if user.is_authenticated %}
-    
-    {% endif %}
-    {% endblock %}
+    <footer>
+        <div class="footer">
 
+        </div>
+    </footer>
+    {% endblock %}
     {% block js%}
     {% endblock %}
 </body>
