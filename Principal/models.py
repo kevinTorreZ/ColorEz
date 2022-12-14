@@ -114,13 +114,13 @@ class Tareas(models.Model):
     def __str__(self):
        return self.Tarea
 class Fonts(models.Model):
-    idTarea = models.AutoField(primary_key=True)
+    idFont = models.AutoField(primary_key=True)
     Fonts = models.CharField(max_length=100)
     Proyecto = models.ForeignKey(Proyecto, on_delete=models.CASCADE)
     def __str__(self):
        return self.Fonts
 class PaletaColores(models.Model):
-    idTarea = models.AutoField(primary_key=True)
+    idPaleta = models.AutoField(primary_key=True)
     Color = models.CharField(max_length=35)
     Proyecto = models.ForeignKey(Proyecto, on_delete=models.CASCADE)
     def __str__(self):

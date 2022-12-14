@@ -152,26 +152,56 @@ def Proyectos(request):
     LogotiposProyecto = LogoTipos.objects.all()
     AllTareas = Tareas.objects.all()
     AllFont = Fonts.objects.all()
+    Allcolors = PaletaColores.objects.all()
     if request.method == "POST":
         ProjectSelected = request.POST.get('ProjectSelected')
         now = date.today()
         Titulo = request.POST.get('Titulo')
         if Titulo == None:
             if ProjectSelected == None:
-                idprj = request.POST['idProyecto']
-                searchPrjct = Proyecto.objects.get(idProyecto=idprj)
                 if request.POST.get('Change',None) == None:
-                    clearListuser = Usuarios_proyecto.objects.get(Usuario=UserInst, Proyecto=searchPrjct)
-                    os.remove(str(searchPrjct.photo))
-                    Loges = LogoTipos.objects.filter(Proyecto=searchPrjct)
-                    for i in Loges:
-                        os.remove(str(i.Logo))
-                    clearListuser.delete()
-                    searchPrjct.delete()
+                    idprj = request.POST['idProyecto']
+                    searchPrjct = Proyecto.objects.get(idProyecto=idprj)
+                    Selected = str(searchPrjct)
+                    if request.POST.get('idProyecto',None) != None:
+                        if request.POST.get('TareaEliminate',False) != False:
+                            TareaEliminate = request.POST.get('TareaEliminate',False)
+                            eliminateTarea = Tareas.objects.get(idTarea=TareaEliminate)
+                            eliminateTarea.delete()
+                        if request.POST.get('FontEliminate',False) != False:
+                            Fonteliminate = request.POST.get('FontEliminate',False)
+                            eliminateFont = Fonts.objects.get(idFont=Fonteliminate)
+                            eliminateFont.delete()
+                        if request.POST.get('logoEliminate',False) != False:
+                            logoEliminate = request.POST.get('logoEliminate',False)
+                            eliminarLogo = LogoTipos.objects.get(idLogo=logoEliminate)
+                            os.remove(str(eliminarLogo.Logo))
+                            eliminarLogo.delete()
+                        if request.POST.get('colorEliminate',False) != False:
+                            colorEliminate = request.POST.get('colorEliminate',False)
+                            eliminarColor = PaletaColores.objects.get(idPaleta=colorEliminate)
+                            eliminarColor.delete()   
+                        return render(request, 'Proyectos.html',{'Proyectos':obj,'form':form,'ProyectosOwner':objOwner,"MostrarQR":Mostrarqr,'Tareas':AllTareas,'Logos':LogotiposProyecto,'Fonts':AllFont,'Paleta':Allcolors,'selected':Selected})
+                    else:
+                        idprj = request.POST['idProyecto']
+                        searchPrjct = Proyecto.objects.get(idProyecto=idprj)
+                        clearListuser = Usuarios_proyecto.objects.get(Usuario=UserInst, Proyecto=searchPrjct)
+                        os.remove(str(searchPrjct.photo))
+                        Loges = LogoTipos.objects.filter(Proyecto=searchPrjct)
+                        for i in Loges:
+                            os.remove(str(i.Logo))
+                        clearListuser.delete()
+                        searchPrjct.delete()
                 else:
+                    idprj = request.POST['idProyecto']
+                    searchPrjct = Proyecto.objects.get(idProyecto=idprj)
+                    color = request.POST.get('Coloradd',False)
                     fonts = request.POST.get('Fontadd',False)
                     Logo = request.FILES.get('Logoadd',False)
                     Tareadd = request.POST.get('Tareadd',False)
+                    if color != "":
+                        colors = PaletaColores(Color=color,Proyecto=searchPrjct)
+                        colors.save()
                     if fonts != "":
                         fonts = Fonts(Fonts=fonts,Proyecto=searchPrjct)
                         fonts.save()
@@ -182,7 +212,7 @@ def Proyectos(request):
                         tarea = Tareas(Tarea=Tareadd,Proyecto=searchPrjct)
                         tarea.save()
                     Selected = str(searchPrjct)
-                    return render(request, 'Proyectos.html',{'Proyectos':obj,'form':form,'ProyectosOwner':objOwner,"MostrarQR":Mostrarqr,'Tareas':AllTareas,'Logos':LogotiposProyecto,'Fonts':AllFont,'selected':Selected})
+                    return render(request, 'Proyectos.html',{'Proyectos':obj,'form':form,'ProyectosOwner':objOwner,"MostrarQR":Mostrarqr,'Tareas':AllTareas,'Logos':LogotiposProyecto,'Fonts':AllFont,'Paleta':Allcolors,'selected':Selected})
             else:
                 userInst = Usuario.objects.get(id=request.user.id)
                 token_generator = PasswordResetTokenGenerator()
@@ -225,7 +255,7 @@ def Proyectos(request):
                     return redirect('/Proyectos/')
                 else:
                     return render(request, 'Proyectos.html',{'Proyectos':obj,'form':form,'ProyectosOwner':objOwner,"MostrarQR":Mostrarqr,'Tareas':AllTareas,'Logos':LogotiposProyecto,'Fonts':AllFont,'ProyectoMax':Mensaje_error})
-    return render(request, 'Proyectos.html',{'Proyectos':obj,'form':form,'ProyectosOwner':objOwner,"MostrarQR":Mostrarqr,'Tareas':AllTareas,'Logos':LogotiposProyecto,'Fonts':AllFont})
+    return render(request, 'Proyectos.html',{'Proyectos':obj,'form':form,'ProyectosOwner':objOwner,"MostrarQR":Mostrarqr,'Tareas':AllTareas,'Logos':LogotiposProyecto,'Fonts':AllFont,'Paleta':Allcolors})
 @login_required()
 def Invitacion_proyecto(request):
     token = request.GET["token"]
