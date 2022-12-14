@@ -42,3 +42,5 @@ urlpatterns = [
     path('invitacion_proyecto/', views.Invitacion_proyecto, name='invitacion_proyecto'),
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+handler404 = 'Principal.views.handler404'
+handler500 = 'Principal.views.handler500'
