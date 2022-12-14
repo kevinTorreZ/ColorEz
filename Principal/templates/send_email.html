@@ -16,7 +16,9 @@
     {% block content %}
         <div class="DivForm">
             <h1 id="title-text">Recupera tu contraseña</h1>
-            <h1 id="error-text"><i class="fa-solid fa-circle-exclamation"></i>{{error}}</h1>
+            {% if error %}
+                <h1 id="error-text"><i class="fa-solid fa-circle-exclamation"></i>{{error}}</h1>
+            {% endif %}
             <form method="post" class="form">
                 {% csrf_token %}
                 <input type="email" name="email">

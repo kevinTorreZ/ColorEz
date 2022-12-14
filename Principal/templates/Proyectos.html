@@ -89,8 +89,10 @@
         {{form}}
         {% csrf_token %}
         <input type="submit">
-
     </form>
+    {% if ProyectoMax %}
+        {{ProyectoMax}}
+    {% endif %}
 
     <form method="post">
         {% csrf_token %}
