@@ -1,6 +1,7 @@
 from django.shortcuts import render,redirect
 import requests
 import glob
+from django.core.exceptions import ObjectDoesNotExist
 import os
 from django.core.mail import send_mail
 from django.conf import settings
@@ -60,12 +61,15 @@ class LoginView(FormView):
 @login_required()
 def Inicio(request):
     instUser = Usuario.objects.get(id=request.user.id)
-    PlanUser = Suscripcion.objects.get(Usuario=instUser)
-    PlanUser = PlanUser.Plan.idPlan
-    if PlanUser == 2:
-        PlanUser = True
-    else:
-        PlanUser = False
+    try:
+        PlanUser = Suscripcion.objects.get(Usuario=instUser)
+        PlanUser = PlanUser.Plan.idPlan
+        if PlanUser == 2:
+            PlanUser = True
+        else:
+            PlanUser = False
+    except ObjectDoesNotExist:
+        print("a")
     return render(request, 'Inicio.html',{"plan":PlanUser})
 @login_required()
 def LogoutView(request):
