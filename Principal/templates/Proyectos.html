@@ -17,7 +17,7 @@
     <div class="contenedor_proyectos" id="content">
         {% for proyecto in Proyectos%}
         <div id="{{proyecto.Proyecto.idProyecto}}" class="Proyectos">
-            <form method="post">
+            <form method="post" enctype="multipart/form-data">
                 {% csrf_token %}
                 <div class="img-proyecto">
                     <img src="/{{proyecto.Proyecto.photo}}">
@@ -32,7 +32,7 @@
                 <input name="Fontadd" type="text" placeholder="Agregar Font....">
                 {% for logo in Logos %}
                 {% if logo.Proyecto.idProyecto == proyecto.Proyecto.idProyecto %}
-                {{logo.Logo}}
+                    <img src="/{{logo.Logo}}" width="50" height="50">
                 {% endif %}
                 {% endfor %}
                 <input name="Logoadd" type="file" placeholder="Ingrese logo " accept="image/*">

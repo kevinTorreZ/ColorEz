@@ -158,21 +158,24 @@ def Proyectos(request):
         if Titulo == None:
             if ProjectSelected == None:
                 idprj = request.POST['idProyecto']
+                searchPrjct = Proyecto.objects.get(idProyecto=idprj)
                 if request.POST.get('Change',None) == None:
-                    searchPrjct = Proyecto.objects.get(idProyecto=idprj)
                     clearListuser = Usuarios_proyecto.objects.get(Usuario=UserInst, Proyecto=searchPrjct)
                     clearListuser.delete()
                     searchPrjct.delete()
                 else:
                     fonts = request.POST.get('Fontadd',False)
-                    Logo = request.POST.get('Logoadd',False)
+                    Logo = request.FILES.get('Logoadd',False)
                     Tareadd = request.POST.get('Tareadd',False)
                     if fonts != "":
-                        print(fonts)
-                    if Logo != "":
-                        print(Logo)
+                        fonts = Fonts(Fonts=fonts,Proyecto=searchPrjct)
+                        fonts.save()
+                    if Logo != False:
+                        Logo = LogoTipos(Proyecto=searchPrjct,Logo=Logo)
+                        Logo.save()
                     if Tareadd != "":
-                        print(Tareadd)
+                        tarea = Tareas(Tarea=Tareadd,Proyecto=searchPrjct)
+                        tarea.save()
             else:
                 userInst = Usuario.objects.get(id=request.user.id)
                 token_generator = PasswordResetTokenGenerator()
