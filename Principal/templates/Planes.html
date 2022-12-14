@@ -1,0 +1,41 @@
+{% extends "Componentes/header.html" %}
+{% load static %}
+{% block links%}
+<link rel="stylesheet" href="{% static 'login.css' %}">
+{% endblock %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block title %} Iniciar sesión {% endblock %}
+</head>
+<body>
+    {% block css %} {% endblock %}
+    {% block content %}
+        <form method="post">
+            {% csrf_token %}
+            <h1>Basico</h1>
+            {% if PlanUser == 1 %}
+                <input type="submit" value="Plan actual" disabled>
+            {% else %}
+                <input type="hidden" value="True" name="PlanBasico">
+                <input type="submit" value="Escoger plan">
+            {% endif %}
+        </form>
+        <form method="post">
+            {% csrf_token %}
+            <h1>Premium</h1>
+            {% if PlanUser == 2 %}
+                <input type="submit" value="Plan actual" disabled>
+            {% else %}
+                <input type="hidden" value="True" name="PlanPremium">
+                <input type="submit" value="Escoger plan">
+            {% endif %}
+        </form>
+        
+    {% endblock %}
+</body>
+</html>
+{% block js%}{% endblock %}

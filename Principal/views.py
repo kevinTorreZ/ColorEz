@@ -1,6 +1,7 @@
 from django.shortcuts import render,redirect
 import requests
 import glob
+from django.core.exceptions import ObjectDoesNotExist
 import os
 from django.core.mail import send_mail
 from django.conf import settings
@@ -60,21 +61,50 @@ class LoginView(FormView):
 @login_required()
 def Inicio(request):
     instUser = Usuario.objects.get(id=request.user.id)
-    PlanUser = Suscripcion.objects.get(Usuario=instUser)
-    PlanUser = PlanUser.Plan.idPlan
-    if PlanUser == 2:
-        PlanUser = True
-    else:
-        PlanUser = False
-    return render(request, 'Inicio.html',{"plan":PlanUser})
+    try:
+        PlanUser = Suscripcion.objects.get(Usuario=instUser)
+        PlanUser = PlanUser.Plan.idPlan
+        if PlanUser == 2:
+            PlanUser = True
+        else:
+            PlanUser = False
+        return render(request, 'Inicio.html',{"plan":PlanUser})
+    except ObjectDoesNotExist:
+        now = date.today()
+        planbasic = Plan.objects.get(idPlan=1)
+        subscripcion = Suscripcion(Usuario=instUser,Plan=planbasic,Fecha_inicio=now)
+        subscripcion.save()
+        PlanUser = Suscripcion.objects.get(Usuario=instUser)
+        PlanUser = PlanUser.Plan.idPlan
+        if PlanUser == 2:
+            PlanUser = True
+        else:
+            PlanUser = False
+        return render(request, 'Inicio.html',{"plan":PlanUser})
 @login_required()
 def LogoutView(request):
     if request.user.photo != "userImageDefault.png":
         logout(request)
     else:
-        print(request.user.photo)
         logout(request)
     return render(request, "logout.html")
+@login_required()
+def Planes(request):
+    userinst = Usuario.objects.get(id=request.user.id)
+    planuser = Suscripcion.objects.get(Usuario=userinst)
+    Basico = Plan.objects.get(idPlan=1)
+    Premium = Plan.objects.get(idPlan=2)
+    Planuser = planuser.Plan.idPlan
+    if request.method == "POST":
+        if request.POST.get('PlanBasico', False) != False:
+            planuser.Plan = Basico
+            planuser.save()
+            return redirect('/Planes/')
+        else:
+            planuser.Plan = Premium
+            planuser.save()
+            return redirect('/Planes/')
+    return render(request, "Planes.html",{"PlanUser":Planuser})
 def enviar_correo(request):
     if request.method == "POST":    
         email = request.POST["email"]
@@ -94,7 +124,6 @@ def enviar_correo(request):
             lista_correos = [email]
             msg_html = render_to_string('email.html', {'Link': linkChangepassword,'user':findUser})
             send_mail(asunto,mensaje,email_desde,lista_correos,html_message=msg_html)
-            print("Se ha enviado el correo!!")
         else:
             return render(request, 'send_email.html',{"error":'El correo ingresado no se encuentra asociado a una cuenta.'})
     return render(request, 'send_email.html')
@@ -229,7 +258,6 @@ def Proyectos(request):
             Suscrip = Suscripcion.objects.get(Usuario=UserInst)
             if Suscrip.Plan.idPlan == 1:
                 if len(UserProjects) < 1:
-                    print(len(UserProjects))
                     Descripcion = request.POST.get('Descripcion')
                     photo = request.FILES.get('photo')
                     if photo == None:
@@ -243,7 +271,6 @@ def Proyectos(request):
                     return render(request, 'Proyectos.html',{'Proyectos':obj,'form':form,'ProyectosOwner':objOwner,"MostrarQR":Mostrarqr,'Tareas':AllTareas,'Logos':LogotiposProyecto,'Fonts':AllFont,'ProyectoMax':Mensaje_error})
             else:
                 if len(UserProjects) <= 5:
-                    print(len(UserProjects))
                     Descripcion = request.POST.get('Descripcion')
                     photo = request.FILES.get('photo')
                     if photo == None:
@@ -301,4 +328,16 @@ def Perfil(request):
                 instUser.save()
                 return redirect('/Perfil/')
     return render(request, "Perfil.html",{"form":formChange,"ProyectosOwner":ProyectosOwner,"ProyectosIn":ProyectosIn,"Plan":str(PlanUser)})
- 
+
+
+
+def handler404(request, exception, template_name="404.html"):
+    response = render(request,template_name)
+    response.status_code = 404
+    return response
+
+
+def handler500(request,template_name="500.html"):
+    response = render(request,template_name)
+    response.status_code = 500
+    return response
