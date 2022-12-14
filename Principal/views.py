@@ -149,13 +149,15 @@ def Proyectos(request):
         now = date.today()
         Titulo = request.POST.get('Titulo')
         if Titulo == None:
-            if ProjectSelected == 0:
+            if ProjectSelected == None:
                 idprj = request.POST['idProyecto']
-
-                searchPrjct = Proyecto.objects.get(idProyecto=idprj)
-                clearListuser = Usuarios_proyecto.objects.get(Usuario=UserInst, Proyecto=searchPrjct)
-                clearListuser.delete()
-                searchPrjct.delete()
+                if request.POST.get('Change',None) == None:
+                    searchPrjct = Proyecto.objects.get(idProyecto=idprj)
+                    clearListuser = Usuarios_proyecto.objects.get(Usuario=UserInst, Proyecto=searchPrjct)
+                    clearListuser.delete()
+                    searchPrjct.delete()
+                else:
+                    print("cambio nashe")
             else:
                 userInst = Usuario.objects.get(id=request.user.id)
                 token_generator = PasswordResetTokenGenerator()
