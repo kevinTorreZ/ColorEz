@@ -15,32 +15,28 @@
     {% block css %} {% endblock %}
     {% block content %}
     {% if is_valid == True %}
-    {% if Proyecto.Usuario.id == user.id %}
-        <h1>No puedes unirte al grupo ya que ya estas dentro!</h1>
-    {% else %}
-        <div class="invite-form">
-            <form method="post" id="formChangePassword">
-                {% csrf_token %}
-                <h2>{{Proyecto.Usuario.username}}, te ha invitado a formar parte de</h2>
-                <h2 id="title-proyecto">{{Proyecto.Titulo}}</h2>
-                <img src="/{{Proyecto.photo}}">
-                <h1>¿Quieres unirte al proyecto? </h1>
-                <input type="hidden" id="inputhidden" name="inputhidden">
-                <input type="submit" onsubmit="document.getElementById('inputhidden').value = 'ok'" value="Aceptar">
-            </form>
-        </div>
-            {% if send == True %}
-                <script>document.getElementById("formChangePassword").remove()</script>
-                <h1>Te has unido correctamente!</h1>
-            {% endif %}
-        {% else %}
-        <div class="token-expirado">
-            <img src="../static/img/200w.gif">
-            <h1>El token no existe o ya ha expirado!</h1>
-        </div>
-            
+    <div class="invite-form">
+        <form method="post" id="formChangePassword">
+            {% csrf_token %}
+            <h2>{{Proyecto.Usuario.username}} te ha invitado a formar parte de</h2>
+            <h2 id="title-proyecto">{{Proyecto.Titulo}}</h2>
+            <img src="/{{Proyecto.photo}}">
+            <h1>Quieres unirte al proyecto? </h1>
+            <input type="hidden" id="inputhidden" name="inputhidden">
+            <input type="submit" onsubmit="document.getElementById('inputhidden').value = 'ok'" value="Aceptar">
+        </form>
+    </div>
+        {% if send == True %}
+            <script>document.getElementById("formChangePassword").remove()</script>
+            <h1>Te has unido correctamente!</h1>
         {% endif %}
-    {%endif%}
+    {% else %}
+    <div class="token-expirado">
+        <img src="../static/img/200w.gif">
+        <h1>El token no existe o ya ha expirado!</h1>
+    </div>
+        
+    {% endif %}
     {% endblock %}
 </body>
 </html>
