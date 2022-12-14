@@ -18,9 +18,12 @@
         {% for proyecto in Proyectos%}
         <div id="{{proyecto.Proyecto.idProyecto}}" class="Proyectos">
             <form>
-                <img src="/{{proyecto.Proyecto.photo}}" width="100" height="50">
-                {{proyecto.Proyecto.Titulo}}
-                {{proyecto.Proyecto.Descripcion}}
+                <div class="img-proyecto">
+                    <img src="/{{proyecto.Proyecto.photo}}">
+                    <h3>{{proyecto.Proyecto.Titulo}}</h3>
+                    <h3>{{proyecto.Proyecto.Descripcion}}</h3>
+                </div>
+                
                 {% for Font in Fonts %}
                     {% if Font.Proyecto.idProyecto == proyecto.Proyecto.idProyecto %}
                         '{{Font.Fonts}}'

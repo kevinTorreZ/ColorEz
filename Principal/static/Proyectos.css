@@ -1,16 +1,37 @@
 .Proyectos{
     display: flex;
     flex-direction: column;
-    width: 80%;
+    width: 1040px;
     height: 100%;
-    background-color: #F4F8FA;
     color: white;
-    padding: 20px;
+    margin: 0 auto;
+    margin-top: 10px;
+    background-color: #2C124C;
     overflow-wrap: break-word;
-    margin: 10px 100px;
     z-index: 0;
     border-radius: 10px;
     box-shadow: 0px 0px 10px 1px #DCDDE3;
+}
+
+.img-proyecto{
+    width: 97%;
+    height: 120px;
+    background-color: #42295e;
+    margin-top: 15px;
+    margin-left: 15px;
+    margin-right: 15px;
+    display: flex;
+    align-items: center;
+    border-radius: 5px;
+    flex-direction: row;
+    font-family: 'Lato', sans-serif;
+}
+
+.img-proyecto img{
+    width: 120px;
+    height: 100px;
+    clip-path: circle();
+    margin-left: 10px;
 }
 
 .contenedor_proyectos{
