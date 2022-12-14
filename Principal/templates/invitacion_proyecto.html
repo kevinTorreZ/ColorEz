@@ -18,7 +18,8 @@
     <div class="invite-form">
         <form method="post" id="formChangePassword">
             {% csrf_token %}
-            <h2>{{Proyecto.Usuario.username}} te ha invitado a formar parte de {{Proyecto.Titulo}}</h2>
+            <h2>{{Proyecto.Usuario.username}} te ha invitado a formar parte de</h2>
+            <h2 id="title-proyecto">{{Proyecto.Titulo}}</h2>
             <img src="/{{Proyecto.photo}}">
             <h1>Quieres unirte al proyecto? </h1>
             <input type="hidden" id="inputhidden" name="inputhidden">

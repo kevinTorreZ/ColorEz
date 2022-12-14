@@ -41,3 +41,8 @@
 .invite-form h2{
     margin-bottom: 10px;
 }
+
+#title-proyecto{
+    width: 520px;
+    word-wrap: break-word;
+}
