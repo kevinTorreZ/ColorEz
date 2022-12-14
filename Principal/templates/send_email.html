@@ -15,13 +15,15 @@
     {% block css %} {% endblock %}
     {% block content %}
         <div class="DivForm">
+            <h1 id="title-text">Recupera tu contraseña</h1>
+            <h1 id="error-text"><i class="fa-solid fa-circle-exclamation"></i>{{error}}</h1>
             <form method="post" class="form">
                 {% csrf_token %}
                 <input type="email" name="email">
                 <input type="submit" value="Enviar correo">
             </form>
         </div>
-        {{error}}
+        {% include "Componentes/footer.html" %}
     {% endblock %}
 </body>
 </html>
