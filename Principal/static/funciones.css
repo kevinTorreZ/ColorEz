@@ -48,6 +48,11 @@
     background-size: cover;
 }
 
+.btnDisabled{
+    background-color: #8c51d4!important;
+    cursor: not-allowed!important;
+}
+
 .funciones {
     max-width: 1040px;
     width: 100%;
