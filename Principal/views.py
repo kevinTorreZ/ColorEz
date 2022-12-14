@@ -149,8 +149,8 @@ def Proyectos(request):
     obj = Usuarios_proyecto.objects.filter(Usuario=request.user.id)
     objOwner = Proyecto.objects.filter(Usuario=request.user.id)
     LogotiposProyecto = LogoTipos.objects.all()
-    AllFonts = Fonts.objects.all()
     AllTareas = Tareas.objects.all()
+    AllFont = Fonts.objects.all()
     if request.method == "POST":
         ProjectSelected = request.POST.get('ProjectSelected')
         now = date.today()
@@ -164,13 +164,15 @@ def Proyectos(request):
                     clearListuser.delete()
                     searchPrjct.delete()
                 else:
-                    Fonts = request.POST.get('Fontadd',False)
+                    fonts = request.POST.get('Fontadd',False)
                     Logo = request.POST.get('Logoadd',False)
                     Tareadd = request.POST.get('Tareadd',False)
-
-                    print(Fonts)
-                    print(Fonts)
-                    print(Fonts)
+                    if fonts != "":
+                        print(fonts)
+                    if Logo != "":
+                        print(Logo)
+                    if Tareadd != "":
+                        print(Tareadd)
             else:
                 userInst = Usuario.objects.get(id=request.user.id)
                 token_generator = PasswordResetTokenGenerator()
@@ -192,7 +194,7 @@ def Proyectos(request):
             AddUserPrjt = Usuarios_proyecto(Usuario=UserInst,Proyecto=SaveProject)
             AddUserPrjt.save()
             return redirect('/Proyectos/')
-    return render(request, 'Proyectos.html',{'Proyectos':obj,'form':form,'ProyectosOwner':objOwner,"MostrarQR":Mostrarqr,'Tareas':AllTareas,'Logos':LogotiposProyecto,'Fonts':AllFonts})
+    return render(request, 'Proyectos.html',{'Proyectos':obj,'form':form,'ProyectosOwner':objOwner,"MostrarQR":Mostrarqr,'Tareas':AllTareas,'Logos':LogotiposProyecto,'Fonts':AllFont})
 @login_required()
 def Invitacion_proyecto(request):
     token = request.GET["token"]
