@@ -84,6 +84,9 @@ nav{
     
 }
 
+.fa-bars{
+    visibility: hidden;
+}
 
 .fa-user{
     margin-right: 10px;
@@ -92,6 +95,10 @@ nav{
 .fa-right-to-bracket{
     margin-right: 10px;
 }
+
+
+
+
 
 @media (min-width: 1040px){
     .nav-login a{

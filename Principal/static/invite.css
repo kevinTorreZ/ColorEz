@@ -46,3 +46,18 @@
     width: 520px;
     word-wrap: break-word;
 }
+
+.token-expirado{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    color: rgb(123, 44, 191);
+    font-family: 'Poppins', sans-serif;
+    margin-top: 150px;
+}
+
+.token-expirado img{
+    margin-bottom: 10px;
+}
