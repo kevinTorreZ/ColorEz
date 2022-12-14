@@ -1,11 +1,12 @@
-.Proyectos{
-    display: flex;
-    flex-direction: column;
+.Proyectos {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
     width: 1040px;
     height: 100%;
     color: white;
-    margin: 0 auto;
-    margin-top: 10px;
     background-color: #2C124C;
     overflow-wrap: break-word;
     z-index: 0;
@@ -13,7 +14,7 @@
     box-shadow: 0px 0px 10px 1px #DCDDE3;
 }
 
-.img-proyecto{
+.img-proyecto {
     width: 97%;
     height: 120px;
     background-color: #42295e;
@@ -27,20 +28,21 @@
     font-family: 'Lato', sans-serif;
 }
 
-.img-proyecto img{
+.img-proyecto img {
     width: 120px;
     height: 100px;
     clip-path: circle();
     margin-left: 10px;
 }
 
-.contenedor_proyectos{
+.contenedor_proyectos {
     position: relative;
     height: 400px;
     width: 90%;
     margin: auto;
 }
-.btnProyectos{
+
+.btnProyectos {
     display: flex;
     flex-direction: column;
     margin-top: 30px;
