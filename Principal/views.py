@@ -59,7 +59,14 @@ class LoginView(FormView):
         return super(LoginView, self).form_invalid(form)
 @login_required()
 def Inicio(request):
-    return render(request, 'Inicio.html')
+    instUser = Usuario.objects.get(id=request.user.id)
+    PlanUser = Suscripcion.objects.get(Usuario=instUser)
+    PlanUser = PlanUser.Plan.idPlan
+    if PlanUser == 2:
+        PlanUser = True
+    else:
+        PlanUser = False
+    return render(request, 'Inicio.html',{"plan":PlanUser})
 @login_required()
 def LogoutView(request):
     if request.user.photo != "userImageDefault.png":
@@ -157,7 +164,13 @@ def Proyectos(request):
                     clearListuser.delete()
                     searchPrjct.delete()
                 else:
-                    print("cambio nashe")
+                    Fonts = request.POST.get('Fontadd',False)
+                    Logo = request.POST.get('Logoadd',False)
+                    Tareadd = request.POST.get('Tareadd',False)
+
+                    print(Fonts)
+                    print(Fonts)
+                    print(Fonts)
             else:
                 userInst = Usuario.objects.get(id=request.user.id)
                 token_generator = PasswordResetTokenGenerator()

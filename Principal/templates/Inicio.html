@@ -32,7 +32,11 @@
                 <img src="../static/img/generarapaleta.png">
                 <h1>Generar paleta de colores</h1>
                 <p>Con esta función podrás generar 10 paletas de colores con colores aleatorios, genera las paletas que desees.</p>
-                <button id="btnFuncion" onclick="window.location.href='/Generar-paleta/'">Usar función</button>
+                {% if plan %}
+                    <button id="btnFuncion" onclick="window.location.href='/Generar-paleta/'">Usar función</button>
+                {% else %}
+                    <button id="btnFuncion" disabled>No puedes utilizar esta función</button>
+                {% endif %}
             </div>
             <div class="card-funciones">
                 <img src="../static/img/mezclarcolores.png">
