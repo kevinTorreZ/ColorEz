@@ -35,13 +35,16 @@
             </form>
                 {% for color in Paleta %}
                 {% if color.Proyecto.idProyecto == proyecto.Proyecto.idProyecto %}
+    
                 '{{color.Color}}'
+                <input type="color" disabled value="{{color.Color}}">
                 <form method="post">
                     {% csrf_token %}
                     <input type="hidden" value="{{proyecto.Proyecto.idProyecto}}" name="idProyecto">
                     <input type="hidden" value="{{color.idPaleta}}" name="colorEliminate" style="display: None;">
                     <input type="submit" value="X">
                 </form>
+
                 {% endif %}
                 {% endfor %}
                 {% for Font in Fonts %}
