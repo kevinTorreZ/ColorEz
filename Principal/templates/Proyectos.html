@@ -24,8 +24,8 @@
                     <h3>{{proyecto.Proyecto.Titulo}}</h3>
                     <h3>{{proyecto.Proyecto.Descripcion}}</h3>
                 </div>
-                <input name="Coloradd" type="hidden" value="" placeholder="Agregar Color...." id="inputcolor">
-                <input type="button" value="Select color" onclick="document.getElementById('inputcolor').type = 'color' ">
+                <input name="Coloradd" type="hidden" value="" placeholder="Agregar Color...." id="{{proyecto.Proyecto.idProyecto}}inputcolor">
+                <input type="button" value="Select color" onclick="document.getElementById('{{proyecto.Proyecto.idProyecto}}inputcolor').type = 'color' ">
                 <input name="Logoadd" type="file" placeholder="Ingrese logo " accept="image/*">
                 <input name="Fontadd" type="text" placeholder="Agregar Font....">
                 <input name="Tareadd" type="text" placeholder="Agregar tarea....">
