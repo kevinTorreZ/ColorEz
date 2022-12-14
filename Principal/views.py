@@ -176,6 +176,8 @@ def Proyectos(request):
                     if Tareadd != "":
                         tarea = Tareas(Tarea=Tareadd,Proyecto=searchPrjct)
                         tarea.save()
+                    Selected = str(searchPrjct)
+                    return render(request, 'Proyectos.html',{'Proyectos':obj,'form':form,'ProyectosOwner':objOwner,"MostrarQR":Mostrarqr,'Tareas':AllTareas,'Logos':LogotiposProyecto,'Fonts':AllFont,'selected':Selected})
             else:
                 userInst = Usuario.objects.get(id=request.user.id)
                 token_generator = PasswordResetTokenGenerator()

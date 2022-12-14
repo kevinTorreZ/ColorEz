@@ -53,6 +53,16 @@
             </form>
         </div>
         {% endfor %}
+        {% if selected %}
+            <script>
+                var highlightedItems = document.querySelectorAll('.Proyectos');
+
+                highlightedItems.forEach(function (userItem) {
+                    userItem.style.zIndex = '0';
+                });
+                document.getElementById("{{selected}}").style.zIndex = '10';
+            </script>
+        {% endif %}
         <script>
             function superponer(idProyecto) {
                 var highlightedItems = document.querySelectorAll('.Proyectos');
