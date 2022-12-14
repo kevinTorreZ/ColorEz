@@ -14,18 +14,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {% block title %} Perfil {% endblock %}
 </head>
+{% block content %}
 
 <body>
     {% block css %} {% endblock %}
-    {% block content %}
+
     {% if user.is_authenticated %}
     <div class="main-profile">
         <div class="user-profile">
             <img src="/{{user.photo}}" id="profile-image">
             <h3>{{user.username}}</h3>
-            {{Plan}}
+            <h3 id="plan-info"><strong>Plan: </strong>{{Plan}}</h3>
         </div>
-        <div class="user-data">
+        <div class="user-data" id="userData">
             <div class="column-settings user-name">
                 <h3><strong>Usuario:</strong></h3>
                 <div class="info-sacada">
@@ -43,26 +44,57 @@
             <h3 id="title-proyectos">Proyectos del usuario:</h3>
             <div class="productos">
                 {% for proyecto in ProyectosOwner %}
-                    <div class="productos-info">
-                        <img width="140px" height="110px" src="/{{proyecto.photo}}">
-                        <h3>{{proyecto.Titulo}}</h3>
-                    </div>
+                <div class="productos-info">
+                    <img width="140px" height="110px" src="/{{proyecto.photo}}">
+                    <h3>{{proyecto.Titulo}}</h3>
+                </div>
                 {% endfor %}
             </div>
-            <button id="Btnperfil" onclick="window.location.href ='/Editar-perfil'">Editar perfil</button>
+            <button id="Btnperfil" onclick="btnHide()">Editar perfil</button>
+        </div>
+        <div class="edit-profile" id="editProfile">
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="formDiv">
+                    {{form}}
+                </div>
+                <div class="btnEditar">
+                    <input type="submit" value="Guardar cambios">
+                </div>
+            </form>
         </div>
     </div>
-    
-       
-        <form method="post"  enctype="multipart/form-data">
-            {% csrf_token %}
-            {{form}}    
-            <input type="submit" value="Editar">       
-        </form>
+
+
     {% endif %}
     {% endblock %}
 
     {% block js%}
+    <script>
+        function hideEdit() {
+            var divEdit = document.getElementById('editProfile')
+            divEdit.style.display = "none";
+        }
+    </script>
+
+    <script>
+        function btnHide() {
+            var divEdit = document.getElementById('editProfile')
+            var divProfile = document.getElementById('userData')
+            if (divEdit.style.display == "none") {
+                divEdit.style.display = "block"
+                divProfile.style.display = "none"
+            } else {
+                divEdit.style.display = "none"
+                divProfile.style.display = "block"
+            }
+        }
+    </script>
+    <script>
+        window.onload = function () {
+            hideEdit()
+        }
+    </script>
     {% endblock %}
 </body>
 

@@ -109,6 +109,9 @@ hr{
     margin-top: 5px;
 }
 
+#plan-info{
+    font-weight: normal;
+}
 
 .productos-info{
     display: flex;
@@ -133,4 +136,80 @@ hr{
     font-family: 'Poppins', sans-serif;
     margin-left: 15px;
     margin-top: 10px;
+}
+
+.edit-profile{
+    background-color: #F4F8FA;
+    width: 700px;
+    height: 490px;
+    border-radius: 5px;
+    border: 2px solid #DCDDE3;
+    box-shadow: 0px 0px 10px 1px #DCDDE3;
+    display: flex;
+    flex-direction: column;
+    margin-left: 15px;
+    margin-top: 5px;
+    align-items: center;
+    justify-content: center;
+}
+
+.edit-profile input[type="text"]{
+    width: 350px;
+    border-radius: 5px;
+    border: 2px solid rgb(218, 220, 224);
+    height: 45px;
+    display: block;
+    padding-left: 10px;
+    outline: none;
+    margin-bottom: 15px;
+    font-family: 'Poppins', sans-serif;
+    margin-top: 35px;
+}
+
+.edit-profile input[type="email"]{
+    width: 350px;
+    border-radius: 5px;
+    border: 2px solid rgb(218, 220, 224);
+    height: 45px;
+    display: block;
+    padding-left: 10px;
+    outline: none;
+    margin-bottom: 15px;
+    font-family: 'Poppins', sans-serif;
+}
+
+
+.edit-profile input[type="file" i]{
+    font-family: 'Lato', sans-serif;
+    color: black;
+    border: none;
+    width: 300px;
+    height: 30px;
+}
+
+.btnEditar{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.btnEditar input[type="submit"]{
+    cursor: pointer;
+    display: block;
+    border: none;
+    border-radius: 5px;
+    background-color: #672BB1;
+    height: 40px;
+    width: 140px;
+    color: white;
+    font-family: 'Poppins', sans-serif;
+    margin-left: 15px;
+    margin-top: 10px;
+}
+
+.formDiv{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
 }
