@@ -4,6 +4,10 @@
     width: 100%;
 }
 
+body{
+    background-color: white;
+}
+
 .container-funciones::before {
     left: 0;
     top: -24%;
@@ -107,4 +111,26 @@
     margin-bottom: 50px;
     font-family: 'Lato', sans-serif;
     text-align: center;
+}
+
+
+.logout-text{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    flex-direction: column;
+    left: 50%;
+    top: 50%;
+    height: 450px;
+    width: 500px;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+.logout-text h1{
+    font-family: 'Poppins', sans-serif;
+    color: rgb(123, 44, 191);
+    font-weight: bold;
+  
 }
