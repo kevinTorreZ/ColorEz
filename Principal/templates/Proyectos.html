@@ -24,53 +24,83 @@
                     <h3>{{proyecto.Proyecto.Titulo}}</h3>
                     <h3>{{proyecto.Proyecto.Descripcion}}</h3>
                 </div>
-                <input name="Coloradd" type="hidden" value="" placeholder="Agregar Color...." id="{{proyecto.Proyecto.idProyecto}}inputcolor">
-                <input type="button" value="Select color" onclick="document.getElementById('{{proyecto.Proyecto.idProyecto}}inputcolor').type = 'color' ">
-                <input name="Logoadd" type="file" placeholder="Ingrese logo " accept="image/*">
-                <input name="Fontadd" type="text" placeholder="Agregar Font....">
-                <input name="Tareadd" type="text" placeholder="Agregar tarea....">
-                <input type="hidden" value="{{proyecto.Proyecto.idProyecto}}" name="idProyecto">
-                <input type="hidden" value="ok" name="Change">
-                <input value="Guardar cambios" type="submit">
+                <div class="edicion-proyecto">
+                    <h2>Agrega funciones al proyecto</h2>
+
+                    <div class="btnColor">
+                        <input name="Coloradd" class="colorex" type="hidden" value="" placeholder="Agregar Color...."
+                            id="{{proyecto.Proyecto.idProyecto}}inputcolor">
+                        <input type="button" value="Select color"
+                            onclick="document.getElementById('{{proyecto.Proyecto.idProyecto}}inputcolor').type = 'color' ">
+                    </div>
+                    <div class="logo-cont">
+                        <h2>Sube tus logos/imagenes: </h2>
+                        <label for="file-upload" class="custom-file-upload">
+                            <i class="fa fa-cloud-upload"></i> Custom Upload
+                        </label>
+                        <input name="Logoadd" id="file-upload" type="file" placeholder="Ingrese logo " accept="image/*">
+                    </div>
+                    <input name="Fontadd" type="text" placeholder="Agregar Font">
+                    <input name="Tareadd" type="text" placeholder="Agregar tarea">
+                    <input type="hidden" value="{{proyecto.Proyecto.idProyecto}}" name="idProyecto">
+                    <input type="hidden" value="ok" name="Change">
+                    <input value="Guardar cambios" type="submit">
+                </div>
             </form>
+            <div class="container-colores">
+                <h2>Paleta de color:</h2>
                 {% for color in Paleta %}
                 {% if color.Proyecto.idProyecto == proyecto.Proyecto.idProyecto %}
-    
-                '{{color.Color}}'
-                <input type="color" disabled value="{{color.Color}}">
-                <form method="post">
-                    {% csrf_token %}
-                    <input type="hidden" value="{{proyecto.Proyecto.idProyecto}}" name="idProyecto">
-                    <input type="hidden" value="{{color.idPaleta}}" name="colorEliminate" style="display: None;">
-                    <input type="submit" value="X">
-                </form>
-
+                <div class="colores">
+                    <input type="color" disabled value="{{color.Color}}">
+                    <form method="post">
+                        {% csrf_token %}
+                        <input type="hidden" value="{{proyecto.Proyecto.idProyecto}}" name="idProyecto">
+                        <input type="hidden" value="{{color.idPaleta}}" name="colorEliminate" style="display: None;">
+                        <input type="submit" value="X">
+                    </form>
+                </div>
                 {% endif %}
                 {% endfor %}
+            </div>
+            <div class="container-font">
+                <h2>Fonts a utilizar:</h2>
                 {% for Font in Fonts %}
                 {% if Font.Proyecto.idProyecto == proyecto.Proyecto.idProyecto %}
-                '{{Font.Fonts}}'
-                <form method="post">
-                    {% csrf_token %}
-                    <input type="hidden" value="{{proyecto.Proyecto.idProyecto}}" name="idProyecto">
-                    <input type="hidden" value="{{Font.idFont}}" name="FontEliminate" style="display: None;">
-                    <input type="submit" value="X">
-                </form>
+                <div class="fonts">
+                    <h2>{{Font.Fonts}}</h2>
+                    <form method="post">
+                        {% csrf_token %}
+                        <input type="hidden" value="{{proyecto.Proyecto.idProyecto}}" name="idProyecto">
+                        <input type="hidden" value="{{Font.idFont}}" name="FontEliminate" style="display: None;">
+                        <input type="submit" value="X">
+                    </form>
+                </div>
                 {% endif %}
                 {% endfor %}
+            </div>
+            <div class="container-tareas">
+                <h2>Tareas por hacer:</h2>
                 {% for Tarea in Tareas %}
                 {% if Tarea.Proyecto.idProyecto == proyecto.Proyecto.idProyecto %}
-                {{Tarea.Tarea}}
-                <form method="post">
-                    {% csrf_token %}
-                    <input type="hidden" value="{{proyecto.Proyecto.idProyecto}}" name="idProyecto">
-                    <input type="hidden" value="{{Tarea.idTarea}}" name="TareaEliminate" style="display: None;">
-                    <input type="submit" value="X">
-                </form>
+                <div class="tareas">
+                    <h2>{{Tarea.Tarea}}</h2>
+                    <form method="post">
+                        {% csrf_token %}
+                        <input type="hidden" value="{{proyecto.Proyecto.idProyecto}}" name="idProyecto">
+                        <input type="hidden" value="{{Tarea.idTarea}}" name="TareaEliminate" style="display: None;">
+                        <input type="submit" value="X">
+                    </form>
+                </div>
                 {% endif %}
                 {% endfor %}
+            </div>
+            <h2 id="texto-logos">Agrega tus logotipos/imagenes importantes</h2>
+            <div class="container-logos">
+
                 {% for logo in Logos %}
                 {% if logo.Proyecto.idProyecto == proyecto.Proyecto.idProyecto %}
+                <div class="logo">
                     <img src="/{{logo.Logo}}" width="50" height="50">
                     <form method="post">
                         {% csrf_token %}
@@ -78,24 +108,28 @@
                         <input type="hidden" value="{{logo.idLogo}}" name="logoEliminate" style="display: None;">
                         <input type="submit" value="X">
                     </form>
+                </div>
                 {% endif %}
                 {% endfor %}
-            <form method="post">
-                {% csrf_token %}
-                <input type="hidden" value="{{proyecto.Proyecto.idProyecto}}" name="idProyecto">
-                <input type="submit" value="Borrar">
-            </form>
+            </div>
+            <div class="btnBorrar">
+                <form method="post">
+                    {% csrf_token %}
+                    <input type="hidden" value="{{proyecto.Proyecto.idProyecto}}" name="idProyecto">
+                    <input type="submit" value="Borrar proyecto">
+                </form>
+            </div>
         </div>
         {% endfor %}
         {% if selected %}
-            <script>
-                var highlightedItems = document.querySelectorAll('.Proyectos');
+        <script>
+            var highlightedItems = document.querySelectorAll('.Proyectos');
 
-                highlightedItems.forEach(function (userItem) {
-                    userItem.style.zIndex = '0';
-                });
-                document.getElementById("{{selected}}").style.zIndex = '10';
-            </script>
+            highlightedItems.forEach(function (userItem) {
+                userItem.style.zIndex = '0';
+            });
+            document.getElementById("{{selected}}").style.zIndex = '10';
+        </script>
         {% endif %}
         <script>
             function superponer(idProyecto) {
@@ -125,21 +159,27 @@
         <input type="submit">
     </form>
     {% if ProyectoMax %}
-        {{ProyectoMax}}
+    {{ProyectoMax}}
     {% endif %}
-
-    <form method="post">
-        {% csrf_token %}
-        <select name="ProjectSelected">
-            <option value="0">Selecciona tu proyecto</option>
-            {% for proyecto in ProyectosOwner %}
-            <option value="{{proyecto.idProyecto}}">{{proyecto.Titulo}}</option>
-            {% endfor %}
-        </select>
-        <input type="submit">
-    </form>
-    {% if MostrarQR %}
-    <img src="/media/test2.png">
+    <div class="sendQR">
+        <form method="post">
+            {% csrf_token %}
+            <div class="custom-select">
+                <select class="selectorx" name="ProjectSelected">
+                    <option value="0">Selecciona tu proyecto</option>
+                    {% for proyecto in ProyectosOwner %}
+                    <option value="{{proyecto.idProyecto}}">{{proyecto.Titulo}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            
+            <input type="submit" value="Mostrar QR">
+        </form>
+        {% if MostrarQR %}
+        <div class="imgQR">
+            <img src="/media/test2.png">
+        </div>
+    </div>
     {% endif %}
     {% endblock %}
 </body>
