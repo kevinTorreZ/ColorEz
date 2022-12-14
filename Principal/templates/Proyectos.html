@@ -97,7 +97,6 @@
             </div>
             <h2 id="texto-logos">Agrega tus logotipos/imagenes importantes</h2>
             <div class="container-logos">
-
                 {% for logo in Logos %}
                 {% if logo.Proyecto.idProyecto == proyecto.Proyecto.idProyecto %}
                 <div class="logo">
@@ -149,18 +148,20 @@
                 style="visibility: hidden;"></button>
 
             {% endfor %}
-            <button style="width: 30px; height: 20px;"
+            <button id="AddBtn" style="width: 30px; height: 20px;"
                 onclick="document.getElementById('form').style.visibility = 'visible'">+</button>
         </div>
     </div>
-    <form style="visibility: hidden" id="form" method="POST" enctype="multipart/form-data">
-        {{form}}
-        {% csrf_token %}
-        <input type="submit">
-    </form>
-    {% if ProyectoMax %}
-    {{ProyectoMax}}
-    {% endif %}
+    <div class="form-ingresar">
+        <form style="visibility: hidden" id="form" method="POST" enctype="multipart/form-data">
+            {{form}}
+            {% csrf_token %}
+            <input type="submit">
+        </form>
+        {% if ProyectoMax %}
+        {{ProyectoMax}}
+        {% endif %}
+    </div>
     <div class="sendQR">
         <form method="post">
             {% csrf_token %}

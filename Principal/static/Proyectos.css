@@ -338,3 +338,25 @@ input[type="file"] {
     height: 270px;
     background-color: #42295e;
 }
+
+.btnProyectos{
+    background-color: #42295e;
+    border-radius: 10px;
+    height: 600px;
+    width: 55px;
+}
+
+#AddBtn{
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    background-color: #672BB1;
+    height: 30px;
+    width: 140px;
+    color: white;
+    font-family: 'Poppins', sans-serif;
+}
+
+.form-ingresar{
+    
+}
