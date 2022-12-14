@@ -68,9 +68,9 @@ def Inicio(request):
             PlanUser = True
         else:
             PlanUser = False
+        return render(request, 'Inicio.html',{"plan":PlanUser})
     except ObjectDoesNotExist:
         print("a")
-    return render(request, 'Inicio.html',{"plan":PlanUser})
 @login_required()
 def LogoutView(request):
     if request.user.photo != "userImageDefault.png":
