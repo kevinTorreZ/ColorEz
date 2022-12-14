@@ -1,7 +1,7 @@
 {% extends "Componentes/header.html" %}
 {% load static %}
 {% block links%}
-<link rel="stylesheet" href="{% static 'inicio.css' %}">
+<link rel="stylesheet" href="{%static 'inicio.css' %}">
 <script src="{% static 'js/chroma.min.js' %}"></script>
 <script src="{% static 'js/inicio.js' %} "></script>
 {% endblock %}
@@ -12,7 +12,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    {% block title %} Inicio {% endblock %}
+    {% block title %} Logout {% endblock %}
 </head>
 
 <body>
@@ -20,12 +20,13 @@
     {% block content %}
     {% if user.is_authenticated %}
     {% endif %}
-    <h1 style="color: white;">Te has desconectado.......</h1>
-
+    <div class="logout-text">
+        <img src="../static/img/AW3909154_23.gif">
+        <h1 id="animated">Te has desconectado...</h1>
+    </div>
     <script>
         function redirect(){
             window.location.href = '/Login/'
-            
         }
         const myTimeout = setTimeout(redirect, 1500);
     </script>

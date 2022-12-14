@@ -1,7 +1,7 @@
 {% extends "Componentes/header.html" %}
 {% load static %}
 {% block links%}
-<link rel="stylesheet" href="{% static 'login.css' %}">
+<link rel="stylesheet" href="{% static 'invite.css' %}">
 {% endblock %}
 <!DOCTYPE html>
 <html lang="en">
@@ -15,13 +15,16 @@
     {% block css %} {% endblock %}
     {% block content %}
     {% if is_valid == True %}
+    <div class="invite-form">
         <form method="post" id="formChangePassword">
             {% csrf_token %}
+            <h2>{{Proyecto.Usuario.username}} te ha invitado a formar parte de {{Proyecto.Titulo}}</h2>
+            <img src="/{{Proyecto.photo}}">
             <h1>Quieres unirte al proyecto? </h1>
-
             <input type="hidden" id="inputhidden" name="inputhidden">
             <input type="submit" onsubmit="document.getElementById('inputhidden').value = 'ok'" value="Aceptar">
         </form>
+    </div>
         {% if send == True %}
             <script>document.getElementById("formChangePassword").remove()</script>
             <h1>Te has unido correctamente!</h1>

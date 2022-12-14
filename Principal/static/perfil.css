@@ -2,6 +2,7 @@
     width: 1040px;
     height: 500px;
     margin: 0 auto;
+    margin-top: 50px;
     display: flex;
     align-content: center;
 }
@@ -212,4 +213,5 @@ hr{
     justify-content: center;
     flex-direction: column;
     align-items: center;
+    
 }
