@@ -143,6 +143,7 @@ def Editarperfil(request):
 
 @login_required()
 def Proyectos(request):
+    Mensaje_error = "Se ha alcanzado el limite de proyectos"
     form = NewProyecto()
     Mostrarqr = False
     UserInst = Usuario.objects.get(id=request.user.id)
@@ -161,6 +162,10 @@ def Proyectos(request):
                 searchPrjct = Proyecto.objects.get(idProyecto=idprj)
                 if request.POST.get('Change',None) == None:
                     clearListuser = Usuarios_proyecto.objects.get(Usuario=UserInst, Proyecto=searchPrjct)
+                    os.remove(str(searchPrjct.photo))
+                    Loges = LogoTipos.objects.filter(Proyecto=searchPrjct)
+                    for i in Loges:
+                        os.remove(str(i.Logo))
                     clearListuser.delete()
                     searchPrjct.delete()
                 else:
@@ -190,15 +195,36 @@ def Proyectos(request):
                 imgtest.save("media/test2.png")
                 Mostrarqr = True
         else:
-            Descripcion = request.POST.get('Descripcion')
-            photo = request.FILES.get('photo')
-            if photo == None:
-                photo = 'media/ImageProyectos/default_image_project.png'
-            SaveProject = Proyecto(Titulo=Titulo,Descripcion=Descripcion,Fecha_creacion=now,Usuario=UserInst,photo=photo)
-            SaveProject.save()
-            AddUserPrjt = Usuarios_proyecto(Usuario=UserInst,Proyecto=SaveProject)
-            AddUserPrjt.save()
-            return redirect('/Proyectos/')
+            UserProjects = Proyecto.objects.filter(Usuario=UserInst)
+            Suscrip = Suscripcion.objects.get(Usuario=UserInst)
+            if Suscrip.Plan.idPlan == 1:
+                if len(UserProjects) < 1:
+                    print(len(UserProjects))
+                    Descripcion = request.POST.get('Descripcion')
+                    photo = request.FILES.get('photo')
+                    if photo == None:
+                        photo = 'media/ImageProyectos/default_image_project.png'
+                    SaveProject = Proyecto(Titulo=Titulo,Descripcion=Descripcion,Fecha_creacion=now,Usuario=UserInst,photo=photo)
+                    SaveProject.save()
+                    AddUserPrjt = Usuarios_proyecto(Usuario=UserInst,Proyecto=SaveProject)
+                    AddUserPrjt.save()
+                    return redirect('/Proyectos/')
+                else:
+                    return render(request, 'Proyectos.html',{'Proyectos':obj,'form':form,'ProyectosOwner':objOwner,"MostrarQR":Mostrarqr,'Tareas':AllTareas,'Logos':LogotiposProyecto,'Fonts':AllFont,'ProyectoMax':Mensaje_error})
+            else:
+                if len(UserProjects) <= 5:
+                    print(len(UserProjects))
+                    Descripcion = request.POST.get('Descripcion')
+                    photo = request.FILES.get('photo')
+                    if photo == None:
+                        photo = 'media/ImageProyectos/default_image_project.png'
+                    SaveProject = Proyecto(Titulo=Titulo,Descripcion=Descripcion,Fecha_creacion=now,Usuario=UserInst,photo=photo)
+                    SaveProject.save()
+                    AddUserPrjt = Usuarios_proyecto(Usuario=UserInst,Proyecto=SaveProject)
+                    AddUserPrjt.save()
+                    return redirect('/Proyectos/')
+                else:
+                    return render(request, 'Proyectos.html',{'Proyectos':obj,'form':form,'ProyectosOwner':objOwner,"MostrarQR":Mostrarqr,'Tareas':AllTareas,'Logos':LogotiposProyecto,'Fonts':AllFont,'ProyectoMax':Mensaje_error})
     return render(request, 'Proyectos.html',{'Proyectos':obj,'form':form,'ProyectosOwner':objOwner,"MostrarQR":Mostrarqr,'Tareas':AllTareas,'Logos':LogotiposProyecto,'Fonts':AllFont})
 @login_required()
 def Invitacion_proyecto(request):
