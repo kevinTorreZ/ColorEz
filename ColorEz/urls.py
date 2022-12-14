@@ -37,6 +37,7 @@ urlpatterns = [
     path('Mezclar-colores', views.MezclarColores),
     path('Obtener-paleta', views.Obtenerpaleta),
     path('Perfil/', views.Perfil),
+    path('Planes/', views.Planes),
     path('Editar-perfil', views.Editarperfil),
     path('invitacion_proyecto/', views.Invitacion_proyecto, name='invitacion_proyecto'),
 ]

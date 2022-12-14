@@ -72,9 +72,25 @@ def LogoutView(request):
     if request.user.photo != "userImageDefault.png":
         logout(request)
     else:
-        print(request.user.photo)
         logout(request)
     return render(request, "logout.html")
+@login_required()
+def Planes(request):
+    userinst = Usuario.objects.get(id=request.user.id)
+    planuser = Suscripcion.objects.get(Usuario=userinst)
+    Basico = Plan.objects.get(idPlan=1)
+    Premium = Plan.objects.get(idPlan=2)
+    Planuser = planuser.Plan.idPlan
+    if request.method == "POST":
+        if request.POST.get('PlanBasico', False) != False:
+            planuser.Plan = Basico
+            planuser.save()
+            return redirect('/Planes/')
+        else:
+            planuser.Plan = Premium
+            planuser.save()
+            return redirect('/Planes/')
+    return render(request, "Planes.html",{"PlanUser":Planuser})
 def enviar_correo(request):
     if request.method == "POST":    
         email = request.POST["email"]
@@ -94,7 +110,6 @@ def enviar_correo(request):
             lista_correos = [email]
             msg_html = render_to_string('email.html', {'Link': linkChangepassword,'user':findUser})
             send_mail(asunto,mensaje,email_desde,lista_correos,html_message=msg_html)
-            print("Se ha enviado el correo!!")
         else:
             return render(request, 'send_email.html',{"error":'El correo ingresado no se encuentra asociado a una cuenta.'})
     return render(request, 'send_email.html')
@@ -229,7 +244,6 @@ def Proyectos(request):
             Suscrip = Suscripcion.objects.get(Usuario=UserInst)
             if Suscrip.Plan.idPlan == 1:
                 if len(UserProjects) < 1:
-                    print(len(UserProjects))
                     Descripcion = request.POST.get('Descripcion')
                     photo = request.FILES.get('photo')
                     if photo == None:
@@ -243,7 +257,6 @@ def Proyectos(request):
                     return render(request, 'Proyectos.html',{'Proyectos':obj,'form':form,'ProyectosOwner':objOwner,"MostrarQR":Mostrarqr,'Tareas':AllTareas,'Logos':LogotiposProyecto,'Fonts':AllFont,'ProyectoMax':Mensaje_error})
             else:
                 if len(UserProjects) <= 5:
-                    print(len(UserProjects))
                     Descripcion = request.POST.get('Descripcion')
                     photo = request.FILES.get('photo')
                     if photo == None:
