@@ -19,17 +19,21 @@
     {% block css %} {% endblock %}
     {% block content %}
     {% if user.is_authenticated %}
+    {% if plan %}
         <script>window.onload = function(){
             generatePalette()
         }</script>
     <div class="topFuncion">
-        <h1 id="titleG">¡Presiona la tecla "espacio" para generar otra paleta!</h1>
+        <h1 id="titleG">¡Presiona la tecla     {{plan}} "espacio" para generar otra paleta!</h1>
     </div>
     <div class="mainGenerar">
         <div id="paleta_colores">
             <input type="hidden" id="btnhiden">
         </div>
     </div>
+    {% else %}
+        <h1>No eres premium</h1>
+    {% endif %}
     {% endif %}
     {% endblock %}
 
