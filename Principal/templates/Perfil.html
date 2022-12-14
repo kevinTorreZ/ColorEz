@@ -20,6 +20,7 @@
     {% block css %} {% endblock %}
 
     {% if user.is_authenticated %}
+
     <div class="main-profile">
         <div class="user-profile">
             <img src="/{{user.photo}}" id="profile-image">
@@ -65,11 +66,16 @@
         </div>
     </div>
 
-
+    {% include "Componentes/footer.html" %}
     {% endif %}
     {% endblock %}
 
     {% block js%}
+    <script>
+        window.onload = function () {
+            hideEdit()
+        }
+    </script>
     <script>
         function hideEdit() {
             var divEdit = document.getElementById('editProfile')
@@ -90,12 +96,8 @@
             }
         }
     </script>
-    <script>
-        window.onload = function () {
-            hideEdit()
-        }
-    </script>
-    {% include "Componentes/footer.html" %}
+    
+    
     {% endblock %}
 </body>
 
