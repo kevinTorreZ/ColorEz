@@ -31,7 +31,11 @@
             <h1>Te has unido correctamente!</h1>
         {% endif %}
     {% else %}
+    <div class="token-expirado">
+        <img src="../static/img/200w.gif">
         <h1>El token no existe o ya ha expirado!</h1>
+    </div>
+        
     {% endif %}
     {% endblock %}
 </body>

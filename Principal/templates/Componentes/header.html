@@ -14,7 +14,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %} {% endblock %}</title>
 </head>
-
 <body>
     <header>
         <nav>
@@ -22,20 +21,19 @@
                 <ul class="rootnav">
                     <li class="logo-section"><a href="/">LOGO</a></li>
                     {% if user.is_authenticated %}
-                    <li class="main-section">
-                        <a href="/">Inicio</a>
-                        <a href="/Proyectos/">Proyectos</a>
-                    </li>
+                        <li class="main-section"  id="myLinks">
+                            <a href="/">Inicio</a>
+                            <a href="/Proyectos/">Proyectos</a>
+                        </li>
                     <li class="nav-login">
                         <a href="/Perfil/"><i class="fa-solid fa-user"></i>Perfil</a>
                         <a href="/logout/">Cerrar sesión</a>
                     </li>
                     {% else %}
-                    <li class="main-section">
-                        <a href="/">Inicio</a>
-                        <a href="/Funciones/">Funciones</a>
-                   
-                    </li>
+                        <li class="main-section"  id="myLinks">
+                            <a href="/">Inicio</a>
+                            <a href="/Funciones/">Funciones</a>
+                        </li>
                     <li class="nav-login">
                         <a href="/Login/"><i class="fa-solid fa-right-to-bracket"></i>Iniciar sesión</a>
                     </li>
@@ -43,10 +41,22 @@
                 </ul>
             </div>
         </nav>
+        <script>
+            function myFunction() {
+              var x = document.getElementById("myTopnav");
+              if (x.className === "topnav") {
+                x.className += " responsive";
+              } else {
+                x.className = "topnav";
+              }
+            }
+            </script>
     </header>
     {% block content %}
     {% endblock %}
-    {% block js %}{% endblock %}
+    {% block js %}
+    
+    {% endblock %}
 </body>
 
 </html>
