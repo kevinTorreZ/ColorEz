@@ -115,6 +115,7 @@
                 <form method="post">
                     {% csrf_token %}
                     <input type="hidden" value="{{proyecto.Proyecto.idProyecto}}" name="idProyecto">
+                    <input type="hidden" value="ok" name="borrar">
                     <input type="submit" value="Borrar proyecto">
                 </form>
             </div>
@@ -154,7 +155,7 @@
     </div>
     <div class="form-ingresar" id="formIngresar">
         <form style="visibility: visible" id="form" method="POST" enctype="multipart/form-data">
-            <button id="btnClose" onclick="btnCloses()">X</button>
+            <button class="btnClose" onclick="btnCloses()">X</button>
             {{form}}
             {% csrf_token %}
             <input type="submit">

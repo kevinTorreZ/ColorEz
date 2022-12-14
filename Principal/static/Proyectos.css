@@ -410,7 +410,7 @@ input[type="file"] {
     max-height: 60px;
 }
 
-#btnClose{
+.btnClose{
     border: none;
     cursor: pointer;
     width: 25px;

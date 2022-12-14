@@ -192,7 +192,7 @@ def Proyectos(request):
                     idprj = request.POST['idProyecto']
                     searchPrjct = Proyecto.objects.get(idProyecto=idprj)
                     Selected = str(searchPrjct)
-                    if request.POST.get('idProyecto',None) != None:
+                    if request.POST.get('idProyecto',False) != False:
                         if request.POST.get('TareaEliminate',False) != False:
                             TareaEliminate = request.POST.get('TareaEliminate',False)
                             eliminateTarea = Tareas.objects.get(idTarea=TareaEliminate)
@@ -209,18 +209,20 @@ def Proyectos(request):
                         if request.POST.get('colorEliminate',False) != False:
                             colorEliminate = request.POST.get('colorEliminate',False)
                             eliminarColor = PaletaColores.objects.get(idPaleta=colorEliminate)
-                            eliminarColor.delete()   
+                            eliminarColor.delete()
+                        if request.POST.get('borrar',False) != False:
+                            idprj = request.POST['idProyecto']
+                            searchPrjct = Proyecto.objects.get(idProyecto=idprj)
+                            clearListuser = Usuarios_proyecto.objects.get(Usuario=UserInst, Proyecto=searchPrjct)
+                            os.remove(str(searchPrjct.photo))
+                            Loges = LogoTipos.objects.filter(Proyecto=searchPrjct)
+                            for i in Loges:
+                                os.remove(str(i.Logo))
+                            clearListuser.delete()
+                            searchPrjct.delete()     
                         return render(request, 'Proyectos.html',{'Proyectos':obj,'form':form,'ProyectosOwner':objOwner,"MostrarQR":Mostrarqr,'Tareas':AllTareas,'Logos':LogotiposProyecto,'Fonts':AllFont,'Paleta':Allcolors,'selected':Selected})
                     else:
-                        idprj = request.POST['idProyecto']
-                        searchPrjct = Proyecto.objects.get(idProyecto=idprj)
-                        clearListuser = Usuarios_proyecto.objects.get(Usuario=UserInst, Proyecto=searchPrjct)
-                        os.remove(str(searchPrjct.photo))
-                        Loges = LogoTipos.objects.filter(Proyecto=searchPrjct)
-                        for i in Loges:
-                            os.remove(str(i.Logo))
-                        clearListuser.delete()
-                        searchPrjct.delete()
+                       pass
                 else:
                     idprj = request.POST['idProyecto']
                     searchPrjct = Proyecto.objects.get(idProyecto=idprj)

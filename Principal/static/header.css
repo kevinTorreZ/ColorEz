@@ -33,14 +33,20 @@ nav{
     position: absolute;
     top: 0;
     left: 0;
+    text-align: center;
 }
 
 .logo-section a{
     cursor: pointer;
     text-decoration: none;
     color: white;
+    font-weight: bold;
+    text-align: center;
 }
 
+.logo-section img{
+    margin-top: 10px;
+}
 
 .rootnav{
     position: relative;

@@ -4,10 +4,12 @@
 <head>
     {% block links %}
     {% endblock %}
+    {% load static %}
     <meta name="facebook-domain-verification" content="bbgfywcpcxy4m1rc596ftbf2slqalc" />
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    {% load static %}
+    <link rel="shortcut icon" href="../../static/img/favicon.ico"
+    
     <link rel="stylesheet" href="https://static.imgix.net/treefrog.jpg?w=640&h=320&fit=crop&palette=css&class=frog">
     <link rel="stylesheet" href="{% static 'header.css' %}">
     <script src="https://kit.fontawesome.com/c1366bcc7f.js" crossorigin="anonymous"></script>
@@ -19,7 +21,7 @@
         <nav>
             <div class="navBar">
                 <ul class="rootnav">
-                    <li class="logo-section"><a href="/">LOGO</a></li>
+                    <li class="logo-section"><a href="/"><img src="../../static/img/Logitonuevo.png" width="20" height="20">ColorEz</a></li>
                     {% if user.is_authenticated %}
                         <li class="main-section"  id="myLinks">
                             <a href="/">Inicio</a>
