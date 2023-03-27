@@ -150,7 +150,6 @@ def validate_token(request):
 def Index(request):
     return render(request, 'Index.html')
 
-@login_required()
 def GenerarPaleta(request):
     instUser = Usuario.objects.get(id=request.user.id)
     PlanUser = Suscripcion.objects.get(Usuario=instUser)
