@@ -151,7 +151,6 @@ def Index(request):
     return render(request, 'Index.html')
 
 def GenerarPaleta(request):
-    print("a")
     return render(request, './Funciones/Generarpaleta.html')
 
 def MezclarColores(request):
