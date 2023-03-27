@@ -18,8 +18,6 @@
 <body>
     {% block css %} {% endblock %}
     {% block content %}
-    {% if user.is_authenticated %}
-    {% if plan %}
         <script>window.onload = function(){
             generatePalette()
         }</script>
@@ -31,11 +29,6 @@
             <input type="hidden" id="btnhiden">
         </div>
     </div>
-    {% else %}
-        <h1>No eres premium</h1>
-    {% endif %}
-    {% endif %}
-   
     {% endblock %}
 
     {% block js%}
