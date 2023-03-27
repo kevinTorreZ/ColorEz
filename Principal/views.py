@@ -151,14 +151,8 @@ def Index(request):
     return render(request, 'Index.html')
 
 def GenerarPaleta(request):
-    instUser = Usuario.objects.get(id=request.user.id)
-    PlanUser = Suscripcion.objects.get(Usuario=instUser)
-    PlanUser = PlanUser.Plan.idPlan
-    if PlanUser == 2:
-        PlanUser = True
-    else:
-        PlanUser = False
-    return render(request, './Funciones/Generarpaleta.html',{"plan":PlanUser})
+    print("a")
+    return render(request, './Funciones/Generarpaleta.html')
 
 def MezclarColores(request):
     return render(request, './Funciones/Mezclarcolores.html')
