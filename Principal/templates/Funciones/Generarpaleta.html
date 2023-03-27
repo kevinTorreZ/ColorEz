@@ -18,7 +18,10 @@
 <body>
     {% block css %} {% endblock %}
     {% block content %}
-        <script>window.onload = function(){
+        <script>
+            generatePalette()
+        
+        window.onload = function(){
             generatePalette()
         }</script>
     <div class="topFuncion">
