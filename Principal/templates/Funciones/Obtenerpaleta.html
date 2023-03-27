@@ -38,6 +38,7 @@
             {% endblock %}
             {% block js%}
             <script>
+                GetPaleta()
                 function GetPaleta() {
                     var highlightedItems = document.querySelectorAll('.colorPalette')
                     if (highlightedItems.length != 0) {
