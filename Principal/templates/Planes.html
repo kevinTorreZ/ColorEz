@@ -19,24 +19,17 @@
             <form method="post">
                 {% csrf_token %}
                 <h1>Basico</h1>
-                {% if PlanUser == 1 %}
                     <input type="submit" value="Plan actual" disabled>
-                {% else %}
                     <input type="hidden" value="True" name="PlanBasico">
                     <input type="submit" value="Escoger plan">
-                {% endif %}
             </form>
         </div>
         <div class="plan2">
             <form method="post">
                 {% csrf_token %}
                 <h1>Premium</h1>
-                {% if PlanUser == 2 %}
                     <input type="submit" value="Plan actual" disabled>
-                {% else %}
                     <input type="hidden" value="True" name="PlanPremium">
-                    <input type="submit" value="Escoger plan">
-                {% endif %}
             </form>
         </div> 
     </div>
